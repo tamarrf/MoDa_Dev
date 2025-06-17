@@ -1,0 +1,20 @@
+{
+  "name": "remote-sync",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "mysql": "^2.17.1",
+    "mysql-ssh": "^1.0.6",
+    "ssh2": "^0.8.5",
+    "tunnel-ssh": "^4.1.4"
+  },
+  "dependencies": {
+    "sprintf-js": "^1.1.2"
+  }
+}

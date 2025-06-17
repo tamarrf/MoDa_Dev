@@ -1,0 +1,39 @@
+{% set csrfTokenName = craft.app.config.general.csrfTokenName %}
+{% set csrfToken = craft.app.request.csrfToken %}
+{% set journeyId = craft.app.request.getQueryParam("journeyId") %}
+{% set taskId = craft.app.request.getQueryParam("taskId") %}
+{% set exampleId = craft.app.request.getQueryParam("exampleId") %}
+{% set info = craft.netlogo.getJourneyAndTask(journeyId, taskId) %}
+{% set imagePath = view.getAssetManager().getPublishedUrl('@fablevision/netlogo/assetbundles/simulation/img', true) %}
+{% set studentId = null %}
+<html>
+    <head>
+        <title>{{ siteName }}</title>
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link
+            href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,700;0,900;1,400&display=swap"
+            rel="stylesheet">
+        <script>
+            var __SERVICE_URL__ = "{{ actionUrl('netlogo/default/') }}";
+            var __CSRF_TOKEN_NAME__ = "{{ csrfTokenName }}";
+            var __CSRF_TOKEN__ = "{{ csrfToken }}";
+            var __JOURNEY_ID__ = {{ journeyId ?? "0" }};
+            var __TASK_ID__ = {{ taskId ?? "0" }};
+            var __CONTENT__ = JSON.parse("{{ info|json_encode|e('js') }}");
+            {% if currentUser %}
+            var __USER_ID__ = {{ currentUser.id }};
+            var __USER__ = "{{ currentUser.username }}";
+            {% endif %}
+            var __IMAGE_URL__ = "{{ imagePath }}";
+        </script>
+        <script src="https://kit.fontawesome.com/8476c81704.js" crossorigin="anonymous"></script>
+        {% do view.registerAssetBundle("fablevision\\netlogo\\assetbundles\\CSSBundle") %}
+        {% do view.registerAssetBundle("fablevision\\netlogo\\assetbundles\\SimulationBundle") %}
+    </head>
+    <body>
+        <div class="container">
+            {% include "netlogo/navBar.twig" %}
+            {% include "netlogo/landing.twig" %}
+        </div>
+    </body>
+</html>

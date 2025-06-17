@@ -1,0 +1,41 @@
+<html>
+	<head>
+		<title>{{ siteName }}</title>
+		<link rel="preconnect" href="https://fonts.gstatic.com">
+		<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,700;0,900;1,400&display=swap" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+        <script type="text/javascript" async
+            src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+        </script>
+        {% do view.registerAssetBundle("fablevision\\netlogo\\assetbundles\\CSSBundle") %}
+        {% do view.registerAssetBundle("fablevision\\netlogo\\assetbundles\\ChatBundle") %}
+        <link rel="icon" href="/netlogo/favicon.ico">
+	</head>
+	{% set requestedPath = craft.app.request.pathInfo() %}
+	<body>
+		<div class="container">
+            <div class="page">
+                <header>
+                </header>
+                <div class="chat-container">
+                    <div id="chat-user-identification" class="chat-user-identification">
+                        <label for="chat-user-name">Student Number:</label>
+                        <input type="text" id="chat-user-name" class="chat-user-input" placeholder="Type Your Student Number" required autofocus>
+                        <button id="chat-start-chat" class="chat-start-btn">Start Chat</button>
+                    </div>
+                    
+                    <div id="chat-box-container" style="display: none;">
+                        <div id="chat-box" class="chat-box"></div>
+                        <input type="text" id="chat-user-input" class="chat-user-input" placeholder="Type a message...">
+                        <button id="chat-send-btn" class="chat-send-btn">
+                            <i class="fas fa-arrow-up"></i>
+                        </button>
+                    </div>
+                </div>
+                <hr/>
+			    {% include "netlogo/footer.twig" %}
+            </div>
+        </div>
+	</body>
+</html>
+

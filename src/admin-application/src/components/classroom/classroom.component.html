@@ -1,0 +1,224 @@
+<view-container id="classroom-main">
+	<view id="menu">
+		<ng-template>
+			<ul class="fv-tile-grid">
+				<li class="li">
+				  <button class="button tile" (click)="createClassroom()">
+				    <i class="fa-solid fa-plus-large"></i>
+				    <span class="label">Create Classroom</span>
+				  </button>
+				</li>
+				<li class="li" *ngFor="let classroom of classrooms">
+				  <button class="button tile" (click)="selectClassroom(classroom)">
+				    <i class="fa-solid fa-screen-users"></i>
+				    <span class="label">
+				    	<span class="name">{{ classroom.Name }}</span>
+				    	<span class="teacher">{{ classroom.Teacher["First Name"] }} {{ classroom.Teacher["Last Name"] }}</span>
+				    </span>
+				  </button>
+				</li>
+			</ul>
+		</ng-template>
+	</view>
+	<view id="editor">
+		<ng-template>
+				<div *ngIf="source" class="controls" [formGroup]="settings">
+				  
+				  <div class="buttons">
+				    <button mat-flat-button color="primary" [matMenuTriggerFor]="menu"><mat-icon>flag</mat-icon> Actions</button>
+				    <button mat-flat-button (click)="downloadRoster()" [ngStyle]="{background: '#1f85b5', color: '#ffffff'}"><mat-icon>cloud_download</mat-icon> Download</button>
+				    <mat-menu #menu="matMenu">
+				      <button mat-menu-item (click)="enableStudents()" [disabled]="noneChecked()">Enable Student(s)</button>
+				      <button mat-menu-item (click)="disableStudents()" [disabled]="noneChecked()">Disable Student(s)</button>
+				    </mat-menu>
+				  </div>
+				  <div class="filter-container">
+				    <mat-form-field appearance="standard">
+				      <mat-label>Filter</mat-label>
+				      <input matInput type="text" formControlName="filtertext" (keyup)="applyFilter($event)" placeholder="Filter teachers" #input>
+				      <button *ngIf="dataSource.filter?.length" matSuffix mat-icon-button aria-label="Clear" (click)="this.dataSource.filter=''; settings.patchValue({filtertext:''})">
+				        <mat-icon>close</mat-icon>
+				      </button>
+				    </mat-form-field>
+				  </div>
+				  <div class="buttons">
+				    <button mat-flat-button color="accent" (click)="importStudents()">Import Students</button>
+				    <button mat-flat-button color="primary" (click)="createStudent()">Create New Student Accounts</button>
+				    <button class="settings" matSuffix mat-icon-button aria-label="Settings" (click)="configureClassroom()">
+					    <mat-icon>settings</mat-icon>
+					</button>
+				  </div>
+				</div>
+				<table *ngIf="source" mat-table [fixedLayout]="true" [dataSource]="source.rows" class="mat-elevation-z8 view" matSort>
+				  <ng-container matColumnDef="checked">
+				    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by checked">
+				    <mat-checkbox [checked]="allChecked()"
+				                  [indeterminate]="someChecked()"
+				                  (change)="setAll($event.checked)">Check All</mat-checkbox>
+				    </th>
+				    <td mat-cell *matCellDef="let element">
+				      <div class="checkbox-container">
+				          <mat-checkbox [(ngModel)]="element.checked"></mat-checkbox>
+				      </div> 
+				    </td>
+				  </ng-container>
+
+				  <ng-container *ngFor="let column of source.columns; index as i;" matColumnDef="{{ column }}">
+				    <th mat-header-cell mat-sort-header *matHeaderCellDef>
+				      {{ column }}
+				    </th>
+				    <td mat-cell *matCellDef="let element;">
+				      {{ element[column] || '--' }}
+				    </td>
+				  </ng-container>
+
+				 <!-- <ng-container matColumnDef="video">
+				    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by checked">
+				    	Video Enabled
+				    </th>
+				    <td mat-cell *matCellDef="let element">
+				      <mat-slide-toggle
+				          color="primary"
+				          [(ngModel)]="element.enabled">
+				        {{ element.enabled  ? "Enabled" : "Disabled" }}
+				      </mat-slide-toggle>
+				    </td>
+				  </ng-container> -->
+
+				  <tr mat-header-row *matHeaderRowDef="['checked'].concat(source.columns); sticky: true"></tr>
+				    <tr mat-row *matRowDef="let row; columns: ['checked'].concat(source.columns)"></tr>
+				</table>
+				<mat-paginator showFirstLastButtons [pageSize]="15" [pageSizeOptions]="[15, 25, 50, 100, 500, 1000, 10000]" aria-label="Select page of users"></mat-paginator>
+
+		</ng-template>
+	</view>
+</view-container>
+
+
+<ng-template #studentEdit>
+  <div class="modal-header">
+    <h2 class="h2">EditStudent</h2>
+  </div>
+  <div class="modal-body">
+    <form class="form grid-60">
+      <mat-form-field class="cell span-60" appearance="standard">
+        <mat-label>First Name</mat-label>
+        <input name="firstName" type="text" [(ngModel)]="currentStudent['First Name']" matInput>
+      </mat-form-field>
+      <mat-form-field class="cell span-60" appearance="standard">
+        <mat-label>Last Name</mat-label>
+        <input name="lastName" type="text" [(ngModel)]="currentStudent['Last Name']" matInput>
+      </mat-form-field>
+      <mat-form-field class="cell span-60" appearance="standard">
+        <mat-label>Student Number</mat-label>
+        <input name="studentNumber" [disabled]="!!currentStudent.Id" type="text" [(ngModel)]="currentStudent['Student Number']" matInput>
+      </mat-form-field>
+    </form>
+  </div>
+  <div class="buttons">
+    <button mat-flat-button color="primary" (click)="onCancelModal()">Cancel</button>
+    <button mat-flat-button [disabled]="saveStudentDisabled()" (click)="onCreateStudent()" [ngStyle]="{background: '#1f85b5', color: '#ffffff'}">{{ currentStudent.Id ? "Save Student" : "Create Student" }}</button>
+  </div>
+</ng-template>
+
+<ng-template #studentCreate>
+  <div class="modal-header">
+    <h2 class="h2">Create new Student Accounts</h2>
+  </div>
+  <div class="modal-body">
+    <form class="form grid-60">
+	    <mat-form-field class="cell span-60" appearance="standard">
+        <mat-label>Number of Students to Create</mat-label>
+        <input name="studentNumber" type="number" [(ngModel)]="currentStudent['NumStudents']" matInput>
+      </mat-form-field>
+    </form>
+  </div>
+  <div class="buttons">
+    <button mat-flat-button color="primary" (click)="onCancelModal()">Cancel</button>
+    <button mat-flat-button (click)="onCreateStudentAccounts()" [ngStyle]="{background: '#1f85b5', color: '#ffffff'}">{{ currentStudent.Id ? "Save Student" : "Create Student Accounts" }}</button>
+  </div>
+</ng-template>
+
+
+
+
+
+<ng-template #classroomEdit>
+	<div class="modal-header">
+    <h2 class="h2">Create new Classroom</h2>
+  </div>
+  <div class="modal-body">
+    <form class="form grid-60">
+      <mat-form-field class="cell span-60" appearance="standard">
+        <mat-label>Class Name</mat-label>
+        <input name="className" type="text" [(ngModel)]="currentClassroomModel['Name']" matInput>
+      </mat-form-field>
+			<mat-form-field appearance="fill" class="w-100">
+				<mat-label>Teacher</mat-label>
+				<mat-select name="teacher" [(ngModel)]="currentClassroomModel.Teacher">
+					<mat-option *ngFor="let teacher of teachers" [value]="teacher" [innerHtml]="teacher['First Name'] + ' ' + teacher['Last Name'] + ' (#' + teacher['Teacher Number'] + ')'"></mat-option>
+				</mat-select>
+			</mat-form-field>
+			<mat-form-field *ngIf="!editing" class="cell span-60" appearance="standard">
+        <mat-label>Initial Number of Students</mat-label>
+        <input name="studentNumber" type="number" [(ngModel)]="currentClassroomModel['NumStudents']" matInput>
+      </mat-form-field>
+    </form>
+  </div>
+  <div class="buttons">
+    <button mat-flat-button color="primary" (click)="onCancelModal()">Cancel</button>
+    <button mat-flat-button [disabled]="saveDisabled()" (click)="currentClassroomModel.Id ? onUpdateClassroom():onCreateClassroom()" [ngStyle]="{background: '#1f85b5', color: '#ffffff'}">{{ currentClassroomModel.Id ? "Save Classroom" : "Create Classroom" }}</button>
+  </div>
+</ng-template>
+
+<ng-template #studentImport>
+  <div class="modal-header">
+    <h2 class="h2">Import Student Roster</h2>
+  </div>
+  <div class="modal-body">
+    <form class="accessible">
+      <input #uploader type="file" id="student-roster" class="accessible" name="student-roster" accept="text/csv" (change)="onFileSelect($event)">
+    </form>
+    <div *ngIf="!importData.students" class="intro">
+      <p class="p">
+        Upload a CSV roster that contains new students for import. Your CSV must have the following column, with matching case:
+      </p>  
+      <ul class="ul">
+        <li class="li"><b>Student Number</b> (should be an unassigned integer to use for code generation)</li>
+      </ul>
+      <p class="p"><a [href]="dir + '/assets/student-template.csv'" download target="_blank">Click here to download a template</a></p>
+    </div>
+    <div *ngIf="importData.students" class="intro">
+      <h3 *ngIf="importData.hasErrors" class="h3 errors">
+        Your import has errors. Please review the items below, correct the issues in the CSV and then try uploading again.
+      </h3>  
+      <h3 *ngIf="!importData.hasErrors" class="h3 valid">
+        Your import has been validated. Click "Import Students" below to finalize their account creation.
+      </h3>  
+    </div>
+    <table *ngIf="importData.students" mat-table [fixedLayout]="true" [dataSource]="importData.students" class="mat-elevation-z8 view" matSort>
+      <ng-container *ngFor="let column of importData.columns; index as i;" matColumnDef="{{ column }}">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef>
+          {{ column }}
+        </th>
+        <td mat-cell *matCellDef="let element;">
+          {{ element[column] || '--' }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="Status">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef>
+          Status
+        </th>
+        <td class="teacher-status" mat-cell *matCellDef="let element;" [innerHtml]="element.getStatusMessage()|safe">
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="importData.columns.concat('Status'); sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: importData.columns.concat('Status')"></tr>
+    </table>
+  </div>
+  <div class="buttons">
+    <button mat-flat-button color="primary" (click)="onCancelModal(); importData = {};">Cancel</button>
+    <button *ngIf="importData.students && !importData.hasErrors" mat-flat-button (click)="finalizeImportStudents()" [ngStyle]="{background: '#1f85b5', color: '#ffffff'}">Import Students</button>
+    <button *ngIf="!importData.students || importData.hasErrors" mat-flat-button (click)="findCsv()" [ngStyle]="{background: '#1f85b5', color: '#ffffff'}">Find CSV</button>
+  </div>
+</ng-template>

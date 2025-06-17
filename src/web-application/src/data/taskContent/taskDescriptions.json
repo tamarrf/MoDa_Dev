@@ -1,0 +1,518 @@
+[
+    {
+        "taskId": "diffusion",
+        "title": "Diffusion",
+        "description": "Sample Text",
+        "blocklyLibrary": {
+            "0":{
+                "label": "General",
+                "selected": true,
+                "valid": true,
+                "value":  "general"
+            },
+            "1":{
+                "label": "Diffusion",
+                "selected": true,
+                "valid": true,
+                "value": "diffusion"
+            }
+            
+        },
+        "script": "water-diffusion.nlogo",
+        "videos":[
+           {
+            "source": "/u1_hot_water_default.mp4",
+            "title": "Hot Water Diffusion"
+           },
+           {
+            "source": "/u1_cold_water.mp4",
+            "title": "Cold Water Diffusion"
+           }
+        ],
+        "debugFile":"water-diffusion-solution.nlogo",
+        "worldWidth": 201,
+        "viewComponents":["chartComponent", "experimentComponent"],
+        "chart": "diffusionChart",
+        "widget":"diffusionWidget",
+        "experiment":"videoComponent"
+    },
+    {
+        "taskId": "diffusion_v2",
+        "title": "Diffusion",
+        "description": "Sample Text",
+        "blocklyLibrary": {
+            "0":{
+                "label": "General",
+                "selected": true,
+                "valid": true,
+                "value":  "general"
+            },
+            "1":{
+                "label": "Diffusion",
+                "selected": true,
+                "valid": true,
+                "value": "diffusion_v2"
+            }
+            
+        },
+        "script": "water-diffusion_v2.nlogo",
+        "videos":[
+           {
+            "source": "/u1_hot_water_default.mp4",
+            "title": "Hot Water Diffusion"
+           },
+           {
+            "source": "/u1_cold_water.mp4",
+            "title": "Cold Water Diffusion"
+           }
+        ],
+        "debugFile":"water-diffusion-solution.nlogo",
+        "worldWidth": 201,
+        "viewComponents":["chartComponent", "experimentComponent"],
+        "chart": "diffusion_v2Chart",
+        "widget":"diffusion_v2Widget",
+        "experiment":"videoComponent"
+    },
+    {
+        "taskId": "diffusion_v2_pt_br",
+        "title": "Diffusion",
+        "description": "Sample Text",
+        "blocklyLibrary": {
+            "0":{
+                "label": "General",
+                "selected": true,
+                "valid": true,
+                "value":  "general"
+            },
+            "1":{
+                "label": "Diffusion",
+                "selected": true,
+                "valid": true,
+                "value": "diffusion_v2_pt_br"
+            }
+            
+        },
+        "script": "water-diffusion_v2.nlogo",
+        "videos":[
+           {
+            "source": "/u1_hot_water_default.mp4",
+            "title": "Hot Water Diffusion"
+           },
+           {
+            "source": "/u1_cold_water.mp4",
+            "title": "Cold Water Diffusion"
+           }
+        ],
+        "debugFile":"water-diffusion-solution.nlogo",
+        "worldWidth": 201,
+        "viewComponents":["chartComponent", "experimentComponent"],
+        "chart": "diffusion_v2_pt_brChart",
+        "widget":"diffusion_v2_pt_brWidget",
+        "experiment":"videoComponent"
+    },
+    {
+        "taskId": "wildfires",
+        "title": "Wildfires",
+        "description": "Sample Text",
+        "blocklyLibrary": [
+            {
+                "label": "General",
+                "selected": true,
+                "valid": true,
+                "value": "general"
+            },
+            {
+                "label": "Wildfires",
+                "selected": true,
+                "valid": true,
+                "value": "wildfires"
+            }
+        ],
+        "script": "wildfire-and-smoke-spread.nlogo",
+        "videos": [],
+        "debugFile":"wildfire-and-smoke-solution.nlogo",
+        "worldWidth": 101,
+        "viewComponents":["experimentComponent"],
+        "widget": "wildfiresWidget",
+        "experiment":"videoComponent"
+    },
+    {
+        "taskId": "wildfires_v2",
+        "title": "Wildfires",
+        "description": "Sample Text",
+        "blocklyLibrary": [
+            {
+                "label": "General",
+                "selected": true,
+                "valid": true,
+                "value": "general"
+            },
+            {
+                "label": "Wildfires",
+                "selected": true,
+                "valid": true,
+                "value": "wildfires_v2"
+            }
+        ],
+        "script": "wildfire-and-smoke-spread-v2.nlogo",
+        "videos": [],
+        "debugFile":"wildfire-and-smoke-solution.nlogo",
+        "worldWidth": 101,
+        "viewComponents":["experimentComponent"],
+        "widget": "wildfiresWidget",
+        "experiment":"videoComponent"
+    },
+    {
+        "taskId": "wildfires-2",
+        "title": "Wildfires Task 2",
+        "description": "Sample Text",
+        "blocklyLibrary": [
+            {
+                "label": "General",
+                "selected": true,
+                "valid": true,
+                "value": "general"
+            },
+            {
+                "label": "Wildfires",
+                "selected": true,
+                "valid": true,
+                "value": "wildfires2"
+            }
+        ],
+        "script": "a2s-netlogo/wildfire-and-smoke-spread2.nlogo",
+        "videos": [],
+        "debugFile":"wildfire-and-smoke-solution.nlogo",
+        "worldWidth": 201,
+        "viewComponents":[],
+        "chart": "wildfiresChart",
+        "widget": "wildfires2Widget"
+    },
+    {
+        "taskId": "heat",
+        "title": "Heat",
+        "description": "Sample Text",
+        "blocklyLibrary": [
+            {
+                "label": "General",
+                "selected": true,
+                "valid": true,
+                "value": "general"
+            },
+            {
+                "label": "Heat",
+                "selected": true,
+                "valid": true,
+                "value": "heat"
+            }
+        ],
+        "script": "heat-conduction.nlogo",
+        "videos": [],
+        "debugFile":"heat-conduction-solution.nlogo",
+        "worldWidth": 13,
+        "viewComponents":["chartComponent"],
+        "chart": "heatChart",
+        "widget":"heatWidget"
+            
+    },
+    {
+        "taskId": "virus",
+        "title": "Virus",
+        "description": "Sample Text",
+        "blocklyLibrary": [
+            {
+                "label": "General",
+                "selected": true,
+                "valid": true,
+                "value": "general"
+            },
+            {
+                "label": "Virus",
+                "selected": true,
+                "valid": true,
+                "value": "virus"
+            }
+        ],
+        "script": "virus-spread.nlogo",
+        "videos": [],
+        "debugFile":"virus-spread-solution.nlogo",
+        "worldWidth": 201,
+        "viewComponents":["chartComponent"],
+        "chart": "virusChart",
+        "widget":"virusWidget"
+            
+    },
+    {
+        "taskId": "photossynthesis",
+        "title": "Photossynthesis",
+        "description": "Sample Text",
+        "blocklyLibrary": {
+            "0":{
+                "label": "General",
+                "selected": true,
+                "valid": true,
+                "value":  "general"
+            },
+            "1":{
+                "label": "Photosynthesis",
+                "selected": true,
+                "valid": true,
+                "value": "photosynthesis"
+            }
+            
+        },
+        "script": "photosynthesis.nlogo",
+        "videos":[],
+        "debugFile":"water-diffusion-solution.nlogo",
+        "worldWidth": 201,
+        "viewComponents":["chartComponent"],
+        "chart": "photossynthesisChart",
+        "widget":"photossynthesisWidget"
+    },
+    {
+        "taskId": "diffusionPT",
+        "title": "Diffusion",
+        "description": "Sample Text",
+        "blocklyLibrary": {
+            "0":{
+                "label": "General",
+                "selected": true,
+                "valid": true,
+                "value":  "general"
+            },
+            "1":{
+                "label": "DiffusionPT",
+                "selected": true,
+                "valid": true,
+                "value": "diffusionPT"
+            }
+            
+        },
+        "script": "water-diffusion.nlogo",
+        "videos":[
+           {
+            "source": "/u1_hot_water_default.mp4",
+            "title": "Hot Water Diffusion"
+           },
+           {
+            "source": "/u1_cold_water.mp4",
+            "title": "Cold Water Diffusion"
+           }
+        ],
+        "debugFile":"water-diffusion-solution.nlogo",
+        "worldWidth": 201,
+        "viewComponents":["chartComponent", "experimentComponent"],
+        "chart": "diffusionChartPT",
+        "widget":"diffusionWidgetPT",
+        "experiment":"videoComponent"
+    },
+    {
+        "taskId": "eutrophication_v2",
+        "title": "Eutrophication v2",
+        "description": "Sample Text",
+        "blocklyLibrary": [
+            {
+                "label": "General",
+                "selected": true,
+                "valid": true,
+                "value": "general"
+            },
+            {
+                "label": "Eutrophication v2",
+                "selected": true,
+                "valid": true,
+                "value": "eutrophication_v2"
+            }
+        ],
+        "script": "eutrophication_v2.nlogo",
+        "videos": [],
+        "debugFile":"virus-spread-solution.nlogo",
+        "worldWidth": 201,
+        "viewComponents":["chartComponent"],
+        "chart": "eutrophication_v2Chart",
+        "widget":"eutrophication_v2Widget"   
+    },
+    {
+        "taskId": "eutrophication_v2_pt_br",
+        "title": "Eutrofização v2",
+        "description": "Sample Text",
+        "blocklyLibrary": [
+            {
+                "label": "General",
+                "selected": true,
+                "valid": true,
+                "value": "general"
+            },
+            {
+                "label": "Eutrophication v2",
+                "selected": true,
+                "valid": true,
+                "value": "eutrophication_v2_pt_br"
+            }
+        ],
+        "script": "eutrophication_v2.nlogo",
+        "videos": [],
+        "debugFile":"virus-spread-solution.nlogo",
+        "worldWidth": 201,
+        "viewComponents":["chartComponent","experimentComponent"],
+        "chart": "eutrophication_v2_pt_brChart",
+        "widget":"eutrophication_v2_pt_brWidget",
+        "experiment":"videoComponent"
+    },
+    {
+        "taskId": "wolf_sheep",
+        "title": "Wolf Sheep",
+        "description": "Sample Text",
+        "blocklyLibrary": [
+            {
+                "label": "General",
+                "selected": true,
+                "valid": true,
+                "value": "general"
+            },
+            {
+                "label": "Wolf Sheep",
+                "selected": true,
+                "valid": true,
+                "value": "wolf_sheep"
+            }
+        ],
+        "script": "wolf_sheep.nlogo",
+        "videos": [],
+        "debugFile":"virus-spread-solution.nlogo",
+        "worldWidth": 51,
+        "viewComponents":["chartComponent"],
+        "chart": "wolf_sheepChart",
+        "widget":"wolf_sheepWidget"   
+    },
+    {
+        "taskId": "moda_math",
+        "title": "moda_math",
+        "description": "Sample Text",
+        "blocklyLibrary": [
+            {
+                "label": "General",
+                "selected": true,
+                "valid": true,
+                "value": "general"
+            },
+            {
+                "label": "moda_math",
+                "selected": true,
+                "valid": true,
+                "value": "moda_math"
+            }
+        ],
+        "script": "moda_math.nlogo",
+        "videos": [],
+        "debugFile":"",
+        "worldWidth": 23,
+        "viewComponents":[],
+        "widget":"moda_mathWidget"
+            
+    },
+    {
+        "taskId": "moda_math_1quad",
+        "title": "moda_math_1quad",
+        "description": "Sample Text",
+        "blocklyLibrary": [
+            {
+                "label": "General",
+                "selected": true,
+                "valid": true,
+                "value": "general"
+            },
+            {
+                "label": "moda_math_1quad",
+                "selected": true,
+                "valid": true,
+                "value": "moda_math_1quad"
+            }
+        ],
+        "script": "moda_math_1quad.nlogo",
+        "videos": [],
+        "debugFile":"",
+        "worldWidth": 23,
+        "viewComponents":[],
+        "widget":"moda_math_1quadWidget"
+            
+    },
+    {
+        "taskId": "moda_math_1quad_basic",
+        "title": "moda_math_1quad_basic",
+        "description": "Sample Text",
+        "blocklyLibrary": [
+            {
+                "label": "General",
+                "selected": true,
+                "valid": true,
+                "value": "general"
+            },
+            {
+                "label": "moda_math_1quad_basic",
+                "selected": true,
+                "valid": true,
+                "value": "moda_math_1quad_basic"
+            }
+        ],
+        "script": "moda_math_1quad_basic.nlogo",
+        "videos": [],
+        "debugFile":"",
+        "worldWidth": 23,
+        "viewComponents":[],
+        "widget":"moda_math_1quad_basicWidget"
+            
+    },
+    {
+        "taskId": "moda_math_transform",
+        "title": "moda_math_transform",
+        "description": "Sample Text",
+        "blocklyLibrary": [
+            {
+                "label": "General",
+                "selected": true,
+                "valid": true,
+                "value": "general"
+            },
+            {
+                "label": "moda_math_transform",
+                "selected": true,
+                "valid": true,
+                "value": "moda_math_transform"
+            }
+        ],
+        "script": "moda_math_transform.nlogo",
+        "videos": [],
+        "debugFile":"",
+        "worldWidth": 23,
+        "viewComponents":[],
+        "widget":"moda_math_transformWidget"
+            
+    },
+    {
+        "taskId": "moda_art",
+        "title": "moda_art",
+        "description": "Sample Text",
+        "blocklyLibrary": [
+            {
+                "label": "General",
+                "selected": true,
+                "valid": true,
+                "value": "general"
+            },
+            {
+                "label": "moda_art",
+                "selected": true,
+                "valid": true,
+                "value": "moda_art"
+            }
+        ],
+        "script": "moda_art.nlogo",
+        "videos": [],
+        "debugFile":"",
+        "worldWidth": 23,
+        "viewComponents":[],
+        "widget":"moda_artWidget"
+            
+    }
+]

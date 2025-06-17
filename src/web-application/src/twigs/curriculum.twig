@@ -1,0 +1,29 @@
+<div class="dashboard-content">
+	{% set journey = craft.entries()
+        .section("journey")
+        .id(craft.app.request.getQueryParam("journeyId"))
+        .one() %}
+	<h3>
+		{{ journey.journeyTitle }}
+		Curriculum
+	</h3>
+	<div class="curriculum-content">
+		<div>
+			<h4>Description:</h4>
+			{{ journey.journeyDescription }}
+		</div>
+		{% for section in journey.journeyCurriculum.all() %}
+			<h4>{{ section.sectionTitle }}</h4>
+			<div>
+				{{ section.sectionBody }}
+			</div>
+		{% endfor %}
+		{% for link in journey.curriculumLinks.all() %}
+			<h4>Curriculum Links:</h4>
+			<ul>
+				<li><a href="{{link.linkUrl}}">{{ link.linkDisplayText }}</a></li>
+			</ul>
+		{% endfor %}
+	</div>
+</div>
+

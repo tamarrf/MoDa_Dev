@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["wildfiresChart"],{b1a9:function(t,a,e){"use strict";e.r(a);var r=function(){var t=this,a=t.$createElement,e=t._self._c||a;return e("div",{staticClass:"chart-container",attrs:{id:"chart"}})},n=[],s={name:"wildfiresChartComponent",props:["workspace"]},i=s,c=e("de9a"),o=Object(c["a"])(i,r,n,!1,null,"5039f108",null);a["default"]=o.exports}}]);
+//# sourceMappingURL=wildfiresChart.bundle.js.map

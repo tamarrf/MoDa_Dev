@@ -1,0 +1,69 @@
+@import "../../styles/mixins";
+
+table {
+	width: 100%;
+}
+
+th {
+	vertical-align: middle;
+}
+
+.controls {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: center;
+	z-index: 1000;
+	padding: 1rem;
+	background: white;
+	border-bottom: solid 1px @black10;
+
+	.mat-flat-button {
+		&:extend(.bulgex2 all);
+	}
+}
+
+.controls .buttons {
+	margin: 0 !important;
+}
+
+.controls button + button {
+	margin-left: 1.25rem;
+}
+
+.controls .filter-container {
+	padding: 0 1rem 0 2rem;
+	flex: 1 1 auto;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+
+	mat-form-field {
+		flex: 1 1 auto;
+	}
+
+	mat-icon {
+		color: @purple1;
+		cursor: pointer;
+		&:extend(.bulgex2 all);
+	}
+
+	.settings mat-icon {
+		color: @black50;
+	}
+
+	.refresh mat-icon {
+		color: @blue1;
+		font-weight: 900;
+	}
+}
+
+input[type="text"] {
+	text-align: left;
+}
+
+input[type="text"]:focus {
+	outline: none;
+	border: 0;
+	box-shadow: initial;
+}

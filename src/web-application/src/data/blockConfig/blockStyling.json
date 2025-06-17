@@ -1,0 +1,120 @@
+{
+    "blockStyles": {
+        "netlogo_blocks":{
+            "colourPrimary": "#F26522"
+        },
+        "logic_blocks": {
+            "colourPrimary": "#00836B"
+        },
+        "math_blocks": {
+            "colourPrimary": "#009D80"
+        },
+        "text_blocks": {
+            "colourPrimary": "#00B695"
+        },
+        "loop_blocks": {
+            "colourPrimary": "#00836B"
+        },
+        "behavior_border": {
+            "colourPrimary": "#004BA5"
+        },
+        "behavior_blocks": {
+            "colourPrimary": "#004BA5"
+        },
+        "particle_blocks": {
+            "colourPrimary": "#312B84"
+        },
+        "particle_border": {
+            "colourPrimary": "#312B84"
+        },
+        "control_blocks": {
+            "colourPrimary": "#0089B8"
+        },
+        "smoke_action_blocks":{
+            "colourPrimary": "#0480B7"
+        },
+        "smoke_control_blocks": {
+            "colourPrimary": "#555555"
+        },
+        "smoke_behavior_blocks": {
+            "colourPrimary": "#000000"
+        },
+        "smoke_behavior_unpacked_blocks": {
+            "colourPrimary": "#333333"
+        },
+        "smoke_action_unpacked_blocks":{
+            "colourPrimary": "#3F89B9"
+        },
+        "netlogo_property_blocks":{
+            "colourPrimary": "#312B84"
+        },
+        "netlogo_action_blocks":{
+            "colourPrimary": "#004BA5"
+        },
+        "netlogo_interaction_blocks":{
+            "colourPrimary": "#336FB7"
+        },
+        "netlogo_control_blocks":{
+            "colourPrimary": "#0089B8"
+        },
+        "netlogo_general_blocks":{
+            "colourPrimary": "#00836B"
+        },
+        "netlogo_variable_blocks":{
+            "colourPrimary": "#C7B02C"
+        },
+        "netlogo_background_blocks":{
+            "colourPrimary": "#000000"
+        }
+    },
+    "categoryStyles": {
+        "netlogo_category": {
+            "colour": "#CC3366"
+        },
+        "logic_category": {
+            "colour": "#00836B"
+        },
+        "particles_category":{
+            "colour": "#312B84"
+        },
+        "behavior_category":{
+            "colour": "#004BA5"
+        },
+        "control_category":{
+            "colour": "#0089B8"
+        },
+        "interaction_category":{
+            "colour": "#336FB7"
+        },
+        "smoke_properties_category": {
+            "colour": "#000000"
+        },
+        "smoke_control_category": {
+            "colour": "#555555"
+        },
+        "smoke_action_category": {
+            "colour": "#0480B7"
+        },
+        "background_category": {
+            "colour": "#000000"
+        }
+    },
+    "componentStyles": {
+        "workspaceBackgroundColour": "#ffffff",
+        "toolboxBackgroundColour": "#E0E0E0",
+        "toolboxForegroundColour": "#000000",
+        "flyoutBackgroundColour": "#BDBDBD",
+        "flyoutForegroundColour": "#ccc",
+        "flyoutOpacity": 0.75,
+        "scrollbarColour": "#797979",
+        "insertionMarkerColour": "#fff",
+        "insertionMarkerOpacity": 0.3,
+        "scrollbarOpacity": 0.4,
+        "cursorColour": "#d0d0d0"
+    },
+    "fontStyle": {
+        "family": "Poppins, serif", 
+        "weight": 500, 
+        "size": 10
+    }
+}

@@ -1,0 +1,71 @@
+@import play.api.Mode
+
+@(content: Html, title: String = "NetLogo Web", selectedTopLink: Option[String] = None, extraHead: Html = Html(""), extraBody: Html = Html(""), relativizer: String = "")(implicit mode: Mode, request: RequestHeader)
+
+<!DOCTYPE html>
+
+<html class="not_full_height">
+  <head>
+    <meta charset="UTF-8">
+    <title>@title</title>
+    <link rel="stylesheet" media="screen" href='@routes.Assets.versioned("stylesheets/theme.css").relative'>
+    <link rel="stylesheet" media="screen" href='@routes.Assets.versioned("stylesheets/classes.css").relative'>
+    <link rel="stylesheet" media="screen" href='@routes.Assets.versioned("stylesheets/element-overrides.css").relative'>
+    @extraHead
+    <link rel="shortcut icon" type="image/x-icon" href='@routes.Assets.versioned("images/favicon.ico").relative'>
+    <script src='@routes.Assets.versioned("jquery/dist/jquery.min.js").relative' type="text/javascript"></script>
+    <script src='@routes.Assets.versioned("javascripts/topbar.js").relative' type="text/javascript"></script>
+    @views.html.analytics()
+  </head>
+  <body class="not_full_height">
+
+    <div class="topbar">
+      <a class="topbar-root-link topbar-text topbar-link" href="./@relativizer">NetLogo Web</a>
+      <div class="topbar-link-box">
+        @{
+
+          sealed trait TopSomething
+
+          case class TopLink(id: String, url: String, text: String) extends TopSomething
+          case class TopLabel(id: String, text: String)             extends TopSomething
+
+          val LaunchLink   = TopLink ("launch"      , s"./${relativizer}launch"            , "Launch")
+          val UpdatesLink  = TopLink ("updates"     , s"./${relativizer}whats-new"         , "What's New")
+          val DocsLabel    = TopLabel("docs"                                               , "Documentation")
+          val NetLogoLink  = TopLink ("netlogo"     , "http://ccl.northwestern.edu/netlogo", "About NetLogo")
+
+          Html(Seq(LaunchLink, UpdatesLink, DocsLabel, NetLogoLink).map {
+
+            case TopLabel(id, text) =>
+              val baseClasses = "topbar-quick-link topbar-text topbar-label topbar-link brand"
+              s"""<span id="$id-label" class="$baseClasses">$text</span>"""
+
+            case TopLink(id, url, text) =>
+              val baseClasses  = "topbar-quick-link topbar-text topbar-link brand"
+              val extraClasses = if (selectedTopLink.contains(id)) " selected" else ""
+              s"""<a id="$id-link" class="$baseClasses$extraClasses" href="$url">$text</a>"""
+
+          }.mkString("\n"))
+
+        }
+      </div>
+    </div>
+
+    <div class="topbar-hint-box">
+      <ul class="topbar-hint-list"></ul>
+      <template id="hint-list-entry">
+        <li><a class="topbar-hint-link"></a></li>
+      </template>
+    </div>
+
+    <div class="outer-content not_full_height">
+
+      <div class="content">
+        @content
+      </div>
+
+    </div>
+
+    @extraBody
+  </body>
+</html>

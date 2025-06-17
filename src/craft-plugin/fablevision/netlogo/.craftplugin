@@ -1,0 +1,29 @@
+{
+    "apiVersion": "api_version_3_0",
+    "codeComments": "",
+    "consolecommandName": "",
+    "controllerName": "",
+    "cpsectionName": "Neltogo Imports",
+    "elementName": "",
+    "fieldName": "",
+    "modelName": "",
+    "pluginAuthorGithub": "",
+    "pluginAuthorName": "Chris Spence",
+    "pluginAuthorUrl": "fablevision.com",
+    "pluginComponents": [
+        "controllers",
+        "records",
+        "services",
+        "variables"
+    ],
+    "pluginDescription": "Craft plugin to support Blockly and Netlogo integration ",
+    "pluginName": "netlogo",
+    "pluginVendorName": "fablevision",
+    "pluginVersion": "0.0.7",
+    "purchasableName": "",
+    "recordName": "",
+    "serviceName": "",
+    "taskName": "",
+    "utilityName": "",
+    "widgetName": ""
+}

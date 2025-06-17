@@ -1,0 +1,586 @@
+{
+    "fieldGroups": [
+        "Menu",
+        "Common"
+    ],
+    "sections": [
+        {
+            "name": "Menu Page",
+            "handle": "menuPage",
+            "type": "structure",
+            "enableVersioning": true,
+            "maxLevels": null,
+            "siteSettings": [
+                {
+                    "hasUrls": true,
+                    "uriFormat": "menu-page\/{slug}",
+                    "template": "menu-page\/_entry",
+                    "enabledByDefault": true
+                }
+            ]
+        },
+        {
+            "name": "GGB Settings",
+            "handle": "ggbSettings",
+            "type": "single",
+            "enableVersioning": true,
+            "siteSettings": [
+                {
+                    "hasUrls": true,
+                    "uriFormat": "ggb-settings",
+                    "template": "ggb-settings\/_entry",
+                    "enabledByDefault": true
+                }
+            ]
+        },
+        {
+            "name": "Graph Settings",
+            "handle": "graphSettings",
+            "type": "single",
+            "enableVersioning": true,
+            "siteSettings": [
+                {
+                    "hasUrls": true,
+                    "uriFormat": "graph-settings",
+                    "template": "graph-settings\/_entry",
+                    "enabledByDefault": true
+                }
+            ]
+        }
+    ],
+    "fields": [
+        {
+            "group": "Menu",
+            "name": "Page Image",
+            "handle": "pageImage",
+            "instructions": "",
+            "type": "craft\\fields\\Assets",
+            "useSingleFolder": false,
+            "allowUploads": true,
+            "defaultUploadLocationSource": "volume:contentImages",
+            "defaultUploadLocationSubpath": "",
+            "singleUploadLocationSource": "volume:contentImages",
+            "singleUploadLocationSubpath": "",
+            "restrictFiles": "1",
+            "allowedKinds": [
+                "image"
+            ],
+            "showUnpermittedVolumes": false,
+            "showUnpermittedFiles": false,
+            "previewMode": "full",
+            "sources": [
+                "volume:contentImages"
+            ],
+            "viewMode": "large",
+            "limit": "1",
+            "selectionLabel": "",
+            "showSiteMenu": false,
+            "localizeRelations": false,
+            "validateRelatedElements": false,
+            "allowSelfRelations": false
+        },
+        {
+            "group": "Menu",
+            "name": "Page Section",
+            "handle": "pageSection",
+            "instructions": "",
+            "type": "craft\\fields\\Matrix",
+            "minBlocks": "",
+            "maxBlocks": "",
+            "propagationMethod": "all",
+            "blockTypes": [
+                {
+                    "name": "Section Block",
+                    "handle": "sectionBlock",
+                    "fields": [
+                        {
+                            "required": true,
+                            "name": "Section Title",
+                            "handle": "sectionTitle",
+                            "instructions": "",
+                            "type": "craft\\fields\\PlainText",
+                            "typesettings": {
+                                "uiMode": "normal",
+                                "code": "",
+                                "multiline": "",
+                                "initialRows": "4",
+                                "byteLimit": 255
+                            }
+                        },
+                        {
+                            "required": true,
+                            "name": "Section Body",
+                            "handle": "sectionBody",
+                            "instructions": "",
+                            "type": "craft\\redactor\\Field",
+                            "typesettings": {
+                                "uiMode": "normal",
+                                "redactorConfig": "",
+                                "purifierConfig": "",
+                                "cleanupHtml": true,
+                                "removeInlineStyles": "1",
+                                "removeEmptyTags": "1",
+                                "removeNbsp": "1",
+                                "purifyHtml": "1",
+                                "columnType": "text",
+                                "availableVolumes": [
+                                    "volume:contentImages"
+                                ],
+                                "availableTransforms": "*",
+                                "showUnpermittedVolumes": false,
+                                "showUnpermittedFiles": false,
+                                "showHtmlButtonForNonAdmins": "",
+                                "configSelectionMode": "choose",
+                                "manualConfig": "",
+                                "defaultTransform": ""
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "group": "Menu",
+            "name": "Page Title",
+            "handle": "pageTitle",
+            "instructions": "",
+            "type": "craft\\fields\\PlainText",
+            "uiMode": "normal",
+            "code": "",
+            "multiline": "",
+            "initialRows": "4",
+            "byteLimit": 255
+        },
+        {
+            "group": "Menu",
+            "name": "Menu Location",
+            "handle": "menuLocation",
+            "instructions": "",
+            "type": "craft\\fields\\Checkboxes",
+            "multi": true,
+            "options": [
+                {
+                    "label": "Top Menu",
+                    "value": "topMenu",
+                    "default": ""
+                },
+                {
+                    "label": "Footer Menu",
+                    "value": "footerMenu",
+                    "default": ""
+                }
+            ]
+        },
+        {
+            "group": "Common",
+            "name": "GGB Settings",
+            "handle": "ggbSettings",
+            "instructions": "",
+            "type": "craft\\fields\\Matrix",
+            "minBlocks": "1",
+            "maxBlocks": "1",
+            "propagationMethod": "all",
+            "blockTypes": [
+                {
+                    "name": "GGB Settings",
+                    "handle": "ggbSettings",
+                    "fields": [
+                        {
+                            "required": true,
+                            "name": "Sensor 1",
+                            "handle": "sensor1",
+                            "instructions": "",
+                            "type": "craft\\fields\\Dropdown",
+                            "typesettings": {
+                                "optgroups": true,
+                                "options": [
+                                    {
+                                        "label": "Temperature",
+                                        "value": "temperature",
+                                        "default": "1"
+                                    },
+                                    {
+                                        "label": "Humidity",
+                                        "value": "humidity",
+                                        "default": ""
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "required": true,
+                            "name": "Sensor 2",
+                            "handle": "sensor2",
+                            "instructions": "",
+                            "type": "craft\\fields\\Dropdown",
+                            "typesettings": {
+                                "optgroups": true,
+                                "options": [
+                                    {
+                                        "label": "Temperature",
+                                        "value": "temperature",
+                                        "default": ""
+                                    },
+                                    {
+                                        "label": "Humidity",
+                                        "value": "humidity",
+                                        "default": "1"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "required": true,
+                            "name": "Data Sampling Frequency",
+                            "handle": "dataSamplingFrequency",
+                            "instructions": "",
+                            "type": "craft\\fields\\Number",
+                            "typesettings": {
+                                "min": "0",
+                                "decimals": 0,
+                                "suffix": "seconds",
+                                "previewFormat": "decimal",
+                                "previewCurrency": ""
+                            }
+                        },
+                        {
+                            "required": true,
+                            "name": "Units",
+                            "handle": "units",
+                            "instructions": "",
+                            "type": "craft\\fields\\Dropdown",
+                            "typesettings": {
+                                "optgroups": true,
+                                "options": [
+                                    {
+                                        "label": "Metric",
+                                        "value": "metric",
+                                        "default": "1"
+                                    },
+                                    {
+                                        "label": "Standard",
+                                        "value": "standard",
+                                        "default": ""
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "group": "Common",
+            "name": "Graph Settings General",
+            "handle": "graphSettingsGeneral",
+            "instructions": "",
+            "type": "craft\\fields\\Matrix",
+            "minBlocks": "1",
+            "maxBlocks": "1",
+            "propagationMethod": "all",
+            "blockTypes": [
+                {
+                    "name": "Graph Settings",
+                    "handle": "graphSettings",
+                    "fields": [
+                        {
+                            "required": true,
+                            "name": "Plots Style",
+                            "handle": "plotsStyle",
+                            "instructions": "",
+                            "type": "craft\\fields\\Dropdown",
+                            "typesettings": {
+                                "optgroups": true,
+                                "options": [
+                                    {
+                                        "label": "Separate",
+                                        "value": "separate",
+                                        "default": "1"
+                                    },
+                                    {
+                                        "label": "Merged",
+                                        "value": "merged",
+                                        "default": ""
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "group": "Common",
+            "name": "Graph Settings Model",
+            "handle": "graphSettingsModel",
+            "instructions": "",
+            "type": "craft\\fields\\Matrix",
+            "minBlocks": "1",
+            "maxBlocks": "1",
+            "propagationMethod": "all",
+            "blockTypes": [
+                {
+                    "name": "Graph Settings",
+                    "handle": "graphSettings",
+                    "fields": [
+                        {
+                            "required": true,
+                            "name": "X-Axis",
+                            "handle": "xAxis",
+                            "instructions": "",
+                            "type": "craft\\fields\\Dropdown",
+                            "typesettings": {
+                                "optgroups": true,
+                                "options": [
+                                    {
+                                        "label": "Time",
+                                        "value": "time",
+                                        "default": "1"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "required": true,
+                            "name": "Y-Axis",
+                            "handle": "yAxis",
+                            "instructions": "",
+                            "type": "craft\\fields\\Dropdown",
+                            "typesettings": {
+                                "optgroups": true,
+                                "options": [
+                                    {
+                                        "label": "Temperature",
+                                        "value": "temperature",
+                                        "default": "1"
+                                    },
+                                    {
+                                        "label": "Ink Spread %",
+                                        "value": "inkSpread",
+                                        "default": ""
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "required": true,
+                            "name": "Graph Type",
+                            "handle": "graphType",
+                            "instructions": "",
+                            "type": "craft\\fields\\Dropdown",
+                            "typesettings": {
+                                "optgroups": true,
+                                "options": [
+                                    {
+                                        "label": "Line",
+                                        "value": "line",
+                                        "default": "1"
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "group": "Common",
+            "name": "Graph Settings Real",
+            "handle": "graphSettingsReal",
+            "instructions": "",
+            "type": "craft\\fields\\Matrix",
+            "minBlocks": "1",
+            "maxBlocks": "1",
+            "propagationMethod": "all",
+            "blockTypes": [
+                {
+                    "name": "Graph Settings",
+                    "handle": "graphSettings",
+                    "fields": [
+                        {
+                            "required": true,
+                            "name": "X-Axis",
+                            "handle": "xAxis",
+                            "instructions": "",
+                            "type": "craft\\fields\\Dropdown",
+                            "typesettings": {
+                                "optgroups": true,
+                                "options": [
+                                    {
+                                        "label": "Time",
+                                        "value": "time",
+                                        "default": "1"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "required": true,
+                            "name": "Y-Axis",
+                            "handle": "yAxis",
+                            "instructions": "",
+                            "type": "craft\\fields\\Dropdown",
+                            "typesettings": {
+                                "optgroups": true,
+                                "options": [
+                                    {
+                                        "label": "Temperature",
+                                        "value": "temperature",
+                                        "default": "1"
+                                    },
+                                    {
+                                        "label": "Ink Spread %",
+                                        "value": "inkSpread",
+                                        "default": ""
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "required": true,
+                            "name": "Graph Type",
+                            "handle": "graphType",
+                            "instructions": "",
+                            "type": "craft\\fields\\Dropdown",
+                            "typesettings": {
+                                "optgroups": true,
+                                "options": [
+                                    {
+                                        "label": "Line",
+                                        "value": "line",
+                                        "default": "1"
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "globalSets": [
+        {
+            "name": "Home Page",
+            "handle": "homePage",
+            "fieldLayout": {
+                "Home Page": [
+                    "homePageBanner"
+                ]
+            },
+            "fieldConfigs": {
+                "Home Page": {
+                    "homePageBanner": {
+                        "label": "",
+                        "instructions": "",
+                        "width": 100,
+                        "required": true
+                    }
+                }
+            }
+        }
+    ],
+    "entryTypes": [
+        {
+            "sectionHandle": "menuPage",
+            "name": "Menu Page",
+            "handle": "menuPage",
+            "hasTitleField": false,
+            "titleFormat": "{pageTitle}",
+            "fieldLayout": {
+                "Content": [
+                    "__ui_1",
+                    "pageTitle",
+                    "pageImage",
+                    "pageSection",
+                    "menuLocation"
+                ]
+            },
+            "fieldConfigs": {
+                "Content": {
+                    "__ui_1": {
+                        "type": "craft\\fieldlayoutelements\\EntryTitleField",
+                        "width": 100
+                    },
+                    "pageTitle": {
+                        "label": "",
+                        "instructions": "",
+                        "width": 100,
+                        "required": true
+                    },
+                    "pageImage": {
+                        "label": "",
+                        "instructions": "",
+                        "width": 100
+                    },
+                    "pageSection": {
+                        "label": "",
+                        "instructions": "",
+                        "width": 100
+                    },
+                    "menuLocation": {
+                        "label": "",
+                        "instructions": "",
+                        "width": 100,
+                        "required": true
+                    }
+                }
+            }
+        },
+        {
+            "sectionHandle": "ggbSettings",
+            "name": "GGB Settings",
+            "handle": "ggbSettings",
+            "hasTitleField": true,
+            "titleFormat": "",
+            "fieldLayout": {
+                "Content": [
+                    "__ui_1",
+                    "ggbSettings"
+                ]
+            },
+            "fieldConfigs": {
+                "Content": {
+                    "__ui_1": {
+                        "type": "craft\\fieldlayoutelements\\EntryTitleField",
+                        "width": 100
+                    },
+                    "ggbSettings": {
+                        "width": 100
+                    }
+                }
+            }
+        },
+        {
+            "sectionHandle": "graphSettings",
+            "name": "Graph Settings",
+            "handle": "graphSettings",
+            "hasTitleField": false,
+            "titleFormat": "{section.name|raw}",
+            "fieldLayout": {
+                "Content": [
+                    "__ui_1",
+                    "graphSettingsGeneral",
+                    "graphSettingsModel",
+                    "graphSettingsReal"
+                ]
+            },
+            "fieldConfigs": {
+                "Content": {
+                    "__ui_1": {
+                        "type": "craft\\fieldlayoutelements\\EntryTitleField",
+                        "width": 100
+                    },
+                    "graphSettingsGeneral": {
+                        "width": 100
+                    },
+                    "graphSettingsModel": {
+                        "width": 100
+                    },
+                    "graphSettingsReal": {
+                        "width": 100
+                    }
+                }
+            }
+        }
+    ]
+}

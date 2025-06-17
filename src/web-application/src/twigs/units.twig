@@ -1,0 +1,88 @@
+{% set csrfTokenName = craft.app.config.general.csrfTokenName %}
+{% set csrfToken = craft.app.request.csrfToken %}
+{% set journeyId = craft.app.request.getQueryParam("journeyId") %}
+{% set taskId = craft.app.request.getQueryParam("taskId") %}
+{% set info = craft.netlogo.getJourneyAndTask(journeyId, taskId) %}
+{% set imagePath = view.getAssetManager().getPublishedUrl('@fablevision/netlogo/assetbundles/simulation/img', true) %}
+<html>
+    <head>
+        <title>{{ siteName }}</title>
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link
+            href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,700;0,900;1,400&display=swap"
+            rel="stylesheet">
+        <script>
+            var __SERVICE_URL__ = "{{ actionUrl('netlogo/default/') }}";
+            var __CSRF_TOKEN_NAME__ = "{{ csrfTokenName }}";
+            var __CSRF_TOKEN__ = "{{ csrfToken }}";
+            var __JOURNEY_ID__ = {{ journeyId ?? "0" }};
+            var __TASK_ID__ = {{ taskId ?? "0" }};
+            var __CONTENT__ = JSON.parse("{{ info|json_encode|e('js') }}");
+            {% if currentUser %}
+            var __USER_ID__ = {{ currentUser.id }};
+            var __USER__ = "{{ currentUser.username }}";
+            {% endif %}
+            var __IMAGE_URL__ = "{{ imagePath }}";
+        </script>
+        <script src="https://kit.fontawesome.com/8476c81704.js" crossorigin="anonymous"></script>
+        {% do view.registerAssetBundle("fablevision\\netlogo\\assetbundles\\CSSBundle") %}
+        {% do view.registerAssetBundle("fablevision\\netlogo\\assetbundles\\SimulationBundle") %}
+        <link rel="icon" href="/netlogo/favicon.ico">
+    </head>
+
+    <body>
+        <div class="container">
+            {% include "netlogo/navBar.twig" %}
+            <div class="page units">
+                <header>
+                    <div class="title">
+                        <img class="homepage-logo" src="{{ craft.app.globals().getSetByHandle("homePage").modaLogo.one().url }}"/>
+                        <h3>{{ craft.app.globals().getSetByHandle("homePage").heroTitle  }}</h3>
+                    </div>
+                </header>
+                <h2>Our Units</h2>
+                <div class="units-description">We have created several MoDa units, each including a set of computer models, a dataset, teacher guides, and other instructional materials. These units have been tested and refined in real classrooms. If you are a teacher and want to try MoDa, email us!</div>
+                <div class="journeys">
+                    {# display journeys in alphabetical order #}
+                    {% set journeys = craft.entries()
+                        .section('journey')
+                        .orderBy({'journeyTitle': SORT_ASC})
+                        .all() %}
+                    {% if journeys %}
+                        {% for journey in journeys %}
+                            <div class="journey">
+                                <img class="journey-thumbnail" src="{{ journey.thumbnail.one().url }}"/>
+                                <h3 class="journey-title">{{ journey.journeyTitle }}</h3>
+                                <div class="journey-details-container">
+                                    <div class="journey-details-left">
+                                        <div><strong>SUBJECT:</strong> {{ journey.journeySubject }}</div>
+                                    </div>
+                                    {# <div class="journey-details-right">
+                                        <div>MS-PS1-1</div>
+                                        <div>MS-PS1-2</div>
+                                    </div> #}
+                                </div>
+                                {# <div class="journey-duration">{{ journey.journeyDuration }}</div> #}
+                                <div class="journey-duration">Duration: <span class="journey-duration-value">{{ journey.journeyDuration }}</span></div>
+                                <div class="journey-description-container">
+                                    <div class="journey-description-title">{{ journey.journeyTitle }}</div>
+                                    <div class="journey-description-body">{{ journey.journeyDescription }}</div>
+                                    <div class="journey-description-actions">
+                                        {% for index, task in journey.journeyTasks.all() %}
+                                            {% if index == 0 %}
+                                                <a class="journey-description-link" href="/?journeyId={{ journey.id }}&taskId={{task.id}}" class="journey-button">Model</a>
+                                            {% endif %}
+                                        {% endfor %}
+                                        <a class="journey-description-link" href="/?journeyId={{ journey.id }}" class="journey-button">Overview</a>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                <hr/>
+                {% include "netlogo/footer.twig" %}
+            </div>
+        </div>
+    </body>
+</html>

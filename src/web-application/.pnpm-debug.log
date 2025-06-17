@@ -1,0 +1,21 @@
+{
+  "0 debug pnpm:scope": {
+    "selected": 1
+  },
+  "1 error pnpm": {
+    "code": "ELIFECYCLE",
+    "errno": "ENOENT",
+    "syscall": "spawn",
+    "file": "sh",
+    "pkgid": "a2s-netlogo@0.1.0",
+    "stage": "build",
+    "script": "vue-cli-service build --dest ../craft-plugin/fablevision/netlogo/src/web-application && cp src/twigs/* ../craft-plugin/fablevision/netlogo/src/web-application && pnpm updateImages",
+    "pkgname": "a2s-netlogo",
+    "err": {
+      "name": "Error",
+      "message": "a2s-netlogo@0.1.0 build: `vue-cli-service build --dest ../craft-plugin/fablevision/netlogo/src/web-application && cp src/twigs/* ../craft-plugin/fablevision/netlogo/src/web-application && pnpm updateImages`\nspawn ENOENT",
+      "code": "ELIFECYCLE",
+      "stack": "Error: a2s-netlogo@0.1.0 build: `vue-cli-service build --dest ../craft-plugin/fablevision/netlogo/src/web-application && cp src/twigs/* ../craft-plugin/fablevision/netlogo/src/web-application && pnpm updateImages`\nspawn ENOENT\n    at ChildProcess.<anonymous> (/Users/spencech/pnpm-global/5/node_modules/.pnpm/pnpm@6.4.0/node_modules/pnpm/dist/pnpm.cjs:92220:22)\n    at ChildProcess.emit (events.js:315:20)\n    at maybeClose (internal/child_process.js:1048:16)\n    at Process.ChildProcess._handle.onexit (internal/child_process.js:288:5)"
+    }
+  }
+}

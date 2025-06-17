@@ -1,0 +1,148 @@
+<div class="dashboard-content">
+	<div class="classes">
+		<div class="class-roster">
+			<div class="roster-header">
+				{% set sortOptions = [
+					{
+						label: 'First Name A-Z',
+						value: 'firstNameAZ'
+					},
+					{
+						label: 'First Name Z-A',
+						value: 'firstNameZA'
+					},
+					{
+						label: 'Last Name A-Z',
+						value: 'lastNameAZ'
+					},
+					{
+						label: 'Last Name Z-A',
+						value: 'lastNameZA'
+					},
+					{
+						label: 'Student Number',
+						value: 'studentNumber'
+					}
+				] %}
+				{% set students = craft.netlogo.getStudents(currentUser.id) %}
+				{% set selectedSortOption = craft.app.request.getParam('order', 'firstNameAZ') %}
+				{% set orderJs %}
+				$(function(){
+					$('#categories').on("change", function(e){
+						// Get the value from the select
+						let filter = $(this).val();
+						document.location.href = '{{ craft.app.request.absoluteUrl() }}/?order=' + filter;
+					});
+				});
+				{% endset %}
+				{% js orderJs %}
+				<div>
+					<label for="categories">Sort by:</label>
+					<select name="categories" id="categories">
+						{% for sortOption in sortOptions %}
+							<option value="{{ sortOption.value }}" {{ sortOption.value == selectedSortOption ? 'selected' }}>
+								{{ sortOption.label }}
+							</option>
+						{% endfor %}
+					</select>
+				</div>
+				{% set journeys = craft.entries()
+					.section('journey')
+					.orderBy({'journeyTitle': SORT_ASC})
+					.all()
+				%}
+					<button class="journey-button-white" onclick="window.fv.launchClassModal( {{ journeys|map(j => "#{j.journeyTitle}, #{j.id}")|json_encode() }} )"
+					{% if craft.netlogo.getStudents(currentUser.id)|length < 1 %} 
+					disabled="disabled" 
+					{% endif %}>
+					Assign Units
+				</button>
+			</div>
+			<table class="student-table">
+				<tr>
+					<th>First</th>
+					<th>Last</th>
+					<th>Student Number</th>
+				</tr>
+				{% switch craft.app.request.getParam('order') %}
+					{% case 'firstNameAZ' %}
+						{% set students = craft.netlogo.getStudents(currentUser.id)|sort((a, b) => a.firstName <=> b.firstName) %}
+					{% case 'firstNameZA' %}
+						{% set students = craft.netlogo.getStudents(currentUser.id)|sort((a, b) => b.firstName <=> a.firstName) %}
+					{% case 'lastNameAZ' %}
+						{% set students = craft.netlogo.getStudents(currentUser.id)|sort((a, b) => a.lastName <=> b.lastName) %}
+					{% case 'lastNameZA' %}
+						{% set students = craft.netlogo.getStudents(currentUser.id)|sort((a, b) => b.lastName <=> a.lastName) %}
+					{% case 'studentNumber' %}
+						{% set students = craft.netlogo.getStudents(currentUser.id)|sort((a, b) => a.studentNumber <=> b.studentNumber) %}
+					{% default %}
+						{% set students = craft.netlogo.getStudents(currentUser.id)|sort((a, b) => a.firstName <=> b.firstName) %}
+				{% endswitch %}
+				{% for student in students %}
+					<tr>
+						<td>{{ student.firstName }}</td>
+						<td>{{ student.lastName }}</td>
+						<td>{{ student.studentNumber }}</td>
+						<td>
+							<a href="#">edit</a>
+						</td>
+					</tr>
+				{% endfor %}
+			</table>
+		</div>
+		<div id="classes-modal" class="classes-modal">
+			<div id="classes-modal-content" class="classes-modal-content">
+				<button id="close-modal" class="close" onclick="window.fv.closeClassModal()">
+					<i class="fas fa-times"></i>
+				</button>
+				<div class="classes-modal-body">
+					<div class="modal-title">Assign Units</div>
+					{% set journeys = craft.entries()
+						.section('journey')
+						.orderBy({'journeyTitle': SORT_ASC})
+						.all() %}
+					{% set student = craft.netlogo.getStudents(currentUser.id)|first %}
+					{% set assignments = [] %}
+					{% if student %}
+						{% set assignments = craft.netlogo.getAssignments(student.id) %}
+					{% endif %}
+					<div class="assignments-body">
+						<div class="journeys-to-assign">
+							<div class="modal-subtitle">Assign to Class</div>
+							<div class="unassigned-units">
+								{% for journey in journeys %}
+									{% if journey.id not in assignments %}
+										<div class="assignment">
+											<label class="assign-checkbox">
+												<input type="checkbox" id="journey{{journey.id}}" name="assignedJourneys" class="journey-checkbox" value="{{journey.id}}"/>
+												<div class="assign-checkmark"></div>
+											</label>
+											<div>{{ journey.journeyTitle }}</div>
+										</div>
+									{% endif %}
+								{% endfor %}
+							</div>
+						</div>
+						<div class="journeys-assigned">
+							<div class="modal-subtitle">Remove Assigned Units</div>
+							<div class="assigned-units">
+							{% for journey in journeys %}
+								{% if journey.id in assignments %}
+									<div class="assignment assigned">
+										<span>{{ journey.journeyTitle }}</span>
+										<button id="{{journey.id}}" class="delete-assignment" onclick="window.fv.deleteAssignmentForAllStudents(this.id)"><i class="fas fa-times"></i></button>
+									</div>
+								{% endif %}
+							{% endfor %}
+							</div>
+						</div>
+					</div>
+					<div class="assignment-buttons">
+						<button class="journey-button-white" onclick="window.fv.closeClassModal()">Cancel</button>
+						<button class="journey-button-blue" onclick="window.fv.assignJourneyToAllStudents()">Update Assignments</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

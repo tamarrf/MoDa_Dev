@@ -1,0 +1,66 @@
+{% if currentUser %}
+    {% redirect("\/") %}
+{% endif %}
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>MoDa Login</title>
+		<link rel="preconnect" href="https://fonts.gstatic.com"> 
+        <link
+            href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,700;0,900;1,400&display=swap"
+            rel="stylesheet">
+		{% do view.registerAssetBundle("fablevision\\netlogo\\assetbundles\\CSSBundle") %}
+		<link rel="icon" href="/netlogo/favicon.ico">
+	</head>
+	<body>
+		<div class="login">
+			
+			<div class="login-container">
+				<h3>Student Login</h3>
+				<form class="form" method="post" accept-charset="UTF-8">
+					{{ csrfInput() }}
+					{{ actionInput('netlogo/default/student-login') }}
+					<div class="formrow">
+						<label class="label" for="loginTeacher">Teacher Number: </label>
+						<input id="loginTeacher" type="text" name="loginTeacher"/>
+					</div>
+					<div class="formrow">
+						<label class="label" for="loginName">Student Number: </label>
+						<input id="loginName" type="text" name="loginName"/>
+					</div>
+					<div class="buttons">
+						<input class="input submit button" type="submit" value="Login">
+					</div>
+					{% if errorMessage is defined %}
+					<div class="errors">{{ errorMessage }}</div>
+					{% endif %}
+				</form>
+			</div>
+			<div class="login-container">
+				<h3>Teacher Login</h3>
+				<form class="form" method="post" accept-charset="UTF-8">
+					{{ csrfInput() }}
+					{{ actionInput('users/login') }}
+					<div class="formrow">
+						<label class="label" for="loginName">Username: </label>
+						{{ input('text', 'loginName', craft.app.user.rememberedUsername, { id: 'loginName',}) }}
+					</div>
+					<div class="formrow">
+						<label class="label" for="password">Password: </label> 
+						{{ input('password', 'password', null, { id: 'password',}) }}
+					</div>
+					<div class="buttons">
+						<input class="input submit button" type="submit" value="Login">
+					</div>
+					{% if errorMessage is defined %}
+					<div class="errors">{{ errorMessage }}</div>
+					{% endif %}
+					<p class="p">
+						<a class="a" href="{{ url('reset-password') }}">Forgot your password?</a>
+					</p>
+				</form>
+			</div>
+		</div>
+		<footer class="footer"></footer>
+	</body>
+</html>

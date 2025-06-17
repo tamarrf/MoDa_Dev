@@ -1,0 +1,58 @@
+{% set journeyId = craft.app.request.getQueryParam("journeyId") %}
+{% set taskId = craft.app.request.getQueryParam("taskId") %}
+{% requireLogin %}
+
+<html>
+	<head>
+		<title>{{ siteName }} - teacher dashboard</title>
+		<link rel="preconnect" href="https://fonts.gstatic.com">
+		<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,700;0,900;1,400&display=swap" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/8476c81704.js" crossorigin="anonymous"></script>
+        {% do view.registerAssetBundle("fablevision\\netlogo\\assetbundles\\CSSBundle") %}
+	</head>
+	<body>
+		<div class="container">
+			{% include "netlogo/navBar.twig" %}
+            {% set dashboard = craft.entries()
+                .section('teacherDashboard')
+                .one()%}
+            {% set requestedPath = craft.app.request.pathInfo() %}
+            {% if requestedPath is same as('dashboard') %}
+            <div class="dashboard-content">
+                <a class="journey-button" href="/admin/content-management">{{ dashboard.manageClassLabel }}</a>
+                <div class="unit-resources">
+                    <h3 class="resources-title">{{ dashboard.resourcesLabel }}</h3>
+                    <div
+                        class="dashboard-journeys">
+                        {# display journeys in alphabetical order #}
+                        {% set journeys = craft.entries()
+                            .section('journey')
+                            .orderBy({'journeyTitle': SORT_ASC})
+                            .all() %}
+                        {% if journeys %}
+                            {% for journey in journeys %}
+                                <div class="dashboard-journey">
+                                    <h3 class="dashboard-journey-title">{{ journey.journeyTitle }}</h3>
+                                    <div class="dashboard-links">
+                                    <a href="/dashboard/curriculum/?journeyId={{ journey.id }}" class="dashboard-link">Curriculum</a>
+                                    <a href="/dashboard/examples/?journeyId={{ journey.id }}" class="dashboard-link">Example Models</a>
+                                    <a href="#" class="journey-button">Student Projects</a>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% elseif requestedPath is same as('dashboard/classes') %}
+                {% include "netlogo/classes.twig"%}
+            {% elseif requestedPath is same as('dashboard/curriculum') %}
+                {% include "netlogo/curriculum.twig"%}
+            {% elseif requestedPath is same as('dashboard/examples') %}
+                {% include "netlogo/examples.twig"%}
+            {% endif %}
+			{% include "netlogo/footer.twig" %}
+		</div>
+	</body>
+</html>
+

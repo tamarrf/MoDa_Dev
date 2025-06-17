@@ -1,0 +1,75 @@
+{% set journeyId = craft.app.request.getQueryParam("journeyId") %}
+{% set taskId = craft.app.request.getQueryParam("taskId") %}
+
+<html>
+	<head>
+		<title>{{ siteName }}</title>
+		<link rel="preconnect" href="https://fonts.gstatic.com">
+		<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,700;0,900;1,400&display=swap" rel="stylesheet">
+		{% do view.registerAssetBundle("fablevision\\netlogo\\assetbundles\\CSSBundle") %}
+        <link rel="icon" href="/netlogo/favicon.ico">
+	</head>
+	{% set requestedPath = craft.app.request.pathInfo() %}
+	<body>
+		<div class="container">
+			{% include "netlogo/navBar.twig" %}
+            <div class="page">
+                <header>
+                    <div class="title">
+                        <img class="homepage-logo" src="{{ craft.app.globals().getSetByHandle("homePage").modaLogo.one().url }}"/>
+                        <h3>{{ craft.app.globals().getSetByHandle("homePage").heroTitle  }}</h3>
+                    </div>
+                </header>
+                <div class="research-page">
+                    {% set research = craft.entries()
+                        .section('research')
+                        .one()%}
+                    {% if requestedPath is same as('research') %}
+                        <h2>Research</h2>
+
+                        {% for section in research.menuPageSections.all() %}
+                            <div class="section-container">
+                                <div class="research-section-h3">
+                                    <h3>{{ section.sectionTitle }}</h3>
+                                </div>
+                                {% switch section.type %}
+                                    {% case "textImageSection" %}
+                                        <div class="about-flex">
+                                            <div class="about-text {{ (section.sectionLayout == "textImage") ? "about-flex-left" : "about-flex-right" }}">
+                                                {{ section.sectionText }}
+                                            </div>
+                                            <div class="about-image-container {{ (section.sectionLayout == "textImage") ? "about-flex-right" : "about-flex-left" }}">
+                                                <img class="about-section-image" src="{{ section.sectionImage.one().url }}"/>
+                                            </div>
+                                        </div>
+                                    {% case "textVideoSection" %}
+                                        <div class="about-flex">
+                                            <div class="about-text {{ (section.sectionLayout == "textImage") ? "about-flex-left" : "about-flex-right" }}">
+                                                {{ section.sectionText }}
+                                            </div>
+                                            <div class="about-image-container {{ (section.sectionLayout == "textImage") ? "about-flex-right" : "about-flex-left" }}">
+                                                <iframe src="{{ section.sectionVideoUrl }}" class="about-section-image" width="640" height="360" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+                                            </div>
+                                        </div>
+                                    {% case "imageSection" %}
+                                        <img class="about-section-image" src="{{ section.sectionImage.one().url }}"/>
+                                    {% case "videoSection" %}
+                                        <div class="about-section-video">
+                                            <iframe src="{{ section.sectionVideoUrl }}" class="about-section-image" width="640" height="360" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+                                        </div>
+                                    {% case "textSection" %}
+                                        <div class="about-text">
+                                            {{ section.sectionText }}
+                                        </div>
+                                {% endswitch %}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                <hr/>
+			    {% include "netlogo/footer.twig" %}
+            </div>
+        </div>
+	</body>
+</html>
+

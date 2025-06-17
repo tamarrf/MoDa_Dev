@@ -1,0 +1,76 @@
+/* fvnl Fablevision custom css */
+body.not_full_height,
+body.not_full_height .content,
+body.not_full_height .tortoise.inner-content,
+#model-container {
+	padding: 0;
+	border-radius: 0;
+	border: 0;
+	margin: 0;
+}
+
+body.not_full_height,
+div.not_full_height,
+.tortoise.inner-content,
+.tortoise.inner-content .model-box {
+	height: 100%;
+	min-height: 100%;
+}
+
+body.not_full_height .topbar,
+body.not_full_height .model-selection-bar,
+#netlogo-model-container .netlogo-subheader,
+#netlogo-model-container .netlogo-tab-area,
+#netlogo-model-container .netlogo-model-masthead,
+#netlogo-model-container .netlogo-model-masthead + div{
+	display: none;
+}
+
+body.not_full_height .content,
+body.not_full_height .tortoise.inner-content {
+	background: none;
+}
+
+
+html.not_full_height,
+body.not_full_height {
+	background: white;
+	max-width: 100%;
+	overflow: hidden;
+	height: 100%;
+	min-height: 100%;
+}
+
+
+.netlogo-display-vertical .netlogo-display-horizontal,
+.netlogo-display-vertical .netlogo-speed-slider,
+.netlogo-widget:not(.netlogo-view-container) {
+	display: none !important;
+}
+
+.netlogo-model {
+	min-width: 100% !important;
+	padding: 0 !important;
+}
+
+.netlogo-widget.netlogo-view-container,
+.netlogo-view-container {
+	left: 0px !important;
+	top: 0px !important;
+}
+
+.content {
+	box-shadow: none !important;
+}
+
+#alert-dialog {
+	min-width: auto;
+}
+
+html {
+	overflow: hidden;
+}
+
+iframe#model-container {
+	max-width: 100%;
+}

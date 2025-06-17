@@ -1,0 +1,16 @@
+.DS_Store
+
+runtime/data/mysql/*
+!runtime/data/mysql/.gitkeep 
+
+runtime/logs/apache2/*
+!runtime/logs/apache2/.gitkeep 
+
+runtime/logs/mysql/*
+!runtime/logs/mysql/.gitkeep 
+
+runtime/logs/craft/*
+!runtime/logs/craft/.gitkeep 
+
+.env
+.DS_Store

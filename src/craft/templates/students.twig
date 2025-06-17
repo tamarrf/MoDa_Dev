@@ -1,0 +1,32 @@
+{% if currentUser %}
+    {% redirect("\/") %}
+{% endif %}
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>A2S Login</title>
+		<link rel="preconnect" href="https://fonts.gstatic.com"> 
+		<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,400&display=swap" rel="stylesheet">
+		{% do view.registerAssetBundle("fablevision\\netlogo\\assetbundles\\CSSBundle") %}
+	</head>
+	<body>
+		<div class="login-container">
+			<form class="form" method="post" accept-charset="UTF-8">
+				{{ csrfInput() }}
+				{{ actionInput('netlogo/default/student-login') }}
+				<div class="formrow">
+					<label class="label" for="loginName">Student Id: </label>
+					<input id="loginName" type="text" name="loginName"/>
+				</div>
+				<div class="buttons">
+					<input class="input submit button" type="submit" value="Login">
+				</div>
+				{% if errorMessage is defined %}
+				<div class="errors">{{ errorMessage }}</div>
+				{% endif %}
+			</form>
+		</div>
+		<footer class="footer">
+		</footer>
+	</body>
+</html>

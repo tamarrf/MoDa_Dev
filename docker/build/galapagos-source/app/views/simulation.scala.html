@@ -1,0 +1,237 @@
+@(tagBuilder: TagBuilder)(implicit request: Request[_], environment: play.api.Environment)
+
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <base target="_parent" />
+    @tagBuilder.pathToHTML("codemirror/lib/codemirror.css")
+    @tagBuilder.pathToHTML("codemirror/addon/dialog/dialog.css")
+    @tagBuilder.pathToHTML("codemirror/addon/hint/show-hint.css")
+    @tagBuilder.pathToHTML("chosen-js/chosen.css")
+    @tagBuilder.pathToHTML("stylesheets/classes.css")
+    @tagBuilder.pathToHTML("stylesheets/widgets.css")
+    @tagBuilder.pathToHTML("stylesheets/ui-editor.css")
+    @tagBuilder.pathToHTML("stylesheets/netlogoweb.css")
+    @tagBuilder.pathToHTML("stylesheets/netlogo-syntax.css")
+    @tagBuilder.pathToHTML("stylesheets/spinner.css")
+    @tagBuilder.pathToHTML("stylesheets/alert.css")
+    @tagBuilder.pathToHTML("stylesheets/fablevision.css")
+  </head>
+  <body style="margin: 0px;">
+    <script>window.exports = {};</script>
+    @views.html.spinner()
+    <div id="alert-container"></div>
+    <div id="netlogo-model-container" style="display: inline-block;"></div>
+    <!-- See Safari workaround comments in `color-input.coffee`.  -JMB January 2019 -->
+    @tagBuilder.pathToHTML("jscolor-picker/jscolor.min.js")
+    @tagBuilder.pathToHTML("jquery/dist/jquery.min.js")
+    @tagBuilder.pathToHTML("chosen-js/chosen.jquery.js")
+    @tagBuilder.pathToHTML("file-saver/dist/FileSaver.min.js")
+    @tagBuilder.pathToHTML("lib/google-caja/html-sanitizer-minified.js")
+    @tagBuilder.pathToHTML("lib/markdown-js/markdown.js")
+    @tagBuilder.pathToHTML("mousetrap/mousetrap.min.js")
+    @tagBuilder.pathToHTML("localforage/dist/localforage.min.js")
+    @tagBuilder.pathToHTML("highcharts/highcharts.js")
+    @tagBuilder.pathToHTML("highcharts/modules/exporting.js")
+    @tagBuilder.pathToHTML("highcharts/modules/export-data.js")
+    @tagBuilder.pathToHTML("ractive/ractive.js")
+    @tagBuilder.pathToHTML("synchrodecoder/synchrodecoder.min.js")
+    @tagBuilder.pathToHTML("codemirror/lib/codemirror.js")
+    @tagBuilder.pathToHTML("codemirror/addon/comment/comment.js")
+    @tagBuilder.pathToHTML("codemirror/addon/dialog/dialog.js")
+    @tagBuilder.pathToHTML("codemirror/addon/mode/simple.js")
+    @tagBuilder.pathToHTML("codemirror/addon/search/searchcursor.js")
+    @tagBuilder.pathToHTML("codemirror/addon/search/search.js")
+    @tagBuilder.pathToHTML("codemirror/addon/hint/show-hint.js")
+
+    @tagBuilder.callToHTML(routes.CompilerService.tortoiseCompilerJs, "tortoise-compiler.js")
+    @tagBuilder.callToHTML(routes.Local.engine,                       "tortoise-engine.js")
+
+    @tagBuilder.pathToHTML("javascripts/keywords.js")
+    @tagBuilder.pathToHTML("javascripts/codemirror-mode.js")
+    @tagBuilder.pathToHTML("javascripts/colors.js")
+    @tagBuilder.pathToHTML("javascripts/default-shapes.js")
+    @tagBuilder.pathToHTML("javascripts/alert-display.js")
+    @tagBuilder.pathToHTML("javascripts/highcharts.js")
+    @tagBuilder.pathToHTML("javascripts/models.js")
+    @tagBuilder.pathToHTML("javascripts/new-model.js")
+    @tagBuilder.pathToHTML("javascripts/beak/widgets/code-utils.js")
+    @tagBuilder.pathToHTML("javascripts/beak/widgets/ractives/subcomponent/checkbox.js")
+    @tagBuilder.pathToHTML("javascripts/beak/widgets/ractives/subcomponent/code-container.js")
+    @tagBuilder.pathToHTML("javascripts/beak/widgets/ractives/subcomponent/color-input.js")
+    @tagBuilder.pathToHTML("javascripts/beak/widgets/ractives/subcomponent/dropdown.js")
+    @tagBuilder.pathToHTML("javascripts/beak/widgets/ractives/subcomponent/labeled-input.js")
+    @tagBuilder.pathToHTML("javascripts/beak/widgets/ractives/subcomponent/font-size.js")
+    @tagBuilder.pathToHTML("javascripts/beak/widgets/ractives/subcomponent/print-area.js")
+    @tagBuilder.pathToHTML("javascripts/beak/widgets/ractives/subcomponent/spacer.js")
+    @tagBuilder.pathToHTML("javascripts/beak/widgets/ractives/subcomponent/tick-counter.js")
+    @tagBuilder.pathToHTML("javascripts/beak/widgets/ractives/subcomponent/variable.js")
+    @tagBuilder.pathToHTML("javascripts/beak/widgets/ractives/async-user-dialog.js")
+    @tagBuilder.pathToHTML("javascripts/beak/widgets/ractives/context-menu.js")
+    @tagBuilder.pathToHTML("javascripts/beak/widgets/ractives/draggable.js")
+    @tagBuilder.pathToHTML("javascripts/beak/widgets/ractives/edit-form.js")
+    @tagBuilder.pathToHTML("javascripts/beak/widgets/ractives/widget.js")
+    @tagBuilder.pathToHTML("javascripts/beak/widgets/ractives/button.js")
+    @tagBuilder.pathToHTML("javascripts/beak/widgets/ractives/chooser.js")
+    @tagBuilder.pathToHTML("javascripts/beak/widgets/ractives/code-editor.js")
+    @tagBuilder.pathToHTML("javascripts/beak/widgets/ractives/console.js")
+    @tagBuilder.pathToHTML("javascripts/beak/widgets/ractives/help-dialog.js")
+    @tagBuilder.pathToHTML("javascripts/beak/widgets/ractives/info.js")
+    @tagBuilder.pathToHTML("javascripts/beak/widgets/ractives/input.js")
+    @tagBuilder.pathToHTML("javascripts/beak/widgets/ractives/label.js")
+    @tagBuilder.pathToHTML("javascripts/beak/widgets/ractives/monitor.js")
+    @tagBuilder.pathToHTML("javascripts/beak/widgets/ractives/output.js")
+    @tagBuilder.pathToHTML("javascripts/beak/widgets/ractives/plot.js")
+    @tagBuilder.pathToHTML("javascripts/beak/widgets/ractives/resizer.js")
+    @tagBuilder.pathToHTML("javascripts/beak/widgets/ractives/slider.js")
+    @tagBuilder.pathToHTML("javascripts/beak/widgets/ractives/switch.js")
+    @tagBuilder.pathToHTML("javascripts/beak/widgets/ractives/title.js")
+    @tagBuilder.pathToHTML("javascripts/beak/widgets/ractives/view.js")
+    @tagBuilder.pathToHTML("javascripts/beak/widgets/draw/draw-shape.js")
+    @tagBuilder.pathToHTML("javascripts/beak/widgets/draw/link-drawer.js")
+    @tagBuilder.pathToHTML("javascripts/beak/widgets/draw/view-controller.js")
+    @tagBuilder.pathToHTML("javascripts/beak/widgets/config-shims.js")
+    @tagBuilder.pathToHTML("javascripts/beak/widgets/event-traffic-control.js")
+    @tagBuilder.pathToHTML("javascripts/beak/widgets/handle-context-menu.js")
+    @tagBuilder.pathToHTML("javascripts/beak/widgets/handle-widget-selection.js")
+    @tagBuilder.pathToHTML("javascripts/beak/widgets/initialize-ui.js")
+    @tagBuilder.pathToHTML("javascripts/beak/widgets/set-up-widgets.js")
+    @tagBuilder.pathToHTML("javascripts/beak/widgets/skeleton.js")
+    @tagBuilder.pathToHTML("javascripts/beak/widgets/widget-controller.js")
+    @tagBuilder.pathToHTML("javascripts/beak/babybehaviorspace.js")
+    @tagBuilder.pathToHTML("javascripts/beak/session-lite.js")
+    @tagBuilder.pathToHTML("javascripts/beak/tortoise.js")
+
+    @helper.javascriptRouter("jsRoutes")(
+      routes.javascript.Local.standalone
+    )
+
+    <!-- This can be used to insert NetLogo code into this page -->
+    <script type="text/nlogo" id="nlogo-code" data-filename="model.nlogo"></script>
+
+    <script>
+
+      Ractive.DEBUG = @{environment.mode != play.api.Mode.Prod};
+
+      var loadingOverlay  = document.getElementById("loading-overlay");
+      var activeContainer = loadingOverlay;
+      var modelContainer  = document.querySelector("#netlogo-model-container");
+      var nlogoScript     = document.querySelector("#nlogo-code");
+      var standaloneURL   = `${window.location.protocol}@TagBuilder.protocolRelativeURL(new java.net.URL(routes.Local.standalone.absoluteURL))`;
+      var pageTitle       = function(modelTitle) {
+        if (modelTitle != null && modelTitle != "") {
+          return "NetLogo Web: " + modelTitle;
+        } else {
+          return "NetLogo Web";
+        }
+      };
+      var session;
+      var speed = 0.0;
+      var openSession = function(s) {
+        session = s;
+        session.widgetController.ractive.set('speed', speed)
+        document.title = pageTitle(session.modelTitle());
+        activeContainer = modelContainer;
+        session.startLoop();
+        alerter.listenForErrors(session.widgetController)
+      };
+
+      const isStandaloneHTML = (nlogoScript.textContent.length > 0);
+      const alerter          = new AlertDisplay(document.getElementById('alert-container'), isStandaloneHTML);
+      const alertDialog      = document.getElementById('alert-dialog')
+
+      function handleCompileResult(result) {
+        if (result.type === 'success') {
+          openSession(result.session)
+        } else {
+          if (result.source === 'compile-recoverable') {
+            openSession(result.session)
+          } else {
+            activeContainer = alertDialog
+          }
+          alerter.reportCompilerErrors(result.source, result.errors)
+        }
+      }
+
+      var loadModel = function(nlogo, path) {
+        alerter.hide()
+        if (session) {
+          session.teardown();
+        }
+        activeContainer = loadingOverlay;
+        Tortoise.fromNlogo(nlogo, modelContainer, path, handleCompileResult);
+      };
+
+      const parseFloatOrElse = function(str, def) {
+        const f = Number.parseFloat(str)
+        return (f !== NaN ? f : def)
+      }
+
+      const clamp = function(min, max, val) {
+        return Math.max(min, Math.min(max, val))
+      }
+
+      const readSpeed = function(params) {
+        return params.has('speed') ? clamp(-1, 1, parseFloatOrElse(params.get('speed'), 0.0)) : 0.0;
+      }
+
+      if (nlogoScript.textContent.length > 0) {
+        const nlogo  = nlogoScript.textContent;
+        const path   = nlogoScript.dataset.filename;
+        const params = new URLSearchParams(window.location.search)
+        speed        = readSpeed(params)
+        Tortoise.fromNlogo(nlogo, modelContainer, path, handleCompileResult);
+
+      } else if (window.location.search.length > 0) {
+        const params    = new URLSearchParams(window.location.search)
+        const url       = params.has('url')  ? params.get('url')             : window.location.search.slice(1);
+        const modelName = params.has('name') ? decodeURI(params.get('name')) : undefined;
+        speed           = readSpeed(params)
+        Tortoise.fromURL(url, modelName, modelContainer, handleCompileResult);
+
+      } else {
+        loadModel(exports.newModel, "NewModel");
+      }
+
+      window.addEventListener("message", function (e) {
+        if (e.data.type === "nlw-load-model") {
+          loadModel(e.data.nlogo, e.data.path);
+        } else if (e.data.type === "nlw-open-new") {
+          loadModel(exports.newModel, "NewModel");
+        } else if (e.data.type === "nlw-update-model-state") {
+          session.widgetController.setCode(e.data.codeTabContents);
+        } else if (e.data.type === "run-baby-behaviorspace") {
+          var reaction =
+            function(results) {
+              e.source.postMessage({ type: "baby-behaviorspace-results", id: e.data.id, data: results }, "*");
+            };
+          session.asyncRunBabyBehaviorSpace(e.data.config, reaction);
+        } else if (e.data.type === "nlw-export-model") {
+          model = session.getNlogo();
+          e.source.postMessage({ type: "nlw-export-model-results", id: e.data.id, export: model }, "*");
+        }
+      });
+
+      if (parent !== window) {
+        var width = "", height = "";
+        window.setInterval(function() {
+          if (activeContainer.offsetWidth  !== width ||
+              activeContainer.offsetHeight !== height ||
+              (session !== undefined && document.title != pageTitle(session.modelTitle()))) {
+            if (session !== undefined) {
+              document.title = pageTitle(session.modelTitle());
+            }
+            width = activeContainer.offsetWidth;
+            height = activeContainer.offsetHeight;
+            parent.postMessage({
+              width:  activeContainer.offsetWidth,
+              height: activeContainer.offsetHeight,
+              title:  document.title,
+              type:   "nlw-resize"
+            }, "*");
+          }
+        }, 200);
+      }
+    </script>
+  </body>
+</html>
