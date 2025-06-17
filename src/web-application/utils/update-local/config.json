@@ -1,0 +1,6 @@
+{
+  "host": "ip.ad.dr.ess",
+  "port": 22,
+  "username": "ubuntu",
+  "privateKey": "/absolute/path/to/keyfile"
+}

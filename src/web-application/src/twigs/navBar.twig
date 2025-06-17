@@ -1,0 +1,60 @@
+<nav>
+	{# dynamically create menu items from craft menu pages #}
+	<div
+		class="menu">
+		{# items on left #}
+		<a class="left-menu {{ craft.app.request.segments|join('/') == '' ? 'isActive' : '' }}" id="moda-link" href="/">Home</a>
+
+		{# craft menu pages #}
+		{% set pages = craft.entries()
+            .section('menuPage')
+            .menuLocation('topMenu')
+			.all() %}
+        
+        {# static menu pages #}
+		<a class="left-menu {{ craft.app.request.segments|join('/') == 'units' ? 'isActive' : '' }}" href="/units">Units</a>
+		<a class="left-menu {{ craft.app.request.segments|join('/') == 'research' ? 'isActive' : '' }}" href="/research">Research</a>
+		{# <a class="left-menu" href="/publications">Publications</a> #}
+		<a class="left-menu {{ craft.app.request.segments|join('/') == 'people' ? 'isActive' : '' }}" href="/people">Team</a>
+		{% for page in pages %}
+			<a class="left-menu nonessential" href="/{{ page.slug }}">{{ page.pageTitle }}</a>
+		{% endfor %}
+
+		{# teacher dashboard #}
+		{% if currentUser and ('Teachers' in currentUser.groups or currentUser.admin) %}
+			<a class="left-menu" href="/dashboard">Dashboard</a>
+			{% if journeyId and studentId %}
+				<a class="left-menu" href="/dashboard/projects/?journeyId={{ journeyId }}">Students projects</a>
+			{% endif %}
+		{% endif %}
+
+		{# only enable save if user is logged in #}
+		<div class="center-menu">
+		{% if journeyId and taskId and currentUser and not studentId and not exampleId %}
+			<label id="selected-model-label" class="model-label show-on-hasModels"></label>
+			{# {% if taskId in [639, 713] %} #}
+			{% if taskId in [5980, 7224] %}
+				<button id="open-model" class="ui-buttons show-on-hasModels">Abrir</button>
+				<button id="new-model" class="ui-buttons">Novo</button>
+				<button id="delete" class="ui-buttons show-on-hasModels">Apagar</button>
+				<button id="save" class="ui-buttons">Salvar</button>
+				<button id="save-as" class="ui-buttons">Salvar Como</button>
+			{% else %}
+				<button id="open-model" class="ui-buttons show-on-hasModels">Open</button>
+				<button id="new-model" class="ui-buttons">New</button>
+				<button id="delete" class="ui-buttons show-on-hasModels">Delete</button>
+				<button id="save" class="ui-buttons">Save</button>
+				<button id="save-as" class="ui-buttons">Save As</button>
+			{% endif %}
+		{% endif %}
+		</div>
+
+		{# items on right #}
+		{% if currentUser %}
+			<a class="right-menu" href="/logout">Logout</a>
+			<div class="right-menu"><i class="fas fa-user-circle fa-lg user-icon"></i>{{ currentUser.username }}</div>
+		{% else %}
+			<a class="right-menu" href="/login">Login</a>
+		{% endif %}
+	</div>
+</nav>

@@ -1,0 +1,64 @@
+{% extends "_layouts/cp" %}
+{% import "_includes/forms" as forms %}
+
+{% set title = "Netlogo Admin Resources" %}
+{% set pluginCpUrl = url('netlogo') %}
+{% set endpoint = actionUrl('netlogo/export') %}
+{% set imports = craft.netlogo.getImports() %}
+
+{% set content %}
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <h2>Content Export</h2>
+    <div style="display: flex">
+	    <form method="post" accept-charset="UTF-8" action="{{ endpoint }}/export">
+		    {{ csrfInput() }}
+		    <input type="hidden" name="package" value="false"/>
+		    <input type="hidden" name="upload" value="false"/>
+		    <input type="submit" class="btn submit" value="Create JSON Migration Only">
+		</form>
+		<form method="post" style="margin-left: 1rem" accept-charset="UTF-8" action="{{ endpoint }}/export">
+		    {{ csrfInput() }}
+		    <input type="hidden" name="package" value="true"/>
+		    <input type="hidden" name="upload" value="false"/>
+		    <input type="submit" class="btn submit" value="Create Migration Asset Package">
+		</form>
+		<form method="post" style="margin-left: 1rem" accept-charset="UTF-8" action="{{ endpoint }}/export">
+		    {{ csrfInput() }}
+		    <input type="hidden" name="package" value="true"/>
+		    <input type="hidden" name="upload" value="true"/>
+		    <input type="submit" class="btn submit" value="Create & Upload Migration Asset Package">
+		</form>
+	</div>
+	<h2 style="margin-top: 3rem">Content Import</h2>
+    <div style="display: flex">
+	    <form method="post" accept-charset="UTF-8" action="{{ endpoint }}/import">
+		    {{ csrfInput() }}
+		    <label for="import" style="position: absolute; left: -9999px;">Select Migration</label>
+		    <div class="input ltr" style="display: inline-block; margin-right: 1rem;"> 
+    			<div class="select"> 
+				    <select id="import" name="path">
+				    	<option value="none">Select One</option>
+				    	{% for item in imports|reverse %}
+				    	<option value="{{ item.key }}">{{ item.name }}</option>
+				    	{% endfor %}
+				    </select>
+				</div>
+			</div>
+		    <input id="submit" type="submit" class="btn submit" disabled="disabled" value="Import Remote Migration Package">
+		</form>
+		<script>
+		$(document).ready(function(){
+			$("#import").on("change", function(){
+				var value = $(this).val();
+				$("#submit").attr("disabled", value === "none" ? "disabled" : null);
+			})
+		});
+		</script>
+		<style type="text/css">
+			#submit:disabled {
+				background: #bbb !important;
+				cursor: default;
+			}
+		</style>
+	</div>
+{% endset %}

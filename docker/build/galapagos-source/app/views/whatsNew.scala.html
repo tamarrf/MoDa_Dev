@@ -1,0 +1,647 @@
+@()(implicit request: Request[_])
+
+<link rel="stylesheet" media="screen" href='@routes.Assets.versioned("stylesheets/whats-new.css").relative'>
+
+<div class="inner-content" style="margin: 0 10%; text-align: justify;">
+
+  <h2 id="v2.9.0">April 16th, 2021 - v2.9.0</h2>
+
+  <ul>
+    <li>Runtime errors will now generate stack traces, and the alert for the error will show the procedure call sequence that generated the error.</li>
+    <li>The behavior of <code>run</code> and <code>runresult</code> with string values will more closely match desktop NetLogo.</li>
+    <li>Turtle and link forever buttons will stop if there are no turtles or links in the model, as they do in desktop NetLogo.</li>
+    <li>Models created new in NetLogo Web will have their view updates set to be on ticks, so when exported their behavior in desktop will be the same as what is seen in NetLogo Web.</li>
+    <li>The model speed slider can now be set with <a href="docs/faq#speed-parameter">a URL query parameter, <code>speed</code></a>.  This is useful when hot-linking or embedding models.</li>
+  </ul>
+
+  <h2 id="v2.8.4">March 3rd, 2021 - v2.8.4</h2>
+
+  <p>This release adds support for the <code>plot-pen-up</code> primitive, adds better runtime error checks for agentset primitives and a few more math primitives, and fixes a small difference in model behavior from NetLogo desktop when using <code>n-of</code> with a list when <code>n</code> is the size of the list.</p>
+
+  <h2 id="v2.8.3">February 8th, 2021 - v2.8.3</h2>
+
+  <p>This small release fixes a bug that would cause runtime errors with the <code>up-to-n-of</code> primitive.</code></p>
+
+  <h2 id="v2.8.2">January 20th, 2021 - v2.8.2</h2>
+
+  <h3>Improvements and Bug Fixes</h3>
+
+  <ul>
+    <li>NetLogo Web now supports checking the types of arguments for correctness given to math and list prims, and will give much more meaningful error messages when incorrect types are used.</li>
+    <li>The plot auto-scale feature will only consider new data that is added to a plot, as it does on NetLogo desktop.  Previous it used all plot data a plot had seen to scale.</li>
+  </ul>
+
+  <h3>Models Library</h3>
+
+  NetLogo Web has been updated with the same version of the Models Library that comes with NetLogo desktop 6.2.0, which means that many models have been added or modified.  See <a href="http://ccl.northwestern.edu/netlogo/docs/versions.html#version-620-december-2020">the "Model Changes" section of the NetLogo version docs</a> for more information.
+
+  <h2 id="v2.8.1">October 15th, 2020 - v2.8.1</h2>
+
+  <h3>Improvements and Bug Fixes</h3>
+
+  <ul>
+    <li>Feature: The Array, NLMap, Matrix, and Table extensions can now export and import their extension objects with the <code>export-the:world</code> and <code>import-a:world</code> primitives.</li>
+    <li>Bugfix: Recompiling a model that used the Array, NLMap, Matrix, or Table extensions could cause an error to occur that would leave the model unusable.</li>
+    <li>Bugfix: Chooser widgets now properly retain their value between recompiles instead of reverting to the default choice from when the model was loaded.</li>
+  </ul>
+
+  <h2 id="v2.8.0">September 17th, 2020 - v2.8.0</h2>
+
+  <h3>Improvements and Bug Fixes</h3>
+
+  <ul>
+    <li>Optimization: NetLogo Web now implements an optimized algorithm for <code>in-radius</code> and <code>in-cone</code>.  This should speed up models that use those primitives, especially with a radius argument great than 2.  Additionally, these optimizations mean the order agents from agentsets are returned will exactly match desktop's output.</li>
+    <li>Optimization: The <code>random</code> and <code>count</code> primitives had small optimizations added for certain common use cases.</li>
+    <li>Optimization: Commands run through the command center will be compiled much more quickly, so they should finish faster.</li>
+    <li>Bugfix: The <code>layout-spring</code> primitive should work exactly like desktop in wrapped worlds.</li>
+    <li>Bugfix: The <code>resize-world</code> primitive handles fractional arguments correctly.</li>
+    <li>Bugfix: The <code>precision</code> primitive handles a fractional places argument correctly.</li>
+    <li>Bugfix: A model will correctly recompile when a button is changed to a Forever type.</li>
+    <li>Bugfix: Prevent runtime model exceptions from leaking out into the browser console.</li>
+  </ul>
+
+  <h3>CSV Extension</h3>
+
+  <p>The CSV extension is now officially supported in NetLogo Web.  Most of the primitives work the same as in <a href="https://ccl.northwestern.edu/netlogo/docs/csv.html">the desktop version</a>, with the exception of the file-based primitives.  For getting CSV data from a file, see <a href="https://github.com/NetLogo/Fetch-Extension">the Fetch extension</a>.  For sending CSV data to a file, try out <a href="https://github.com/NetLogo/SendTo-Extension">the SendTo extension</a>.</p>
+
+  <h3>NetTango Builder</h3>
+
+  <p>In addition to the above updates, there are also <a href="https://github.com/NetTango/NetTango/wiki/Release-notes">numerous bugfixes and improvements for the beta release of the NetTango Builder</a>, an application for creating block-based programming models with NetLogo Web. See <a href="https://anttango.netlify.app/">the NetTango Builder tutorial</a> for more information on using the NetTango Builder.</p>
+
+  <h2 id="august10th2020-v2.7.3">August 10th, 2020 - v2.7.3</h2>
+
+  <h3>Improvements and Bug Fixes</h3>
+
+  <ul>
+  <li>Bugfix: Properly line up histogram bars to the x-axis coordinates.</li>
+  <li>Bugfix: Don't animate hisograms when updating so they don't get "stuck" as a model runs.</li>
+  </ul>
+
+  <h3>Table Extension</h3>
+
+  <p>Thanks to the hard work of Center for Connected Learning summer intern Xuan Zhang, we have now added the Table extension to NetLogo Web.</p>
+
+  <h3>NetTango Builder</h3>
+
+  <p>In addition to the above updates, there are also <a href="https://github.com/NetTango/NetTango/wiki/Release-notes">numerous bugfixes and improvements for the beta release of the NetTango Builder</a>, an application for creating block-based programming models with NetLogo Web. See <a href="https://anttango.netlify.app/">the NetTango Builder tutorial</a> for more information on using the NetTango Builder.</p>
+
+  <h2 id="july23rd2020-v2.7.2">July 23rd, 2020 - v2.7.2</h2>
+
+  <h3>Improvements and Bug Fixes</h3>
+
+  <ul>
+  <li>Bugfix: Properly handle early exit from multilist <code>foreach</code></li>
+  <li>Bugfix: Round first arg to <code>n-of</code> down as per NetLogo desktop</li>
+  <li>Bugfix: Only calculate <code>sum</code>, <code>max</code>, <code>min</code> and <code>standard-deviation</code> on numbers from lists, and improve error messages for all numerical list calculation prims.</li>
+  <li>Parity: Rename Label widgets to Note widgets to match desktop</li>
+  </ul>
+
+  <h3>New Extensions</h3>
+
+  <p>These new extensions are thanks to the hard work of Center for Connected Learning summer intern Xuan Zhang.</p>
+
+  <ul>
+  <li>The Array extension is now supported.</li>
+  <li>The Matrix extension is now supported. The primitives <code>real-eigenvalues</code>, <code>imaginary-eigenvalues</code>, and <code>eigenvectors</code> are not yet implemented and will throw runtime errors if used.</li>
+  </ul>
+
+  <h3>NetTango Builder</h3>
+
+  <p>In addition to the above updates, there are also <a href="https://github.com/NetTango/NetTango/wiki/Release-notes">numerous bugfixes and improvements for the beta release of the NetTango Builder</a>, an application for creating block-based programming models with NetLogo Web. See <a href="https://anttango.netlify.app/">the NetTango Builder tutorial</a> for more information on using the NetTango Builder.</p>
+
+  <h2 id="march2020-v2.7.1">March 10th, 2020 - v2.7.1</h2>
+
+  <h3>Improvements and Bug Fixes</h3>
+
+  <ul>
+    <li>Reduced memory usage with models with large-sized worlds to make them usable (thousands of patches large).</li>
+    <li>Fixed a bug where setting a number input widget to a string value could cause a model to become unusable.</li>
+    <li>Fixed broken documentation links when reading sub-pages.</li>
+    <li>Added a licensing attributions page.</li>
+  </ul>
+
+  <h2 id="november21st2019-v2.7.0">November 21st, 2019 - v2.7.0</h2>
+
+  <h3>Improvements and Bug Fixes</h3>
+
+  <ul>
+    <li>The included models have been updated to match those in the NetLogo desktop 6.1.1 release. See <a href="http://ccl.northwestern.edu/netlogo/docs/versions.html#model-changes">the NetLogo desktop 6.1.1 release notes</a> for more information on those changes.</li>
+    <li>Optimizations around using the <code>count</code> primitive with turtle or link agentsets.</li>
+    <li>Avoid an error when running plot commands with no plot pen specified.</li>
+  </ul>
+
+  <h2 id="july31st2019-v2.6.1">July 31st, 2019 - v2.6.1</h2>
+
+  <h3>Improvements and Bug Fixes</h3>
+
+  <ul>
+    <li>Properly report errors that occur in callbacks in the Fetch and Store extensions, rather than silently failing.</li>
+    <li>When passing a list of agentsets to <code>remove-duplicates</code>, any agentsets that have duplicate members will be reduced to a single agentset in the result.</li>
+    <li>Bugfix for a memory leak involving breeded agents dying.</li>
+  </ul>
+
+  <h2 id="may24th2019-v2.6.0">May 24th, 2019 - v2.6.0</h2>
+
+  <h3>Input and Output Extensions</h3>
+
+  <p>The major new features for this release of NetLogo Web are new extensions that enable sending input to and pulling output from outside the browser session. Almost all of these extensions also have a matching NetLogo desktop version, which means you can write a single model that uses external files or data that runs nearly identically in both environments.</p>
+
+  <p>Here is a listing of each of the new extensions with links to their documentation, why you might want to use them, and the desktop primitive functionality they are meant to provide.</p>
+
+  <table>
+
+  <thead>
+  <tr>
+    <th> Extension </th>
+    <th> Enables You To </th>
+    <th> Provides Functionality Like </th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <tr>
+    <td> <a href="https://github.com/NetLogo/Fetch-Extension"><strong>Fetch</strong></a> </td>
+    <td> Get some data into your model from a URL or a file. </td>
+    <td> <code>file-open</code>, <code>file-read</code>, <code>user-file</code>, the Web extension </td>
+  </tr>
+  <tr>
+    <td> <a href="https://github.com/NetLogo/Dialog-Extension"><strong>Dialog</strong></a> </td>
+    <td> Get some information from the user of your model. </td>
+    <td> <code>user-input</code>, <code>user-one-of</code>, <code>user-message</code>, <code>user-yes-or-no?</code> </td>
+  </tr>
+  <tr>
+    <td> <a href="https://github.com/NetLogo/ImportA-Extension"><strong>ImportA</strong></a> </td>
+    <td> Take the string form of an image or world that you have fetched or created and import it into your model. </td>
+    <td> <code>import-world</code>, <code>import-drawing</code>, <code>import-pcolors</code>, <code>import-pcolors-rgb</code> </td>
+  </tr>
+  <tr>
+    <td> <a href="https://github.com/NetLogo/ExportThe-Extension"><strong>ExportThe</strong></a> </td>
+    <td> Get the string form of some data from your model like the world info, the plots, or even the model code itself. </td>
+    <td> <code>export-world</code>, <code>export-plot</code>, <code>export-output</code>, <code>export-view</code> </td>
+  </tr>
+  <tr>
+    <td> <a href="https://github.com/NetLogo/SendTo-Extension"><strong>SendTo</strong></a> </td>
+    <td> Send some string data to a local file. </td>
+    <td> <code>file-open</code>, <code>file-write</code>, <code>file-show</code>, <code>file-print</code>, <code>file-type</code> </td>
+  </tr>
+  <tr>
+    <td> <a href="https://github.com/NetLogo/Store-Extension"><strong>Store</strong></a> </td>
+    <td> Store long-lived string data from the model in the user's browser, in a way that persists between recompiles and reloads, all without without user interaction (unlike <code>send-to:file</code> saving). </td>
+    <td> A very basic file system </td>
+  </tr>
+  <tr>
+    <td> <a href="https://github.com/NetLogo/Tortoise/wiki/Experimental:-Mini-CSV-Extension"><strong>MiniCSV</strong></a> </td>
+    <td> Turn CSV-structured string data into formats usable in NetLogo code, or turn NetLogo data into CSV-structured strings for saving to a file. </td>
+    <td> The CSV extension </td>
+  </tr>
+  </tbody>
+  </table>
+
+  <p>Why not just reproduce the same input and output primitives that NetLogo desktop uses in web? The reasons are technical, but NetLogo Web's design along with the limitations of the browser environment it runs in makes duplicating the exact functionality of the desktop primitives impossible. In the web environment we do not control when the browser will finish getting input we request from a file, a URL, or even from the user, so we usually need to provide <em>callback procedures</em> that can run once the browser complete.  Rather than making primitives whose behavior would differ between platforms, we decided to make extensions whose behavior would be identical between NetLogo desktop and NetLogo Web. The <a href="https://github.com/NetLogo/Dialog-Extension#what-problem-does-this-extension-solve"><strong>Dialog</strong> extension document has more details on the issue</a> if you are interested.</p>
+
+  <p>As part of these updates, the way to do <code>import-world</code> and <code>import-drawing</code> has changed! Instead of using those primitives, the new <strong>ImportA</strong> extension provides the <code>import-a:world</code> primitive that reads a world from a string.  Use <code>export-the:world</code> to get your model's world data as a string, or the <strong>Fetch</strong> extension to get it from outside of your model.  The <strong>Fetch</strong> provides a <code>fetch:user-file-async</code> primitive that will prompt the user to select a file, and then send that file's contents to the provided procedure to use with <code>import-a:world</code>.</p>
+
+  <p>You can see an example below, and would use a similar process for <code>import-a:drawing</code> or the new <code>import-a:pcolors</code> primitive that provides the <code>import-pcolors</code> functionality from desktop.  There are more examples in <a href="https://github.com/NetLogo/ImportA-Extension">the docs for the <strong>ImportA</strong> extension</a>.</p>
+
+  <pre><code>
+  extensions [ fetch import-a ]
+
+  to import-world-new
+    fetch:user-file-async [ world-file -&gt;
+      import-a:world world-file
+
+      ; if you have code that needs to run after
+      ; the world import, it should go here
+    ]
+  end
+  </code></pre>
+
+  <h3>Features and Improvements</h3>
+
+  <ul>
+  <li>The included models have been updated to match those in the NetLogo desktop 6.1 release. See <a href="http://ccl.northwestern.edu/netlogo/docs/versions.html#model-changes">the NetLogo desktop 6.1 release notes</a> for more information on those changes.</li>
+  <li>The new multiple-condition behavior for the <code>ifelse</code> and <code>ifelse-value</code> primitives is supported. See <a href="http://ccl.northwestern.edu/netlogo/docs/dictionary.html#ifelse">the NetLogo dictionary</a> for more information.</li>
+  <li>The new <code>up-to-n-of</code> primitive for selecting random elements from agentsets and lists without an error when the result is smaller than requested is now supported. See <a href="http://ccl.northwestern.edu/netlogo/docs/dictionary.html#up-to-n-of">the NetLogo dictionary</a> for more information.</li>
+  </ul>
+
+  <h3>Bug Fixes</h3>
+
+  <ul>
+  <li>Properly handle negative numbers when given to <code>back</code> and <code>left</code>.</li>
+  <li>Increase the max CSV file import length for <code>import-a:world</code> (formerly <code>import-world</code>).</li>
+  <li>Drawing data is now included in world exports (<code>export-world</code> and <code>export-the:world</code>).</li>
+  <li>Import and export functions properly handle inner quotes in strings.</li>
+  <li>Drawings rescale when the patch size of the view changes.</li>
+  <li>Color value calculations are better aligned with how NetLogo desktop calculates them.</li>
+  <li>Avoid an error when pressing the Delete button with nothing selected.</li>
+  </ul>
+
+  <h2 id="v2.5.2">February 8th, 2019 - v2.5.2</h2>
+
+  <p>This is a quick bugfix release to resolve an issue where authoring a model (resizing widgets) can cause file exports to fail.</p>
+
+  <h2 id="january18th2019-v2.5.1">January 18th, 2019 - v2.5.1</h2>
+
+  <h3>Improvements and Bug Fixes</h3>
+
+  <ul>
+    <li>On a code recompile failure the line number will now display along with the error message.</li>
+    <li>Put in a workaround so that color input widgets can work in the Safari browser.</li>
+    <li>Put in a workaround for selecting input text in authoring mode popup windows in Firefox.</li>
+    <li>Allowed line plots to go in any direction with <code>plotxy</code>, matching NetLogo desktop's behavior.</li>
+    <li>Fixed some bugs around using <code>run</code> and <code>runresult</code> with <code>let</code> variables in strings.</li>
+    <li>Fixed a bug where widgets could be nudged outside the model area in authoring mode using the keyboard.</li>
+    <li>Fixed a bug with the display when repeatedly loading models from the local system.</li>
+  </ul>
+
+  <h2 id="october282018-v2.5.0">October 28th, 2018 - v2.5.0</h2>
+
+  <h3>Coding Enhancements</h3>
+
+  <p>As part of Google Summer of Code a trio of improvements were made to the coding experience of NetLogo Web:</p>
+
+  <ul>
+    <li>A "Jump to Procedure" dropdown has been added in the NetLogo Code tab that makes it easy to go right to a procedure definition in the code.</li>
+    <li>A "Show Usage" hotkey has been added - simply highlight some text and hit <code>Ctrl-U</code> (Windows/Linux) or <code>Command-U</code> (macOS) and you'll see a list of the lines of code the text is used. This is very useful for finding where variables and procedures are used.</li>
+    <li>An "Auto-Complete" feature has been added. When the checkbox is checked in the NetLogo Code tab, suggestions for keywords, primitives, and procedure names will popup as you type in code.</li>
+  </ul>
+
+  <p>Three more features were added that should also help the coding and model testing experience:</p>
+
+  <ul>
+    <li>A "Comment Code" hotkey has been added that will toggle a line between commented or uncommented with the <code>;</code> character. Useful for quickly testing code with or without some line. It is available at <code>Ctrl-;</code> (Windows/Linux) or <code>Command-;</code> (macOS).</li>
+    <li>There is an option to move the "Commands and Code" tabs to the right side of the screen, instead of the bottom (the default). This allows viewing the Command Center or NetLogo Code tabs side-by-side with a model, which is much nicer on wide screens.</li>
+    <li>Errors that occur as a result of code typed into the Command Center will now show in the Command Center display, instead of in a dialog box. The Command Center is also more consistent about retaining focus after commands are entered.</li>
+  </ul>
+
+  <h3>Improvements and Bug Fixes</h3>
+
+  <ul>
+    <li>Wide models will now expand to take up more screen space by default, instead of getting "stuck" inside a small box on the screen.</li>
+    <li>Lots of improvements to navigating models in the models library dropdown - using browser back and forward buttons should work much more reliably.</li>
+    <li>Workarounds were added to better support the Microsoft Edge web browser, especially around widget editing.</li>
+    <li>The Baby BehaviorSpace experimental feature is now aware of the <code>behaviorspace-expiriment-name</code> and <code>behaviorspace-run-number</code> primitives.</li>
+    <li>Fixed a couple issues and styles for the documentation pages.</li>
+    <li>Turtle pen size choices are now better respected.</li>
+    <li>The same <code>nlogo</code> file can now be uploaded multiple times in a row - before nothing would happen on the 2nd or further uploads.</li>
+    <li>Monitor widgets allow non-numeric values, as in desktop.</li>
+    <li>Models that use <code>inspect</code> can now compile and run, but the command doesn't do anything.</li>
+    <li>More primitives have been added to the code highlighter.</li>
+    <li>Fix for using <code>turtle-set</code> with special agentsets, like <code>turtles</code> and <code>patches</code>. It wasn't making a new agentset in these cases, so adjustments to the new agentset would affect all agents in the world.</li>
+    <li>Improved error messages for <code>n-of</code> to match desktop.</li>
+    <li>Fixed an issue where using <code>setxy</code> with <code>pen-down</code> and a wrapped world wouldn't properly wrap the pen drawings.</li>
+    <li>Exporting anonymous procedures works with <code>export-world</code> without errors. Note that importing is not supported (in desktop or web).</li>
+    <li>Speed optimizations were added around breed checks for agents, the <code>patchat</code> primitive, and using commands or reporters with large agentsets, like <code>patches</code> in a big world.</li>
+    <li>The <code>item</code> primitive now allows non-integer indexes when accessing a list, just like desktop.</li>
+    <li>Errors are thrown when using <code>ask</code> or <code>inspect</code> with a dead agent, as with desktop.</li>
+    <li>Using <code>towards</code> with patches no longer throws an error.</li>
+  </ul>
+
+
+  <h2>May 31st, 2018 - v2.4.0</h2>
+
+  <h3>Newly Supported NetLogo Features</h3>
+
+  <ul>
+    <li>The very exciting new feature for this release is model interface editing support! Model authoring is now possible in NetLogo Web. See the <a href="docs/authoring">new documentation</a> for more information.</li>
+  </ul>
+
+  <h3>Improvements and Bug Fixes</h3>
+
+  <ul>
+    <li>Documentation has been updated for authoring and to include more information on the differences with NetLogo desktop.</li>
+    <li>Manually typed slider values will not go outside the limits of the slider.</li>
+    <li>Small improvements were made to the automatic indentation in the code editor.</li>
+    <li>Performance optimizations were added around using <code>any?</code> and <code>with</code> primitives together, as in <code>any? turtles with [color = red]</code>.</li>
+  </ul>
+
+  <h2>March 23rd, 2018 - v2.3.1</h2>
+
+  <h3>Models Library</h3>
+
+  NetLogo Web has been updated with the same version of the Models Library that comes with NetLogo desktop 6.0.3, which means that many models have been added or modified.  See the "Models" section <a href="http://ccl.northwestern.edu/netlogo/docs/versions.html#version-603-march-2018">here</a> for more information.
+
+  <h3>Improvements and Bug Fixes</h3>
+
+  <ul>
+    <li>The <code>diffuse</code> and <code>diffuse4</code> commands are now properly symmetrical, matching the fix made in NetLogo desktop 6.0.3.</li>
+  </ul>
+
+  <h2>March 9th, 2018 - v2.3.0</h2>
+
+  <h3>Newly Supported NetLogo Features</h3>
+
+  <ul>
+    <li><code>import-world</code> and <code>export-world</code> are now supported.</li>
+    <li><code>import-drawing</code> has a basic implementation that tries to load an image at the given URL.</li>
+    <li><code>netlogo-version</code> will return a string value that matches the version from these release notes.</li>
+  </ul>
+
+  <h3>Improvements and Bug Fixes</h3>
+
+  <ul>
+    <li>World will not clear on a recompile unless there are code changes that require it.</li>
+    <li>Agents are now rendered in breed declaration order, as they are in desktop.</li>
+    <li>Number input widgets display correctly in Firefox when set to a small size.</li>
+    <li>Input widgets now update values only when an edit is complete, to avoid causing problems with incomplete changes while models are running.</li>
+    <li>The command console will now properly insert <code>show</code> when using any reporter, not just some.</li>
+    <li>Histograms now properly round down when bucketing data.</li>
+    <li>Small improvement to the display of link shapes so they are more reasonably sized.</li>
+    <li>Plot update commands recognize <code>stop</code>.</li>
+    <li>Plots now use a clone of the main model random number generator, as they do in desktop NetLogo.</li>
+  </ul>
+
+  <h2>January 8th, 2018 - v2.2.3</h2>
+
+  <h3>Improvements and Bug Fixes</h3>
+
+  <ul>
+    <li>Show an x-value in plot tooltips.</li>
+  </ul>
+
+  <h2>November 27th, 2017 - v2.2.2</h2>
+
+  <h3>Improvements and Bug Fixes</h3>
+
+  <ul>
+    <li>Bugfixes around exporting CSV data from plots.</li>
+    <li>Output area widgets should update correctly.</li>
+    <li>Using <code>run</code> or <code>runresult</code> on strings with comments should work correctly.</li>
+    <li>Minor user interface clean-up.</li>
+  </ul>
+
+  <h2>October 27th, 2017 - v2.2.1</h2>
+
+  <h3>Newly Supported NetLogo Features</h3>
+
+  <ul>
+    <li>The <code>diffuse4</code> primitive is now supported.</li>
+    <li>Vertical sliders are now presented correctly.</li>
+  </ul>
+
+  <h3>Improvements and Bug Fixes</h3>
+
+  <ul>
+    <li>Fixed a bug where turtles moving <code>back</code> would not draw pen lines.</li>
+    <li>Fixed a bug with the display of histogram plots when using temporary plot pens.</li>
+    <li>Fixed a bug that would incorrectly set tied turtle positions in rare circumstances.</li>
+  </ul>
+
+  <h2>October 5th, 2017 - v2.2.0</h2>
+
+  <h3>Newly Supported NetLogo Language Primitives</h3>
+
+  <ul>
+    <li><code>read-from-string</code></li>
+    <li><code>export-view</code></li>
+    <li><code>run</code> and <code>runresult</code> now work on string values.  Example:  <code>run "set sum 10 + 100"</code></li>
+  </ul>
+
+  <h3>Improvements and Bug Fixes</h3>
+
+  <ul>
+    <li>Models that are saved with code tab errors can now be loaded so the errors can be addressed.</li>
+    <li>Running a reporter in the command center automatically adds <code>show</code> for usability.</li>
+    <li>Fix for a couple issues when loading a model from an <code>.nlogo</code> file, including ghosting agents at full tick speed.</li>
+    <li>Plot title sizes were reduced to give more room for the plots.</li>
+    <li><code>clear-all</code> clears output areas, too.</li>
+    <li>Models library updated to match the 6.0.2 NetLogo desktop release.</li>
+  </ul>
+
+  <h2>July 28th, 2017 - v2.1.0</h2>
+
+  <h3>Now-Supported Language Primitives</h3>
+
+  <ul>
+    <li>insert-item</li>
+    <li>range</li>
+    <li>wait (This implementation is for basic compatibility.  We recommend NetLogo Web models avoid the use of this primitive.)</li>
+  </ul>
+
+  <h3>Selected BugFixes / Improvements</h3>
+
+  <ul>
+    <li>Numerous major optimizations and performance improvements.</li>
+    <li>Improve anonymous reporter and command display with <code>show</code>.</li>
+    <li>Allow <code>extract-hsb</code> to take RGB lists.</li>
+    <li>Make <code>is-breed?</code> work with links.</li>
+  </ul>
+
+  <h3>Models Library</h3>
+
+  NetLogo Web is now using a preliminary version of the Models Library that will come with the soon-to-be-released NetLogo 6.0.2, which means that many models have been added or modified.  See the "Models" section <a href="http://ccl.northwestern.edu/netlogo/docs/versions.html">here</a> for more information.
+
+  <h2>February 5th, 2017</h2>
+
+  <h3>Now-Supported Language Primitives</h3>
+
+  <ul>
+    <li>clear-globals</li>
+    <li>downhill</li>
+    <li>downhill4</li>
+    <li>layout-circle</li>
+    <li>layout-radial</li>
+    <li>layout-tutte</li>
+    <li>random-gamma</li>
+    <li>uphill</li>
+    <li>uphill4</li>
+  </ul>
+
+  <h3>NetLogo 6 Parity</h3>
+
+  Much has been done to keep step with the desktop version of NetLogo as it transitioned from version 5.3.1 to version 6.0.0.  The two most significant changes have been making link primitives more consistent with one another in their behavior, and the replacement of tasks with anonymous procedures.  For more information about these items, please see the "Tasks replaced by Anonymous Procedures" and "Link reporters overhauled to be more consistent and flexible" subsections of <a href="http://ccl.northwestern.edu/netlogo/docs/transition.html#v60">the NetLogo 6 transition guide</a>.
+
+  <h3>Models Library</h3>
+
+  NetLogo Web is now using the version of the Models Library that comes with NetLogo 6, which means that many models have been added or modified.  See the "Models" section <a href="http://ccl.northwestern.edu/netlogo/docs/versions.html">here</a> for more information.
+
+  <h2>October 11th, 2016</h2>
+
+  <h3>Now-Supported Language Primitives</h3>
+
+  <ul>
+    <li>random-gamma</li>
+  </ul>
+
+  <h2>September 13th, 2016</h2>
+
+  <h3>Now-Supported Language Primitives</h3>
+
+  <ul>
+    <li>export-output</li>
+    <li>user-input</li>
+  </ul>
+
+  <h2>August 9th, 2016</h2>
+
+  <h3>Now-Supported Language Primitives</h3>
+
+  <ul>
+    <li>link-shapes</li>
+  </ul>
+
+  <h2>July 26th, 2016</h2>
+
+  <h3>Miscellaneous</h3>
+
+  NetLogo Web files are now distributed in such a way that clearing your browser's cache should never be necessary for obtaining the latest versions of the files.
+
+  <h2>June 1st, 2016</h2>
+
+  <h3>Now-Supported Language Primitives</h3>
+
+  <ul>
+    <li>user-yes-or-no?</li>
+  </ul>
+
+  <h2>April 8th, 2016</h2>
+
+  <h3>Widget Enhancement</h3>
+
+  Input widgets can now be used to select colors.
+
+  <h2>February 25th, 2016</h2>
+
+  <h3>Widget Enhancement</h3>
+
+  Buttons now indicate if they are "forever" buttons.  Also, buttons now indicate if they run in an agent context (T (turtles), P (patches), or L (links)).
+
+  <h2>February 10th, 2016</h2>
+
+  <h3>Now-Supported Language Primitives</h3>
+
+  <ul>
+    <li>at-points</li>
+    <li>sort-by</li>
+    <li>sort-on</li>
+  </ul>
+
+  <h2>December 14th, 2015</h2>
+
+  <h3>Widget Error Reporting</h3>
+
+  <p>Widgets now support displaying red label text when they contain an error.</p>
+
+  <p>This does not currently apply to plot widgets, which will still display
+     pop-ups about errors on model load, for the time being.</p>
+
+  <h2>November 9th, 2015</h2>
+
+  <h3>Newly-Implemented Language Primitives</h3>
+
+  <p>First and foremost, this update brings with it the implementation of many
+     NetLogo primitives, substantially increasing the percentage of the
+     language supported by NetLogo Web.</p>
+
+  <p>The newly-supported primitives are as follows:</p>
+
+  <ul>
+    <li>approximate-rgb</li>
+    <li>approximate-hsb</li>
+    <li>breed-at</li>
+    <li>clear-drawing</li>
+    <li>date-and-time</li>
+    <li>extract-hsb</li>
+    <li>home</li>
+    <li>hsb</li>
+    <li>in-cone</li>
+    <li>is-boolean?</li>
+    <li>max-n-of</li>
+    <li>min-n-of</li>
+    <li>modes</li>
+    <li>netlogo-web?</li>
+    <li>patch-at-heading-and-distance</li>
+    <li>patch-size</li>
+    <li>pen-erase</li>
+    <li>random-exponential</li>
+    <li>random-normal</li>
+    <li>random-poisson</li>
+    <li>random-pxcor</li>
+    <li>random-pycor</li>
+    <li>rgb</li>
+    <li>set-patch-size</li>
+    <li>shapes</li>
+    <li>shuffle</li>
+    <li>stamp-erase</li>
+    <li>user-message</li>
+    <li>with-local-randomness</li>
+    <li>with-min</li>
+    <li>with-max</li>
+    <li>wrap-color</li>
+  </ul>
+
+  <h3>Updated Models Library</h3>
+
+  <p>This change adds the Traffic Basic Adaptive Individuals model and updates
+     dozens of other models were updated with small tweaks and code style
+     improvements.</p>
+
+  <p>The above changes, combined with all of the new primitives added, has
+     allowed the following models to now be openable in NetLogo Web:</p>
+
+  <ul>
+    <li>Autumn</li>
+    <li>Bacteria Food Hunt</li>
+    <li>Bacteria Hunt Speeds</li>
+    <li>BeeSmart Hive Finding</li>
+    <li>Bug Hunt Coevolution</li>
+    <li>Bug Hunt Speeds</li>
+    <li>Connected Chemistry Gas Combustion</li>
+    <li>Connected Chemistry Rusting Reaction</li>
+    <li>Connected Chemistry Solid Combustion</li>
+    <li>Current in a Wire</li>
+    <li>Dice Stalagmite</li>
+    <li>Disease Solo</li>
+    <li>DNA Replication Fork</li>
+    <li>Echo</li>
+    <li>El Farol Network Congestion</li>
+    <li>epiDEM Basic</li>
+    <li>epiDEM Travel and Control</li>
+    <li>Equidistant Probability</li>
+    <li>Fireworks</li>
+    <li>Flocking - Alternative Visualizations</li>
+    <li>Flocking Vee Formations</li>
+    <li>GasLab Single Collision</li>
+    <li>Geometron Top-Down</li>
+    <li>HSB and RGB Example</li>
+    <li>K-Means Clustering</li>
+    <li>Lightning</li>
+    <li>Lunar Lander</li>
+    <li>Many Regions Example</li>
+    <li>Muscle Development</li>
+    <li>Osmotic Pressure</li>
+    <li>Particle Swarm Optimization</li>
+    <li>Particle System Flame</li>
+    <li>Particle System Fountain</li>
+    <li>Particle System Waterfall</li>
+    <li>Plant Speciation</li>
+    <li>Prob Graphs Basic</li>
+    <li>Random Basic Advanced</li>
+    <li>Reactor Top Down</li>
+    <li>Red Queen</li>
+    <li>Sampler Solo</li>
+    <li>Shuffle Board</li>
+    <li>Simple Economy.nlogo</li>
+    <li>Stochastic Patchwork</li>
+    <li>Sunflower Biomorphs</li>
+    <li>Traffic Basic Adaptive Individuals</li>
+    <li>Turtles Circling</li>
+    <li>Urban Suite - Path Dependence</li>
+    <li>Urban Suite - Recycling</li>
+    <li>Vision Cone Example</li>
+    <li>Voronoi</li>
+  </ul>
+
+  <p>Note: While most of these work fine, the fact that a model is openable does
+     not imply that we think the model is running well.  Some of these models
+     are still a bit slow or buggy, and we plan to fix that in future updates.</p>
+
+  <h3>New Random Number Generator</h3>
+
+  <p>Previously, NetLogo Web used the standard JavaScript random number
+     generator.  With this update, NetLogo Web now gets its random numbers from
+     a direct port of the random number generator used in desktop NetLogo.
+     Thanks to this, any seed passed to <code>random-seed</code> leads to
+     exactly the same model run in NetLogo Web as it does in desktop NetLogo.</p>
+
+</div>

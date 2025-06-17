@@ -1,0 +1,20 @@
+<footer>
+	{# dynamically create footer menu items from craft #}
+	<div class="footer-container">
+		{% set pages = craft.entries()
+                    .section('menuPage')
+                    .menuLocation('footerMenu')
+					.all()%}
+        <div class="footer-logos">
+            {% set logos = craft.app.globals().getSetByHandle("footer").logos.all() %}
+            {% for logo in logos %}
+                <a href="{{ logo.logoUrl }}" target="_blank">
+                    <img src="{{ logo.url }}" class="footer-logo"></img>
+                </a>
+            {% endfor %}
+        </div>
+        <div class="footer-text">
+            {{ craft.app.globals().getSetByHandle("footer").copyrightText }}
+        </div>
+	</div>
+</footer>

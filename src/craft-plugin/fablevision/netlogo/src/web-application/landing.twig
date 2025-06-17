@@ -1,0 +1,164 @@
+{# LANDING PAGE #}
+{% set journeys = craft.entries()
+        .section('journey')
+        .orderBy({'journeyTitle': SORT_ASC})
+        .all() %}
+{% if not journeyId and not taskId %}
+<div class="page">
+    <div class="homepage-container2">
+        <div class="homepage-hero">
+            <img class="homepage-logo" src="{{ craft.app.globals().getSetByHandle("homePage").modaLogo.one().url }}"/>
+            <div class="homepage-hero-container">
+                <h3>{{ craft.app.globals().getSetByHandle("homePage").heroTitle  }}</h3>
+                {{ craft.app.globals().getSetByHandle("homePage").heroBody }}
+            </div>
+            <a href="/units" class="homepage-cta-button">Try MoDa</a>
+        </div>
+        <div class="homepage-features">
+            <div class="homepage-feature">
+                <img src="assets/images/exports/icon_experiment.png"/>
+                <h3>Experiment</h3>
+                {# <div class="homepage-feature-color1">
+                    <strong>{{ craft.app.globals().getSetByHandle("homePage").homeFeature1Title }}</strong>
+                    <p>{{ craft.app.globals().getSetByHandle("homePage").homeFeature1Body }}</p>
+                </div> #}
+            </div>
+            <div class="homepage-feature">
+                <img src="assets/images/exports/icon_investigate.png"/>
+                <h3>Investigate</h3>
+                {# <div class="homepage-feature-color2">
+                    <strong>{{ craft.app.globals().getSetByHandle("homePage").homeFeature2Title }}</strong>
+                    <p>{{ craft.app.globals().getSetByHandle("homePage").homeFeature2Body }}</p>
+                </div> #}
+            </div>
+            <div class="homepage-feature">
+                <img src="assets/images/exports/icon_data.png"/>
+                <h3>Collect Data</h3>
+                {# <div class="homepage-feature-color3">
+                    <strong>{{ craft.app.globals().getSetByHandle("homePage").homeFeature3Title }}</strong>
+                    <p>{{ craft.app.globals().getSetByHandle("homePage").homeFeature3Body }}</p>
+                </div> #}
+            </div>
+            <div class="homepage-feature">
+                <img src="assets/images/exports/icon_computermodel.png"/>
+                <h3>Computer Model</h3>
+                {# <div class="homepage-feature-color4">
+                    <strong>{{ craft.app.globals().getSetByHandle("homePage").homeFeature4Title }}</strong>
+                    <p>{{ craft.app.globals().getSetByHandle("homePage").homeFeature4Body }}</p>
+                </div> #}
+            </div>
+            <div class="homepage-feature">
+                <img src="assets/images/exports/icon_results.png"/>
+                <h3>Compare Results</h3>
+                {# <div class="homepage-feature-color5">
+                    <strong>{{ craft.app.globals().getSetByHandle("homePage").homeFeature5Title }}</strong>
+                    <p>{{ craft.app.globals().getSetByHandle("homePage").homeFeature5Body }}</p>
+                </div> #}
+            </div>
+        </div>
+        <div class="homepage-photos">
+            <div class="homepage-photo">
+            
+                <img src="{{ craft.app.globals().getSetByHandle("homePage").homePhotos1.one().url  }}"/>
+            </div>
+            <div class="homepage-photo">
+                <img src="{{ craft.app.globals().getSetByHandle("homePage").homePhotos2.one().url  }}"/>
+            </div>
+            <div class="homepage-photo">
+                <img src="{{ craft.app.globals().getSetByHandle("homePage").homePhotos3.one().url  }}"/>
+            </div>
+        </div>
+        <div class="homepage-info">
+            <div class="homepage-info-container">
+                <div class="homepage-info-text">
+                    <h2>{{ craft.app.globals().getSetByHandle("homePage").homeInfoTitle }}</h2>
+                    {{ craft.app.globals().getSetByHandle("homePage").homeInfoText }}
+                </div>
+            </div>
+        </div>
+        <div class="homepage-cta">
+            <a href="/units" class="homepage-cta-button large">Try MoDa</a>
+        </div>
+        <hr/>
+    </div>
+    {% include "netlogo/footer.twig" %}
+</div>
+{# JOURNEY PAGE #}
+{% elseif journeyId and not taskId %}
+<div class="page">
+    <header>
+        <div class="title">
+            <img class="homepage-logo" src="{{ craft.app.globals().getSetByHandle("homePage").modaLogo.one().url }}"/>
+            <h3>{{ craft.app.globals().getSetByHandle("homePage").heroTitle  }}</h3>
+        </div>
+    </header>
+    <div class="journey-page">
+        {% set journey = craft.entries()
+                .section("journey")
+                .id(craft.app.request.getQueryParam("journeyId"))
+                .one() %}
+        <h2>Unit Overview</h2>
+        <div class="journey-title">
+            {{ journey.journeyTitle }}
+        </div>
+        <div class="journey-body">
+            <div class="left-column">
+                <img class="journey-image" src="{{ journey.thumbnail.one().url }}"/>
+                {% for index, task in journey.journeyTasks.all() %}
+                    <div class="task">
+                        <div class="task-title">
+                            Task
+                            {{ index + 1 }}:
+                            <span>{{ task.taskTitle }}</span>
+                        </div>
+                        <a class="journey-button-blue" href="/?journeyId={{journey.id}}&taskId={{task.id}}">
+                            <i class="fas fa-external-link-alt share-icon"></i> Create a model</a>
+                        {% if currentUser and ('Teachers' in currentUser.groups or currentUser.admin) %}
+                            <a href="/dashboard/projects/?journeyId={{ journeyId }}"  class="journey-button-white">Student Projects</a>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="right-column">
+                <div>
+                    <h4>Description</h4>
+                    {{ journey.journeyDescription }}
+                </div>
+                <div>
+                    <h4>General Info</h4>
+                    {{ journey.journeyGeneralInfo }}
+                </div>
+                <div>
+                    <h4>Duration</h4>
+                    {{ journey.journeyDuration }}
+                </div>
+                <div>
+                    <h4>Target age</h4>
+                    {{ journey.journeyTargetAge }}
+                </div>
+                <div>
+                    <h4>Resources</h4>
+                    <ul>
+                        {% for link in journey.journeyResources.all() %}
+                            <li>
+                                <a href="{{ link.linkUrl }}" target="_blank">{{ link.linkDisplayText }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr/>
+    {% include "netlogo/footer.twig" %}
+</div>
+{# TASK PAGE #}
+{% elseif journeyId and taskId %}
+    <noscript>
+        <strong>We're sorry but a2s-netlogo doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+    </noscript>
+    <div id="app"></div>
+    <script src="/netlogo/chunk-vendors.bundle.js"></script>
+    <script src="/netlogo/app.bundle.js"></script>
+    {% include "netlogo/footer-bar.twig" %}
+{% endif %}

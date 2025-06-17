@@ -1,0 +1,44 @@
+{
+    "name": "fablevision/netlogo",
+    "description": "Craft plugin to support Blockly and Netlogo integration ",
+    "type": "craft-plugin",
+    "version": "0.0.5",
+    "keywords": [
+        "craft",
+        "cms",
+        "craftcms",
+        "craft-plugin",
+        "netlogo"
+    ],
+    "support": {
+        "docs": "???",
+        "issues": "???"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Chris Spence",
+            "homepage": "fablevision.com"
+        }
+    ],
+    "require": {
+        "craftcms/cms": "^3.0.0"
+    },
+    "autoload": {
+        "psr-4": {
+          "fablevision\\netlogo\\": "src/"
+        }
+    },
+    "extra": {
+        "name": "netlogo",
+        "handle": "netlogo",
+        "developer": "Chris Spence",
+        "developerUrl": "fablevision.com",
+        "documentationUrl": "???",
+        "changelogUrl": "???",
+        "components": {
+            "netlogoService": "fablevision\\netlogo\\services\\NetlogoService"
+        },
+        "class": "fablevision\\netlogo\\Netlogo"
+    }
+}

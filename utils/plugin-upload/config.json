@@ -1,0 +1,6 @@
+{
+  "host": "100.26.225.125",
+  "port": 22,
+  "username": "ubuntu",
+  "privateKey": "/Users/spencech/.ssh/brian-key-pair-us-east.pem"
+}

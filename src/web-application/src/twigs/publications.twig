@@ -1,0 +1,47 @@
+{% set journeyId = craft.app.request.getQueryParam("journeyId") %}
+{% set taskId = craft.app.request.getQueryParam("taskId") %}
+
+<html>
+	<head>
+		<title>{{ siteName }}</title>
+		<link rel="preconnect" href="https://fonts.gstatic.com">
+		<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,700;0,900;1,400&display=swap" rel="stylesheet">
+		{% do view.registerAssetBundle("fablevision\\netlogo\\assetbundles\\CSSBundle") %}
+	</head>
+	{% set requestedPath = craft.app.request.pathInfo() %}
+	<body>
+		<div class="container">
+			{% include "netlogo/navBar.twig" %}
+            <div class="menu-page-content">
+                {% set publications = craft.entries()
+                    .section('publications')
+                    .one()%}
+                {% if requestedPath is same as('publications') %}
+                    <h1 class="light-shadow">Publications</h1>
+                    {% if publications.mainTitle %}
+                        <h2 class="light-shadow">{{ publications.mainTitle }}</h2>
+                    {% endif %}
+                    {% if publications.mainBody %}
+                        <p>{{ publications.mainBody }}</p>
+                    {% endif %}
+                    {% set publicationsByYear = publications.publications.all()|group(e => e.publicationYear) %}
+                    {% for year, publications in publicationsByYear %}
+                        <div class="publication-year-container">
+                            <h3 class="light-shadow">{{ year }}</h3>
+                            {% for publication in publications %}
+                                <div class="publication-grid">
+                                    <p class="publication-grid-item">{{ publication.citation }}</p>
+                                    {% if publication.publicationPdf.one() %}
+                                        <a href="{{ publication.publicationPdf.one().url }}" download="{{ publication.publicationFileName }}" class="download-icon publication-grid-item">&#128229</a>
+                                    {% endif %}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+			{% include "netlogo/footer.twig" %}
+        </div>
+	</body>
+</html>
+

@@ -1,0 +1,98 @@
+{% set csrfTokenName = craft.app.config.general.csrfTokenName %}
+{% set csrfToken = craft.app.request.csrfToken %}
+{% set journeyId = craft.app.request.getQueryParam("journeyId") %}
+{% set taskId = craft.app.request.getQueryParam("taskId") %}
+{% set info = craft.netlogo.getJourneyAndTask(journeyId, taskId) %}
+{% set imagePath = view.getAssetManager().getPublishedUrl('@fablevision/netlogo/assetbundles/simulation/img', true) %}
+<html>
+    <head>
+        <title>{{ siteName }}</title>
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link
+            href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,700;0,900;1,400&display=swap"
+            rel="stylesheet">
+        <script>
+            var __SERVICE_URL__ = "{{ actionUrl('netlogo/default/') }}";
+            var __CSRF_TOKEN_NAME__ = "{{ csrfTokenName }}";
+            var __CSRF_TOKEN__ = "{{ csrfToken }}";
+            var __JOURNEY_ID__ = {{ journeyId ?? "0" }};
+            var __TASK_ID__ = {{ taskId ?? "0" }};
+            var __CONTENT__ = JSON.parse("{{ info|json_encode|e('js') }}");
+            {% if currentUser %}
+            var __USER_ID__ = {{ currentUser.id }};
+            var __USER__ = "{{ currentUser.username }}";
+            {% endif %}
+            var __IMAGE_URL__ = "{{ imagePath }}";
+        </script>
+        <script src="https://kit.fontawesome.com/8476c81704.js" crossorigin="anonymous"></script>
+        {% do view.registerAssetBundle("fablevision\\netlogo\\assetbundles\\CSSBundle") %}
+        {% do view.registerAssetBundle("fablevision\\netlogo\\assetbundles\\SimulationBundle") %}
+       
+       VueGoesHere
+    </head>
+
+    <body>
+        <div class="container">
+            {% include "netlogo/navBar.twig" %}
+            {# LANDING PAGE #}
+            {% if not journeyId and not taskId %}
+            <div class="page">
+                <div class="journeys">
+                    {# display journeys in alphabetical order #}
+                    {% set journeys = craft.entries()
+                        .section('journey')
+                        .orderBy({'journeyTitle': SORT_ASC})
+                        .all() %}
+                    {% if journeys %}
+                        {% for journey in journeys %}
+                            <div class="journey">
+                                <img class="journey-thumbnail" src="{{ journey.thumbnail.one().url }}"/>
+                                <h3 class="journey-title"> {{ journey.journeyTitle }}</h3>
+                                <a href="/?journeyId={{ journey.id }}" class="journey-button">Unit Overview</a>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+            {# JOURNEY PAGE #}
+            {% elseif journeyId and not taskId %}
+            <div class="journey-page">
+                {% set journey = craft.entries()
+                    .section("journey")
+                    .id(craft.app.request.getQueryParam("journeyId"))
+                    .one() %}
+                <h3>
+                    {{ journey.journeyTitle }}
+                </h3>
+                <div class="journey-body">
+                    <div class="left-column">
+                        <img class="journey-image" src="{{ journey.thumbnail.one().url }}"/>
+                        <div>
+                            <h4>Description:</h4>
+                            {{ journey.journeyDescription }}
+                        </div>
+                        <div>
+                            <h4>Resources:</h4>
+                            <ul>
+                            {% for link in journey.journeyResources %}
+                                <li><a href="{{ link.linkUrl }}">{{ link.linkDisplayText }}</a></li>
+                            {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="right-column">
+                        <a href="/?journeyId={{journey.id}}&taskId={{journey.journeyTasks.one().id}}">Create a model</a>
+                    </div>
+                </div>
+            </div>
+            {# TASK PAGE #}
+            {% elseif journeyId and taskId %}
+            <noscript><strong>We're sorry but a2s-netlogo doesn't work properly without JavaScript enabled. Please enable it to
+                continue.</strong></noscript>
+            <div id="app"></div>
+            <script src="/netlogo/chunk-vendors.bundle.js"></script>
+            <script src="/netlogo/app.bundle.js"></script>
+            {% endif %}
+        </div>
+    </body>
+</html>

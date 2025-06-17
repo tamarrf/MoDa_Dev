@@ -1,0 +1,78 @@
+{% set journeyId = craft.app.request.getQueryParam("journeyId") %}
+{% set taskId = craft.app.request.getQueryParam("taskId") %}
+{% set studentId = craft.app.request.getQueryParam("studentId") %}
+{% set csrfTokenName = craft.app.config.general.csrfTokenName %}
+{% set csrfToken = craft.app.request.csrfToken %}
+{% requireLogin %}
+
+<html>
+	<head>
+		<title>{{ siteName }}
+			- teacher dashboard</title>
+		<link rel="preconnect" href="https://fonts.gstatic.com">
+		<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,700;0,900;1,400&display=swap" rel="stylesheet">
+		<script src="https://kit.fontawesome.com/8476c81704.js" crossorigin="anonymous"></script>
+		<script>
+			var __SERVICE_URL__ = "{{ actionUrl('netlogo/default/') }}";
+			var __CSRF_TOKEN_NAME__ = "{{ csrfTokenName }}";
+			var __CSRF_TOKEN__ = "{{ csrfToken }}";
+			var __USER_ID__ = {{ currentUser.id }};
+			{% if journeyId and taskId and studentId %}
+			var __STUDENT_INFO__ = craft.netlogo.getStudentInfo(studentId, journeyId, taskId) %}
+			{% endif %}
+		</script>
+		{% do view.registerAssetBundle("fablevision\\netlogo\\assetbundles\\CSSBundle") %}
+		{% do view.registerAssetBundle("fablevision\\netlogo\\assetbundles\\SimulationBundle") %}
+		<link rel="icon" href="/netlogo/favicon.ico">
+	</head>
+	{% set requestedPath = craft.app.request.pathInfo() %}
+	<body>
+		<div class="container">
+			{% include "netlogo/navBar.twig" %}
+			<div class="page dashboard">
+                <header>
+                    <div class="title">
+                        <img class="homepage-logo" src="{{ craft.app.globals().getSetByHandle("homePage").modaLogo.one().url }}"/>
+                        <h3>{{ craft.app.globals().getSetByHandle("homePage").heroTitle  }}</h3>
+                    </div>
+                </header>
+                <h2>Dashboard</h2>
+				{% set dashboard = craft.entries()
+					.section('teacherDashboard')
+					.one()%}
+				{% if requestedPath is same as('dashboard') %}
+					<div class="dashboard-content">
+						<a class="journey-button-blue" href="/admin/content-management">{{ dashboard.manageClassLabel }}</a>
+						<div class="unit-resources">
+							<h3 class="resources-title">{{ dashboard.resourcesLabel }}</h3>
+							<div class="dashboard-journeys">
+								{# display journeys in alphabetical order #}
+								{% set journeys = craft.entries()
+								.section('journey')
+								.orderBy({'journeyTitle': SORT_ASC})
+								.all() %}
+								{% if journeys %}
+									{% for journey in journeys %}
+										<div class="dashboard-journey">
+											<h3 class="dashboard-journey-title">{{ journey.journeyTitle }}</h3>
+											<div class="dashboard-links">
+												<a href="/dashboard/curriculum/?journeyId={{ journey.id }}" class="dashboard-link">Curriculum</a>
+												<a href="/dashboard/examples/?journeyId={{ journey.id }}" class="dashboard-link">Example Models</a>
+												<a href="/dashboard/projects/?journeyId={{ journey.id }}" class="journey-button-blue">Student Projects</a>
+											</div>
+										</div>
+									{% endfor %}
+								{% endif %}
+							</div>
+						</div>
+					</div>
+				{% elseif requestedPath is same as('dashboard/classes') %}
+					{% include "netlogo/classes.twig"%}
+				{% elseif requestedPath is same as('dashboard/curriculum') %}
+					{% include "netlogo/curriculum.twig"%}
+				{% endif %}
+			<hr/>
+			{% include "netlogo/footer.twig" %}
+		</div>
+	</body>
+</html>

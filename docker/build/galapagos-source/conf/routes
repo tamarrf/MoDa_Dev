@@ -1,0 +1,57 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# General
+GET         /                                   controllers.Application.index
+GET         /docs/authoring                     controllers.Application.authoring
+GET         /docs/differences                   controllers.Application.differences
+GET         /docs/faq                           controllers.Application.faq
+GET         /docs/attributions                  controllers.Application.attributions
+GET         /whats-new                          controllers.Application.whatsNew
+GET         /model/list.json                    controllers.Application.modelList
+GET         /model/$modelPath<.*\.nlogo>        controllers.Application.model(modelPath)
+GET         /server-error                       controllers.Application.serverError
+GET         /robots.txt                         controllers.Application.robots
+GET         /humans.txt                         controllers.Application.humans
+
+# Local (Tortoise)
+GET         /launch                             controllers.Local.launch
+GET         /web                                controllers.Local.web
+GET         /standalone                         controllers.Local.standalone
+
+# NetTango redirects
+GET         /ntango-build                       controllers.Assets.at(path="/public", file="/pages/ntango-build-redirect.html")
+# Leaving these play routes in place for now in case anyone has hot-linked to the player page.  An HTML redirect would break things for them.
+# Maybe monitor the AWS stats and remove it if we don't see acitivity here for a bit?
+# -Jeremy B August 2020
+GET         /ntango-play                        controllers.Local.netTangoBuilder(themed: Boolean = false, standalone: Boolean = false)
+# Setting `standalone = false` is intentional here.  This was incorrectly listed as the route to hot-link a model, which is not the
+# case.  If someone has already hot-linked we let it continue working, but at least use the correct behavior.  -Jeremy B April 2021
+GET         /ntango-play-standalone             controllers.Local.netTangoBuilder(themed: Boolean = false, standalone: Boolean = false)
+
+# NetTango
+GET         /nettango-builder                   controllers.Local.netTangoBuilder(themed: Boolean = true,  standalone: Boolean = false)
+GET         /nettango-player                    controllers.Local.netTangoBuilder(themed: Boolean = false, standalone: Boolean = false)
+GET         /nettango-player-standalone         controllers.Local.netTangoBuilder(themed: Boolean = false, standalone: Boolean = true)
+
+# Compiler Service
+POST        /compile-url                        controllers.CompilerService.compileURL
+GET         /compile-url                        controllers.CompilerService.compileURL
+POST        /compile-code                       controllers.CompilerService.compileCode
+GET         /compile-code                       controllers.CompilerService.compileCode
+POST        /compile-nlogo                      controllers.CompilerService.compileNlogo
+GET         /compile-nlogo                      controllers.CompilerService.compileNlogo
+POST        /export-code                        controllers.CompilerService.exportCode
+GET         /export-code                        controllers.CompilerService.exportCode
+GET         /tortoise-compiler.js               controllers.CompilerService.tortoiseCompilerJs
+GET         /tortoise-compiler.js.map           controllers.CompilerService.tortoiseCompilerJsMap
+
+GET         /model/statuses.json                controllers.CompilerService.modelStatuses
+
+GET         /netlogo-engine.js                  controllers.Local.engine
+GET         /netlogo-agentmodel.js              controllers.Local.agentModel
+
+GET         /favicon.ico                        controllers.Application.favicon
+# Map static resources from the /public folder to the /assets URL path
+GET         /assets/*file                       controllers.Assets.versioned(path="/public", file: Asset)

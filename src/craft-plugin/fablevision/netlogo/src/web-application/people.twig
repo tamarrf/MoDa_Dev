@@ -1,0 +1,73 @@
+{% set journeyId = craft.app.request.getQueryParam("journeyId") %}
+{% set taskId = craft.app.request.getQueryParam("taskId") %}
+
+<html>
+	<head>
+		<title>{{ siteName }}</title>
+		<link rel="preconnect" href="https://fonts.gstatic.com">
+		<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,700;0,900;1,400&display=swap" rel="stylesheet">
+		{% do view.registerAssetBundle("fablevision\\netlogo\\assetbundles\\CSSBundle") %}
+	</head>
+	{% set requestedPath = craft.app.request.pathInfo() %}
+	<body>
+		<div class="container">
+			{% include "netlogo/navBar.twig" %}
+            <div class="page">
+                <header>
+                    <div class="title">
+                        <img class="homepage-logo" src="{{ craft.app.globals().getSetByHandle("homePage").modaLogo.one().url }}"/>
+                        <h3>{{ craft.app.globals().getSetByHandle("homePage").heroTitle  }}</h3>
+                    </div>
+                </header>
+                <div class="people-page">
+                    {% set people = craft.entries()
+                        .section('people')
+                        .one()%}
+                    {% if requestedPath is same as('people') %}
+                        <div>
+                            <h2>People</h2>
+                            {% for team in people.teams.all() %}
+                                <div class="team">
+                                    <h3>{{ team.teamTitle }}</h3>
+                                    <div class="people">
+                                        {% for person in team.people.all() %}
+                                            <div class="person-grid">
+                                                <div class="person-card">
+                                                    {% if person.profilePicture.one() %}
+                                                        <img class="person-image" src="{{ person.profilePicture.one().url }}"/>
+                                                    {% endif %}
+                                                    {% if person.fullName %}
+                                                        <div class="person-name">{{ person.fullName }}</div>
+                                                    {% endif %}
+                                                    {% if person.role %}
+                                                        <div class="person-role">{{ person.role }}</div>
+                                                    {% endif %}
+                                                </div>
+                                                    {% if person.userBio %}
+                                                        <div class="person-description"><p>{{ person.userBio }}</p></div>
+                                                    {% endif %}
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <div class="friends-section">
+                        <h2>Friends of the Project</h2>
+                            <div class="friends-logos-container">
+                            {% for friend in people.projectFriends.all() %}
+                                <a href="{{ friend.friendUrl }}" target="_blank">
+                                    <img class="friend-logo" src="{{ friend.logo.one().url }}" alt="{{ friend.friendName }}"/>
+                                </a>
+                            {% endfor %}
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+                <hr/>
+			    {% include "netlogo/footer.twig" %}
+            </div>
+        </div>
+	</body>
+</html>
+

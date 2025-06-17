@@ -1,0 +1,21 @@
+{% requireLogin %}
+{% set csrfTokenName = craft.app.config.general.csrfTokenName %}
+{% set csrfToken = craft.app.request.csrfToken %}
+{% set journeyId = craft.app.request.getQueryParam("journeyId") %}
+{% set taskId = craft.app.request.getQueryParam("taskId") %}
+{% set info = craft.netlogo.getJourneyAndTask(journeyId, taskId) %}
+
+<!DOCTYPE html>
+<html lang="">
+<head>
+	<script>
+		var __SERVICE_URL__ = "{{ actionUrl('netlogo/default/') }}";
+		var __CSRF_TOKEN_NAME__ = "{{ csrfTokenName }}";
+		var __CSRF_TOKEN__ = "{{ csrfToken }}";
+		var __JOURNEY_ID__ = {{ journeyId ?? "0" }};
+		var __TASK_ID__ = {{ taskId ?? "0" }};
+		var __USER_ID__ = {{ currentUser.id }};
+		var __CONTENT__ = JSON.parse("{{ info|json_encode|e('js') }}");
+		var __USER__ = "{{ currentUser.username }}";
+	</script>
+	{% do view.registerAssetBundle("fablevision\\netlogo\\assetbundles\\SimulationBundle") %}

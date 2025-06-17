@@ -1,0 +1,92 @@
+@import "./mixins";
+
+#edit-teacher.modal-content,
+#edit-classroom.modal-content,
+#edit-student.modal-content {
+
+	max-width: 30rem;
+	max-height: 35rem;
+
+	form {
+		width: 100%;
+		max-width: 25rem;
+		margin: 0 auto;
+	}
+
+	mat-form-field {
+		text-align: left;
+	}
+
+	input[type="text"]:focus,
+	input[type="number"]:focus-visible {
+		outline: none;
+		border: 0;
+		box-shadow: initial;
+	}
+
+	.buttons {
+		margin: 0;
+		padding: 0 3rem 4rem 3rem;
+	}
+
+	button + button {
+		margin-left: 1.5rem;
+	}
+
+	button[disabled] {
+		background: @black30 !important;
+	}
+}
+
+#teacher-import.modal-content,
+#student-import.modal-content {
+	max-height: 23rem;
+	transition: max-width @transition-speed, max-height @transition-speed;
+
+	h3 {
+		text-align: center;
+		color: green;
+		font-size: 1.25rem;
+	}
+
+	h3.errors {
+		color: red;
+	}
+
+	&.expanded {
+		max-width: 80rem;
+		max-height: 44rem;
+		transition: max-width @transition-speed, max-height @transition-speed;
+	}
+
+	.buttons {
+		margin: 0;
+		padding: 0 3rem 4rem 3rem;
+	}
+
+	button + button {
+		margin-left: 1.5rem;
+	}
+
+	button[disabled] {
+		background: @black30 !important;
+	}
+
+	table {
+		box-shadow: initial;
+	}
+
+	td.teacher-status {
+		i {
+			color: green;
+		}
+
+		li { 
+			color: red;
+		}
+	}
+}
+
+#edit-student.modal-content {
+	max-height: 29rem;
+}

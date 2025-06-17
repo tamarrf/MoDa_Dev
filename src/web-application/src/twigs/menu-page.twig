@@ -1,0 +1,36 @@
+{% set journeyId = craft.app.request.getQueryParam("journeyId") %}
+{% set taskId = craft.app.request.getQueryParam("taskId") %}
+
+<html>
+	<head>
+		<title>{{ siteName }}</title>
+		<link rel="preconnect" href="https://fonts.gstatic.com">
+		<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,700;0,900;1,400&display=swap" rel="stylesheet">
+		{% do view.registerAssetBundle("fablevision\\netlogo\\assetbundles\\CSSBundle") %}
+	</head>
+	<body>
+		<div class="container">
+			{% include "netlogo/navBar.twig" %}
+			<div class="menu-page-content">
+				{% set requestedPath = craft.app.request.pathInfo() %}
+				{% set requestedPage = requestedPath|replace({'a2s-': ''}) %}
+				{% set entry = craft.entries()
+				.section("menuPage")
+				.slug(requestedPage).one() %}
+				<h3>{{ entry.pageTitle }}</h3>
+				{% if entry.pageSection %}
+					<div class="sections">
+						{% for section in entry.pageSection.all() %}
+							<div class="section">
+								<div>{{ section.sectionTitle }}</div>
+								<div>{{ section.sectionBody }}</div>
+							</div>
+						{% endfor %}
+					</div>
+				{% endif %}
+			</div>
+			{% include "netlogo/footer.twig" %}
+		</div>
+	</body>
+</html>
+

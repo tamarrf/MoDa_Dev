@@ -1,0 +1,120 @@
+{# LANDING PAGE #}
+{% set journeys = craft.entries()
+        .section('journey')
+        .orderBy({'journeyTitle': SORT_ASC})
+        .all() %}
+{% if not journeyId and not taskId %}
+    {% set assignments = currentUser ? craft.netlogo.getAssignments(currentUser.id) : journeys %}
+    {% set assignedIds = currentUser ? assignments|map(a=> "#{a.journeyId}") : assignments|map(a=> "#{a.id}")%}
+    {% set selectedSortOption = craft.app.request.getParam('order', 'all') %}
+    <div class="page">
+        <div class="homepage-container">
+            <div id="title-container">
+                <h1 class="dark-shadow">{{ craft.app.globals().getSetByHandle("homePage").heroTitle }}</h1>
+                {{ craft.app.globals().getSetByHandle("homePage").heroBody }}
+            </div>
+            <img class="homepage-banner" src="{{ craft.app.globals().getSetByHandle("homePage").homePageBanner.one().url }}"/>
+        </div>
+        <div class="task-filter">
+            {% if currentUser and ('Students' in currentUser.groups or currentUser.admin) %}
+                <label for="categories">Filter by:
+                </label>
+                <select name="categories" id="categories">
+                    <option value="all" {{ "all" == selectedSortOption ? 'selected' }}>All Tasks</option>
+                    <option value="assigned" {{ "assigned" == selectedSortOption ? 'selected' }}>Assigned Tasks</option>
+                </select>
+            {% endif %}
+        </div>
+        <div class="journeys">
+            {# display journeys in alphabetical order #}
+            {% set orderJs %}
+				$(function(){
+					$('#categories').on("change", function(e){
+						// Get the value from the select
+						let filter = $(this).val();
+						document.location.href = '/?order=' + filter;
+					});
+				});
+			{% endset %}
+			{% js orderJs %}
+
+            {% switch craft.app.request.getParam('order') %}
+                {% case 'all' %}
+                    {% set assignedJourneys = journeys %}
+                {% case 'assigned' %}
+                    {% set assignedJourneys = journeys|filter(a => a.id in assignedIds) %}
+                {% default %}
+                    {% set assignedJourneys = journeys %}
+            {% endswitch %}
+            
+            {% if assignedJourneys %}
+                {% for journey in assignedJourneys %}
+                    <div class="journey">
+                        <div class="journey-title">{{ journey.journeyTitle }}</div>
+                        <img class="journey-thumbnail" src="{{ journey.thumbnail.one().url }}"/>
+                        <div class="journey-buttons">
+                            <a href="/?journeyId={{ journey.id }}" class="journey-button-white">Unit Overview</a>
+                            <a href="/?journeyId={{ journey.id }}&taskId={{journey.journeyTasks.one().id}}" class="journey-button-blue">
+                                <i class="fas fa-external-link-alt share-icon"></i>
+                                Modeling Page</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+{# JOURNEY PAGE #}
+{% elseif journeyId and not taskId %}
+    <div class="journey-page">
+        {% set journey = craft.entries()
+                .section("journey")
+                .id(craft.app.request.getQueryParam("journeyId"))
+                .one() %}
+        <div class="journey-title">
+            {{ journey.journeyTitle }}
+        </div>
+        <div class="journey-body">
+            <div class="left-column">
+                <img class="journey-image" src="{{ journey.thumbnail.one().url }}"/>
+                <div>
+                    <h4>Description:</h4>
+                    {{ journey.journeyDescription }}
+                </div>
+                <div>
+                    <h4>Resources:</h4>
+                    <ul>
+                        {% for link in journey.journeyResources.all() %}
+                            <li>
+                                <a href="{{ link.linkUrl }}">{{ link.linkDisplayText }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <div class="right-column">
+                {% for index, task in journey.journeyTasks.all() %}
+                    <div class="task">
+                        <div class="task-title">
+                            Task
+                            {{ index + 1 }}:
+                            <span>{{ task.taskTitle }}</span>
+                        </div>
+                        <a class="journey-button-blue" href="/?journeyId={{journey.id}}&taskId={{task.id}}">
+                            <i class="fas fa-external-link-alt share-icon"></i> Create a model</a>
+                        {% if currentUser and ('Teachers' in currentUser.groups or currentUser.admin) %}
+                            <a href="/dashboard/projects/?journeyId={{ journeyId }}"  class="journey-button-white">Student Projects</a>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{# TASK PAGE #}
+{% elseif journeyId and taskId %}
+    <noscript>
+        <strong>We're sorry but a2s-netlogo doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+    </noscript>
+    <div id="app"></div>
+    <script src="/netlogo/chunk-vendors.bundle.js"></script>
+    <script src="/netlogo/app.bundle.js"></script>
+{% endif %}

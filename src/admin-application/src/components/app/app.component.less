@@ -1,0 +1,144 @@
+@import "../../styles/mixins";
+
+:host {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	&:extend(.scrollbar all);
+
+	@media @lg-up {
+		left: 226px;
+	}
+}
+
+.header {
+	padding: 2rem;
+	background: @primary-dark;
+	box-sizing: border-box;
+	box-shadow: initial !important;
+	border-radius: 0 !important;
+}
+
+.header .h1 {
+	color: white;
+	text-align: center;
+	font-size: 2vw;
+	transition: opacity @transition-speed;
+}
+
+.header.transitioning .h1 {
+	opacity: 0;
+	transition: opacity @transition-speed;
+}
+
+.content-panel {
+	padding: 2rem;
+	box-sizing: border-box;
+	border-top: solid 1px @primary-light;
+}
+
+.content-panel .h2,
+.content-panel .p,
+.content-panel iframe {
+	display: block;
+	width: 100%;
+	padding: 1rem;
+	max-width: 60rem;
+	margin: 0 auto;
+	box-sizing: border-box;
+}
+
+.content-panel .h2.wide,
+.content-panel .p.wide,
+.content-panel iframe.wide {
+	max-width: initial;
+	padding-left: 0;
+}
+
+.content-panel .h2.wide {
+	padding-bottom: 0;
+}
+
+.content-panel .h2 a {
+	text-decoration: none;
+}
+
+.content-panel .controls .button {
+	min-width: initial;
+}
+
+.content-panel iframe {
+	padding: 0;
+	height: 30rem;
+	flex: 1 1 auto;
+	border: 0;
+	transition: opacity @transition-speed;
+}
+
+.content-panel iframe.transitioning {
+	opacity: 0;
+	transition: opacity @transition-speed;
+}
+
+.content-panel .buttons {
+	text-align: center;
+}
+
+:host::ng-deep .modal .modal-content {
+	width: ~'calc(100% - 2rem)';
+	height: ~'calc(100% - 2rem)';
+	max-width: 40rem;
+	max-height: 30rem;
+	display: flex;
+	flex-direction: column;
+	padding: 0;
+
+	.modal-header {
+		padding: 1rem;
+		background: @primary-dark;
+		color: white;
+	}
+
+	.modal-body {
+		padding: 1rem;
+		flex: 1 1 auto;
+
+		.p + .p {
+			margin-top: 1rem;
+		}
+	}
+
+	.buttons {
+		padding: 1rem;
+		display: flex;
+		justify-content: flex-end;
+	}
+}
+
+loader, modal {
+	width: 100%;
+	height: 100%;
+}
+
+loader.spinner.showLoader {
+	z-index: 10005 !important;
+}
+
+modal {
+	background: none;
+	box-shadow: initial;
+	border-radius: ;
+}
+
+@media @lg-up {
+	loader, modal {
+		left: 226px !important;
+		width: ~'calc(100% - 226px)' !important;
+	}
+}
+
+ul.fv-tile-grid:not(.admin) {
+	max-width: 40rem;
+}

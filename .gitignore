@@ -1,0 +1,7 @@
+.env
+.DS_Store
+cpresources
+*.sublime*
+src/craft-plugin/fablevision/netlogo/src/migrations-pkg/*.zip
+my.config.json
+utils/plugin-upload/node_modules

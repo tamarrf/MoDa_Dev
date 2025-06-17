@@ -1,0 +1,134 @@
+{% set csrfTokenName = craft.app.config.general.csrfTokenName %}
+{% set csrfToken = craft.app.request.csrfToken %}
+{% set journeyId = craft.app.request.getQueryParam("journeyId") %}
+{% set taskId = craft.app.request.getQueryParam("taskId") %}
+{% set studentId = craft.app.request.getQueryParam("studentId") %}
+{% set allInfo = craft.netlogo.getAllContent() %}
+{% set imagePath = view.getAssetManager().getPublishedUrl('@fablevision/netlogo/assetbundles/simulation/img', true) %}
+{% if journeyId and taskId and studentId %}
+	{% set student = craft.netlogo.getStudentInfo(studentId, journeyId, taskId) %}
+  {% set info = craft.netlogo.getJourneyAndTask(journeyId, taskId) %}
+{% endif %}
+{% requireLogin %}
+
+<html>
+	<head>
+		<title>{{ siteName }}
+			- teacher dashboard</title>
+		<link rel="preconnect" href="https://fonts.gstatic.com">
+		<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,700;0,900;1,400&display=swap" rel="stylesheet">
+		<script src="https://kit.fontawesome.com/8476c81704.js" crossorigin="anonymous"></script>
+		<script>
+			var __SERVICE_URL__ = "{{ actionUrl('netlogo/default/') }}";
+			var __CSRF_TOKEN_NAME__ = "{{ csrfTokenName }}";
+			var __CSRF_TOKEN__ = "{{ csrfToken }}";
+			var __USER_ID__ = {{ currentUser.id }};
+      var __ALL_INFO__ = JSON.parse("{{ allInfo|json_encode|e('js') }}");
+			{% if journeyId and taskId and studentId %}
+			var __STUDENT_INFO__ = JSON.parse("{{ student|json_encode|e('js') }}");
+      var __TASK_INFO__ = JSON.parse("{{ info|json_encode|e('js') }}");
+      {% endif %}
+      var __IMAGE_URL__ = "{{ imagePath }}";
+		</script>
+    <script src="https://kit.fontawesome.com/8476c81704.js" crossorigin="anonymous"></script>
+		{% do view.registerAssetBundle("fablevision\\netlogo\\assetbundles\\CSSBundle") %}
+		{% do view.registerAssetBundle("fablevision\\netlogo\\assetbundles\\SimulationBundle") %}
+    <meta charset="utf-8"><meta name="description" content="Netlogo Simulation Builder"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" href="/netlogo/favicon.ico"><title>a2s-netlogo</title><link href="/netlogo/Example.bundle.js" rel="prefetch"><link href="/netlogo/Example~Simulation.bundle.js" rel="prefetch"><link href="/netlogo/Simulation.bundle.js" rel="prefetch"><link href="/netlogo/css/Example.css" rel="prefetch"><link href="/netlogo/css/Example~Simulation.css" rel="prefetch"><link href="/netlogo/css/Simulation.css" rel="prefetch"><link href="/netlogo/css/diffusionChart.css" rel="prefetch"><link href="/netlogo/css/diffusionWidget.css" rel="prefetch"><link href="/netlogo/css/wildfires2Widget.css" rel="prefetch"><link href="/netlogo/css/wildfiresWidget.css" rel="prefetch"><link href="/netlogo/diffusion.bundle.js" rel="prefetch"><link href="/netlogo/diffusionChart.bundle.js" rel="prefetch"><link href="/netlogo/diffusionWidget.bundle.js" rel="prefetch"><link href="/netlogo/wildfires.bundle.js" rel="prefetch"><link href="/netlogo/wildfires2.bundle.js" rel="prefetch"><link href="/netlogo/wildfires2Widget.bundle.js" rel="prefetch"><link href="/netlogo/wildfires2Widget~wildfiresWidget.bundle.js" rel="prefetch"><link href="/netlogo/wildfiresChart.bundle.js" rel="prefetch"><link href="/netlogo/wildfiresWidget.bundle.js" rel="prefetch"><link href="/netlogo/app.bundle.js" rel="preload" as="script"><link href="/netlogo/chunk-vendors.bundle.js" rel="preload" as="script"><link href="/netlogo/css/app.css" rel="preload" as="style"><link href="/netlogo/css/app.css" rel="stylesheet">
+	</head>
+
+	<body {% if journeyId and not taskId and not studentId %} onpageshow="window.fv.refreshStudentProjects()" {% endif %}>
+		<div class="container">
+			{% include "netlogo/navBar.twig" %}
+      <div 
+      {% if studentId %}
+        class="simulation-view"
+      {% else %}
+        class="dashboard-content"
+      {% endif %}>
+        {% if journeyId and not taskId and not studentId %}
+        <div class="projects">
+        		{% set journey = craft.entries()
+              .section("journey")
+              .id(craft.app.request.getQueryParam("journeyId"))
+              .one() %}
+            <div class="projects-header">
+              <div class="project-task-title">{{ journey.journeyTitle }}</div>
+            </div>
+            {% set sortOptions = [
+            {
+              label: 'First Name A-Z',
+              value: 'firstNameAZ'
+            },
+            {
+              label: 'First Name Z-A',
+              value: 'firstNameZA'
+            },
+            {
+              label: 'Last Name A-Z',
+              value: 'lastNameAZ'
+            },
+            {
+              label: 'Last Name Z-A',
+              value: 'lastNameZA'
+            },
+            {
+              label: 'Number of Saved Models',
+              value: 'numModels'
+            },
+            {
+              label: 'Last Modified',
+              value: 'lastModified'
+            },
+            {
+              label: 'Favorites',
+              value: 'favorites'
+            }
+            ] %}
+            <div class="projects-filters">
+              <div>
+                <label for="projects-sort">Tasks:</label>
+                <select name="projects-task" id="projects-task"  onchange="window.fv.refreshStudentProjects()">
+                  <option value="all">All Tasks</option>
+                  {% for task in journey.journeyTasks.all() %}
+                  <option value={{task.id}}>{{task.taskTitle}}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              <div>
+                <label for="projects-sort">Sort by:</label>
+                <select name="projects-sort" id="projects-sort" onchange="window.fv.refreshStudentProjects()">
+                {% for sortOption in sortOptions %}
+                  <option value={{ sortOption.value }}>
+                  {{ sortOption.label }}
+                  </option>
+                {% endfor %}
+                </select>
+              </div>
+              <div>
+                <label for="projects-view">View:</label>
+                <select name="projects-view" id="projects-view" onchange="window.fv.refreshStudentProjects()">
+                  <option value="table">
+                    Table
+                  </option>
+                  <option value="gallery">
+                    Gallery
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div id="student-view"></div>
+            <div id="student-view-footer"></div>
+        </div>
+      </div>
+        {% elseif journeyId and taskId and studentId %}
+          <noscript>
+            <strong>We're sorry but a2s-netlogo doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+          </noscript>
+          <div id="app"></div>
+          <script src="/netlogo/chunk-vendors.bundle.js"></script>
+          <script src="/netlogo/app.bundle.js"></script>
+        {% endif %}
+        
+      {% include "netlogo/footer.twig" %}
+		</div>
+	</body>

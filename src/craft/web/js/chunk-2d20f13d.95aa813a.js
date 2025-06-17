@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d20f13d"],{b1a9:function(t,n,a){"use strict";a.r(n);var e=function(){var t=this,n=t.$createElement,a=t._self._c||n;return a("div",{staticClass:"chart-container",attrs:{id:"chart"}})},r=[],s={name:"wildfiresChartComponent",props:["workspace"]},c=s,i=a("bdd7"),o=Object(i["a"])(c,e,r,!1,null,"5039f108",null);n["default"]=o.exports}}]);
+//# sourceMappingURL=chunk-2d20f13d.95aa813a.js.map
