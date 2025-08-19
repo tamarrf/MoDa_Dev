@@ -27,6 +27,7 @@
                     {% if requestedPath is same as('people') %}
                         <div>
                             <h2>People</h2>
+                            <div class="people-description">MoDa is a multi-institutional project with a collective leadership model. While funding may require designating a single lead PI for each individual grant, stewardship is shared equally and responsibilities are dynamically distributed among the four Principal Investigators: Paulo Blikstein (Columbia University), Tamar Fuhrmann (Columbia University), Aditi Wagh (MIT/Concord Consortium), and Michelle Wilkerson (UC Berkeley).</div>
                             {% for team in people.teams.all() %}
                                 <div class="team">
                                     <h3>{{ team.teamTitle }}</h3>
