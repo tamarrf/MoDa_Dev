@@ -55,7 +55,7 @@ baseBlockLibrary["contents"][0] = {
     },
     {
         "kind": "category",
-        "name": "Text",
+        "name": "Texto",
         "colour": "#00B695",
         "contents": [
             {
