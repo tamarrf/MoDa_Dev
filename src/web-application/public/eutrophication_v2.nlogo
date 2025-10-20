@@ -27,6 +27,7 @@ turtles-own [
   near-nutrients
   near-o2s
   near-co2s
+  assigned-near
   flag-near
 ]
 
@@ -87,13 +88,24 @@ to go
   ask co2s [move]
 
   ask turtles [
-    set near-algae one-of algae in-radius 4
-    set near-fishes one-of fishes in-radius 4
-    set near-dead-matters one-of dead-matters in-radius 6
-    set near-bacteria one-of bacteria in-radius 4
-    set near-nutrients one-of nutrients in-radius 4
-    set near-o2s one-of o2s in-radius 4
-    set near-co2s one-of co2s in-radius 4
+    set assigned-near false
+  ]
+
+  ask turtles [
+    set near-algae one-of algae with [ assigned-near = false ] in-radius 4
+    if near-algae != nobody [ ask near-algae [ set assigned-near true] ]
+    set near-fishes one-of fishes with [ assigned-near = false ] in-radius 4
+    if near-fishes != nobody [ ask near-fishes [ set assigned-near true] ]
+    set near-dead-matters one-of dead-matters with [ assigned-near = false ] in-radius 6
+    if near-dead-matters != nobody [ ask near-dead-matters [ set assigned-near true] ]
+    set near-bacteria one-of bacteria with [ assigned-near = false ] in-radius 4
+    if near-bacteria != nobody [ ask near-bacteria [ set assigned-near true] ]
+    set near-nutrients one-of nutrients with [ assigned-near = false ] in-radius 4
+    if near-nutrients != nobody [ ask near-nutrients [ set assigned-near true] ]
+    set near-o2s one-of o2s with [ assigned-near = false ] in-radius 4
+    if near-o2s != nobody [ ask near-o2s [ set assigned-near true] ]
+    set near-co2s one-of co2s with [ assigned-near = false ] in-radius 4
+    if near-co2s != nobody [ ask near-co2s [ set assigned-near true] ]
   ]
   display-labels
 end
