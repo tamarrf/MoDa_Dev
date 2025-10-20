@@ -1490,6 +1490,8 @@ netlogoGenerator['infect'] = unpackableNetlogoGenerator;
 
 netlogoGenerator['recover'] = unpackableNetlogoGenerator;
 
+netlogoGenerator['recover_or_die'] = unpackableNetlogoGenerator;
+
 netlogoGenerator['pass_away'] = function () {
     const code =
         'ask patches in-radius contact-radius [ set pcolor white]\n' +
@@ -1664,7 +1666,7 @@ function traverseBlocks(blockData, parentBlockConnection, workspace) {
                 inputBlock = block.inputList.find(obj => {return obj.name === blockGroup.children.field});
                 childrenBlocks = blockGroup.children.blocks;
             }
-            this.traverseBlocks(childrenBlocks, inputBlock.connection);
+            traverseBlocks(childrenBlocks, inputBlock.connection, workspace);
         }
         if (blockGroup.children_else) {
             let inputBlock = block.inputList[2];
@@ -1673,7 +1675,7 @@ function traverseBlocks(blockData, parentBlockConnection, workspace) {
                 inputBlock = block.inputList.find(obj => {return obj.name === blockGroup.children_else.field});
                 childrenBlocks = blockGroup.children_else.blocks;
             }
-            this.traverseBlocks(childrenBlocks, inputBlock.connection);
+            traverseBlocks(childrenBlocks, inputBlock.connection, workspace);
         }
     }
 }
