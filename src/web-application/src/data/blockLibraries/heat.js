@@ -13,7 +13,7 @@ heat = {
           "kind": "category",
           "name": "Properties",
           "toolboxitemid": "propertiesUnpackable",
-          "categorystyle": "smoke_properties_category",
+          "categorystyle": "particles_category",
           "contents": [
             {
               "kind": "block",
@@ -64,7 +64,7 @@ heat = {
         {
           "kind": "category",
           "name": "Action",
-          "categorystyle": "smoke_action_category",
+          "categorystyle": "behavior_category",
           "expanded": true,
           "contents": [
             // {
@@ -120,7 +120,7 @@ heat = {
         {
           "kind": "category",
           "name": "Control",
-          "categorystyle": "smoke_control_category",
+          "categorystyle": "control_category",
           "expanded": true,
           "contents": [
             {
@@ -175,7 +175,7 @@ Blockly.Blocks['create_particles'] = {
             ],
             "previousStatement": null,
             "nextStatement": null,
-            "style": "smoke_behavior_blocks",
+            "style": "netlogo_property_blocks",
             "mutator": "general_mutator"
         });
         let dataObj = {
@@ -347,7 +347,7 @@ Blockly.Blocks['create_electrons'] = {
             ],
             "previousStatement": null,
             "nextStatement": null,
-            "style": "smoke_behavior_blocks",
+            "style": "netlogo_property_blocks",
             "mutator": "general_mutator"
         });
         let dataObj = {
@@ -475,7 +475,7 @@ Blockly.Blocks['interact'] = {
             "previousStatement": null,
             "nextStatement": null,
             "mutator": "general_mutator",
-            "style": "smoke_action_blocks"
+            "style": "netlogo_action_blocks"
         });
         let dataObj = {
             'unpackBlocks': [
@@ -559,7 +559,7 @@ Blockly.Blocks['transfer_energy'] = {
             "previousStatement": null,
             "nextStatement": null,
             "mutator": "general_mutator",
-            "style": "smoke_action_blocks"
+            "style": "netlogo_action_blocks"
         });
         let dataObj = {
             'unpackBlocks': [
@@ -638,7 +638,7 @@ Blockly.Blocks['vibrate'] = {
             "previousStatement": null,
             "nextStatement": null,
             "mutator": "general_mutator",
-            "style": "smoke_action_blocks"
+            "style": "netlogo_action_blocks"
         });
         let dataObj = {
             'unpackBlocks':[
@@ -694,7 +694,7 @@ Blockly.Blocks['move forward'] = {
             "previousStatement": null,
             "nextStatement": null,
             "mutator": "general_mutator",
-            "style": "smoke_action_blocks"
+            "style": "netlogo_action_blocks"
         });
         let dataObj = {
             'unpackBlocks':[
@@ -751,7 +751,7 @@ Blockly.Blocks['blow'] = {
             "previousStatement": null,
             "nextStatement": null,
             "mutator": "general_mutator",
-            "style": "smoke_action_blocks"
+            "style": "netlogo_action_blocks"
         });
         let dataObj = {
             'unpackBlocks':[
@@ -827,7 +827,7 @@ Blockly.defineBlocksWithJsonArray([
     ],
     "previousStatement": null,
     "nextStatement": null,
-    "style": "smoke_behavior_unpacked_blocks"
+    "style": "netlogo_property_blocks"
 },
 {
     "type": "set_type",
@@ -850,7 +850,7 @@ Blockly.defineBlocksWithJsonArray([
     ],
     "previousStatement": null,
     "nextStatement": null,
-    "style": "smoke_behavior_unpacked_blocks"
+    "style": "netlogo_property_blocks"
 },
 // {
 //     "type": "create_electrons_old",
@@ -858,7 +858,7 @@ Blockly.defineBlocksWithJsonArray([
 //     "inputsInline": true,
 //     "previousStatement": null,
 //     "nextStatement": null,
-//     "style": "smoke_behavior_blocks"
+//     "style": "netlogo_property_blocks"
 // },
 // {
 //     "type":"set_mass",
@@ -882,7 +882,7 @@ Blockly.defineBlocksWithJsonArray([
 //     "inputsInline": true,
 //     "previousStatement": null,
 //     "nextStatement": null,
-//     "style": "smoke_behavior_unpacked_blocks",
+//     "style": "netlogo_property_blocks",
 //     "tooltip": "pick a value between 0 and 5",
 // },
 {
@@ -907,7 +907,7 @@ Blockly.defineBlocksWithJsonArray([
     "inputsInline": true,
     "previousStatement": null,
     "nextStatement": null,
-    "style": "smoke_behavior_unpacked_blocks",
+    "style": "netlogo_property_blocks",
     "tooltip": "pick a value between 0 and 5",
 },
     {
@@ -953,7 +953,7 @@ Blockly.defineBlocksWithJsonArray([
         "nextStatement": null,
         "tooltip": "",
         "helpUrl": "",
-        "style": "smoke_behavior_unpacked_blocks"
+        "style": "netlogo_property_blocks"
     },
     {
         "type": "set_links",
@@ -977,7 +977,7 @@ Blockly.defineBlocksWithJsonArray([
         "inputsInline": true,
         "previousStatement": null,
         "nextStatement": null,
-        "style": "smoke_behavior_unpacked_blocks",
+        "style": "netlogo_property_blocks",
     },
     {
         "type": "set_size",
@@ -1005,7 +1005,7 @@ Blockly.defineBlocksWithJsonArray([
         "inputsInline": true,
         "previousStatement": null,
         "nextStatement": null,
-        "style": "smoke_behavior_unpacked_blocks",
+        "style": "netlogo_property_blocks",
     },
 {
     "type": "set_position",
@@ -1036,7 +1036,7 @@ Blockly.defineBlocksWithJsonArray([
     ],
     "previousStatement": null,
     "nextStatement": null,
-    "style": "smoke_behavior_unpacked_blocks"
+    "style": "netlogo_property_blocks"
 },
     {
         "type": "set_heading",
@@ -1073,7 +1073,7 @@ Blockly.defineBlocksWithJsonArray([
         "nextStatement": null,
         "tooltip": "",
         "helpUrl": "",
-        "style": "smoke_behavior_unpacked_blocks"
+        "style": "netlogo_property_blocks"
     },
 
 // Action blocks
@@ -1141,7 +1141,7 @@ Blockly.defineBlocksWithJsonArray([
     "inputsInline": true,
     "previousStatement": null,
     "nextStatement": null,
-    "style": "smoke_action_blocks"
+    "style": "netlogo_action_blocks"
 },
 {
     "type": "wiggle",
@@ -1149,7 +1149,7 @@ Blockly.defineBlocksWithJsonArray([
     "inputsInline": true,
     "previousStatement": null,
     "nextStatement": null,
-    "style": "smoke_action_blocks"
+    "style": "netlogo_action_blocks"
 },
 {
     "type": "travel",
@@ -1157,7 +1157,7 @@ Blockly.defineBlocksWithJsonArray([
     "inputsInline": true,
     "previousStatement": null,
     "nextStatement": null,
-    "style": "smoke_action_blocks"
+    "style": "netlogo_action_blocks"
 },
 {
     "type": "transfer_heat",
@@ -1165,7 +1165,7 @@ Blockly.defineBlocksWithJsonArray([
     "inputsInline": true,
     "previousStatement": null,
     "nextStatement": null,
-    "style": "smoke_action_blocks"
+    "style": "netlogo_action_blocks"
 },
 {
     "type": "bounce_off",
@@ -1173,7 +1173,7 @@ Blockly.defineBlocksWithJsonArray([
     "inputsInline": true,
     "previousStatement": null,
     "nextStatement": null,
-    "style": "smoke_action_blocks"
+    "style": "netlogo_action_blocks"
 },
 {
     "type": "erase",
@@ -1181,7 +1181,7 @@ Blockly.defineBlocksWithJsonArray([
     "inputsInline": true,
     "previousStatement": null,
     "nextStatement": null,
-    "style": "smoke_action_blocks"
+    "style": "netlogo_action_blocks"
 },
 {
     "type": "attach",
@@ -1189,7 +1189,7 @@ Blockly.defineBlocksWithJsonArray([
     "inputsInline": true,
     "previousStatement": null,
     "nextStatement": null,
-    "style": "smoke_action_blocks"
+    "style": "netlogo_action_blocks"
 },
 // Control Blocks
 {
@@ -1224,7 +1224,7 @@ Blockly.defineBlocksWithJsonArray([
     ],
     "previousStatement": null,
     "nextStatement": null,
-    "style": "smoke_control_blocks"
+    "style": "netlogo_control_blocks"
 },
 {
     "type": "touching_dropdown",
@@ -1254,7 +1254,7 @@ Blockly.defineBlocksWithJsonArray([
         }
     ],
     "output": "Boolean",
-    "style": "smoke_control_blocks",
+    "style": "netlogo_control_blocks",
     "tooltip": "",
     "helpUrl": ""
 },
@@ -1286,7 +1286,7 @@ Blockly.defineBlocksWithJsonArray([
         }
     ],
     "output": "Boolean",
-    "style": "smoke_control_blocks",
+    "style": "netlogo_control_blocks",
     "tooltip": "",
     "helpUrl": ""
 },
@@ -1333,7 +1333,7 @@ Blockly.defineBlocksWithJsonArray([
         ],
         "previousStatement": null,
         "nextStatement": null,
-        "style": "smoke_action_unpacked_blocks",
+        "style": "netlogo_action_blocks",
         "tooltip": "",
         "helpUrl": ""
     },
