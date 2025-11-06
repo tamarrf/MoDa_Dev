@@ -6,6 +6,7 @@ globals [
   max-pop
   biggest-pop
   language
+  random-wiggle
 ]
 
 breed [ dead-matters dead-matter ]
@@ -63,7 +64,7 @@ to go
       [ error (word "The model has reached the population limit (" max-pop ")") ]
   ]
 
-  if (max-nutrients = 0) or (count nutrients < max-nutrients) [
+  ;if (max-nutrients = 0) or (count nutrients < max-nutrients) [
     create-nutrients additional-amount-nutrients [
       set heading random 360
       set color 52
@@ -71,9 +72,9 @@ to go
       set speed 1
       setxy (min-pxcor + 5 + random-float (world-width - 10)) min-pycor + 5 + random-float (world-height - 10)
     ]
-  ]
+  ;]
 
-  if (max-o2 = 0) or (count o2s < max-o2) [
+  ;if (max-o2 = 0) or (count o2s < max-o2) [
     create-o2s additional-amount-o2 [
       set heading random 360
       set color red
@@ -81,7 +82,7 @@ to go
       set speed 1
       setxy (min-pxcor + 5 + random-float (world-width - 10)) min-pycor + 5 + random-float (world-height - 10)
     ]
-  ]
+  ;]
 
   ask nutrients [move]
   ask o2s [move]
@@ -116,15 +117,16 @@ to display-labels
     ask algae [ set label round energy ]
     ask fishes [ set label round energy ]
   ]
-  ask co2s [ ht ]
-  if show-co2? [
-    ask co2s [ st ]
-  ]
+  ;ask co2s [ ht ]
+  ;if show-co2? [
+  ;  ask co2s [ st ]
+  ;]
 end
 
 to move  ; turtle procedure
  ; rt random 50
  ; lt random 50
+  set heading heading + rand-int -10 10
   fd  speed
   set energy energy - 1
 end
@@ -153,6 +155,15 @@ to drop-with-mouse [number]
   ]
 
   setxy mouse-x mouse-y
+end
+
+to-report rand-int [a b]
+  if a > b [
+    let c a
+    set a b
+    set b c
+  ]
+  report a + (random (b - a + 1))
 end
 
 to-report count-algae

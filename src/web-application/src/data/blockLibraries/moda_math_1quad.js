@@ -917,25 +917,16 @@ netlogoGenerator['controls_if'] = function (block) {
 
 // Properties Blocks
 netlogoGenerator['create_pens'] = function (block) {
-    const root = block.getRootBlock().type;
     const dataObj = JSON.parse(block.data);
     const num = block.getFieldValue('NUM');
     let parameters;
     let prefix = '';
-    let suffix =
-        'if mouse-down? \n[\n' +
-        netlogoGenerator.INDENT + 'drop-with-mouse ' + num + '\n' +
-        ']';
+    let suffix = '';
     if (!dataObj.contextData.CHANGED){
         parameters = getNLCodeFromUnpackBlocks(block.type, dataObj.unpackBlocks, this.workspace)
     }
     else{
         let xmlblock = Blockly.Xml.domToBlock(Blockly.Xml.textToDom(JSON.parse(block.data).contentXml), this.workspace);
-        for(let descendant of xmlblock.getDescendants()){
-            if(root === 'mouse_click' && descendant.type === 'set_position'){
-                descendant.dispose(true);
-            }
-        }
         parameters = netlogoGenerator.blockToCode(xmlblock);
         xmlblock.dispose();
     }
