@@ -8,6 +8,7 @@ globals [
   recovery
   deaths
   new-cases
+  random-wiggle
 ]
 
 breed [ people person ]

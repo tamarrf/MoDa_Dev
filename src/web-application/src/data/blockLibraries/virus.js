@@ -1477,7 +1477,7 @@ netlogoGenerator['set_position'] = function (block) {
 
 netlogoGenerator['set_heading'] = function (block) {
     let heading = netlogoGenerator.HEADING[block.getField('HEADING').selectedOption_[1]];
-    let code = 'set heading ' + heading + '\n';
+    let code = 'set random-wiggle 40\nset heading ' + heading + '\n';
     return code;
 };
 

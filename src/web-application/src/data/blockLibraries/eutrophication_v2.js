@@ -42,6 +42,11 @@ baseBlockLibrary["contents"][0] = {
                 "kind": "block",
                 "blockxml": "<block type=\"math_arithmetic\"><value name=\"A\"><shadow type=\"math_number\"/></value><value name=\"B\"><shadow type=\"math_number\"/></value></block>",
                 "type": "math_arithmetic"
+            },
+            {
+                "kind": "block",
+                "blockxml": "<block type=\"math_random_int\"><value name=\"FROM\"><shadow type=\"math_number\"><field name=\"NUM\">0</field></shadow></value><value name=\"TO\"><shadow type=\"math_number\"><field name=\"NUM\">100</field></shadow></value></block>",
+                "type": "math_random_int"
             }
         ]
     },
@@ -111,6 +116,10 @@ eutrophication_v2 = {
                 {
                     "kind": "block",
                     "type": "set_position"
+                },
+                {
+                    "kind": "block",
+                    "type": "set_heading"
                 }
             ]
         },
@@ -255,6 +264,12 @@ Blockly.Blocks['create_agent'] = {
                     fields: {
                         'POSITION': 'RANDOM',
                     }
+                },
+                {
+                    blockType: 'set_heading',
+                    fields: {
+                        'HEADING': 'RANDOM',
+                    }
                 }
             ],
             'contextData':{
@@ -327,6 +342,12 @@ Blockly.Blocks['create_agent'] = {
                     fields: {
                         'POSITION': 'RANDOM',
                     }
+                },
+                {
+                    blockType: 'set_heading',
+                    fields: {
+                        'HEADING': 'RANDOM',
+                    }
                 }
             ]
         }
@@ -357,6 +378,53 @@ Blockly.Blocks['move_unpackable'] = {
         });
         let dataObj = {
             'unpackBlocks':[
+                {
+                    blockType: 'set_variable',
+                    fields: {
+                        'VAR': 'heading',
+                    },
+                    condition:
+                    {
+                        input: 'VALUE',
+                        blockType: 'math_arithmetic',
+                        field: {
+                            name: 'OP',
+                            value: 'ADD'
+                        },
+                        blockFields: [
+                            {
+                                input: 'A',
+                                blockType: 'get_variable',
+                                field: {
+                                    name: 'VAR',
+                                    value: 'heading'
+                                }
+                            },
+                            {
+                                input: 'B',
+                                blockType: 'math_random_int',
+                                blockFields: [
+                                    {
+                                        input: 'FROM',
+                                        blockType: 'math_number',
+                                        field: {
+                                            name: 'NUM',
+                                            value: -10
+                                        }
+                                    },
+                                    {
+                                        input: 'TO',
+                                        blockType: 'math_number',
+                                        field: {
+                                            name: 'NUM',
+                                            value: 10
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                },
                 {
                     blockType: 'forward',
                     fields: {},
@@ -433,6 +501,53 @@ Blockly.Blocks['move_unpackable'] = {
         }
         if (!dataObj.contextData['CHANGED']) {
             dataObj.unpackBlocks = [
+                {
+                    blockType: 'set_variable',
+                    fields: {
+                        'VAR': 'heading',
+                    },
+                    condition:
+                    {
+                        input: 'VALUE',
+                        blockType: 'math_arithmetic',
+                        field: {
+                            name: 'OP',
+                            value: 'ADD'
+                        },
+                        blockFields: [
+                            {
+                                input: 'A',
+                                blockType: 'get_variable',
+                                field: {
+                                    name: 'VAR',
+                                    value: 'heading'
+                                }
+                            },
+                            {
+                                input: 'B',
+                                blockType: 'math_random_int',
+                                blockFields: [
+                                    {
+                                        input: 'FROM',
+                                        blockType: 'math_number',
+                                        field: {
+                                            name: 'NUM',
+                                            value: -10
+                                        }
+                                    },
+                                    {
+                                        input: 'TO',
+                                        blockType: 'math_number',
+                                        field: {
+                                            name: 'NUM',
+                                            value: 10
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                },
                 {
                     blockType: 'forward',
                     fields: {},
@@ -1533,6 +1648,41 @@ Blockly.defineBlocksWithJsonArray([
         "style": "netlogo_property_blocks",
     },
     {
+        "type": "set_heading",
+        "message0": "set heading %1",
+        "args0": [
+            {
+                "type": "field_dropdown",
+                "name": "HEADING",
+                "options": [
+                    [
+                        "random",
+                        "RANDOM"
+                    ],
+                    [
+                        "up",
+                        "UP"
+                    ],
+                    [
+                        "right",
+                        "RIGHT"
+                    ],
+                    [
+                        "down",
+                        "DOWN"
+                    ],
+                    [
+                        "left",
+                        "LEFT"
+                    ]
+                ]
+            }
+        ],
+        "previousStatement": null,
+        "nextStatement": null,
+        "style": "netlogo_property_blocks",
+    },
+    {
         "type": "set_dead_matter",
         "message0": "become dead matter",
         "inputsInline": true,
@@ -1769,10 +1919,11 @@ Blockly.defineBlocksWithJsonArray([
             'name': 'VAR',
             'options': [
                 ["color", "color"],
+                ["size", "size"],
+                ["speed", "speed"],
                 ["energy", "energy" ],
                 ["position", "position"],
-                ["size", "size"],
-                ["speed", "speed"]
+                ["heading", "heading"]
             ]
             },
         ],
@@ -1788,7 +1939,8 @@ Blockly.defineBlocksWithJsonArray([
             'name': 'VAR',
             'options': [
                 ["energy", "energy"],
-                ["position", "position"]
+                ["position", "position"],
+                ["heading", "heading"]
             ]
         },
         {
@@ -1931,7 +2083,6 @@ netlogoGenerator['create_agent'] = function (block) {
     const type = block.getFieldValue('TYPE');
     let parameters;
     let prefix =
-        'set heading random 360\n' +
         'set flag-near 0\n';
     let suffix =
         'set initial-energy energy\n' +
@@ -1990,6 +2141,12 @@ netlogoGenerator['set_energy'] = function (block) {
 netlogoGenerator['set_position'] = function (block) {
     let position = netlogoGenerator.POSITION[block.getField('POSITION').selectedOption_[1]];
     let code = 'setxy ' + position + '\n';
+    return code;
+};
+
+netlogoGenerator['set_heading'] = function (block) {
+    let heading = netlogoGenerator.HEADING[block.getField('HEADING').selectedOption_[1]];
+    let code = 'set random-wiggle 40\nset heading ' + heading + '\n';
     return code;
 };
 
@@ -2176,6 +2333,13 @@ netlogoGenerator['math_arithmetic'] = function (block) {
 netlogoGenerator['math_number'] = function (block) {
     const value = block.getFieldValue('NUM');
     let code = `${value}`;
+    return code;
+};
+
+netlogoGenerator['math_random_int'] = function (block) {
+    const statement1_members = netlogoGenerator.statementToCode(block, 'FROM');
+    const statement2_members = netlogoGenerator.statementToCode(block, 'TO');
+    let code = `rand-int ${statement1_members} ${statement2_members}`;
     return code;
 };
 

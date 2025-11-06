@@ -8,18 +8,18 @@
                     <input v-on:input="onEnergyUpdate" type="checkbox" id="show-energy" checked/>
                     <div class="checkmark"></div>
                 </label>
-                <div class="widget-checkbox-co2-label">mostrar<br>co2</div>
+                <!-- <div class="widget-checkbox-co2-label">mostrar<br>co2</div>
                 <label class="widget-checkbox widget-checkbox-co2">
                     <input v-on:input="onCo2Update" type="checkbox" id="show-co2" checked/>
                     <div class="checkmark"></div>
-                </label>
+                </label> -->
                 <div class="timer">{{$props.ticks}} ticks</div>
             </div>
 
             <div class="widget-amount-col">
                 <div class="widget-label-amount-row">
                     <div class="widget-label-amount">adicionados a cada tick</div>
-                    <div class="widget-label-max">máx</div>
+                    <!-- <div class="widget-label-max">máx</div> -->
                 </div>
                 
                 <div class="widget-o2-row">
@@ -27,7 +27,7 @@
                     <div class="widget-slider-label-o2">o2</div>
                     <input v-on:input="onAdditionalAmounto2Update" @change="logInteractionData('slider', 'additional-amount-o2', $event.target.value)" type="range" min="0" max="10" value="0" step="1" class="widget-slider widget-slider-additional-amount-o2" id="additional-amount-o2">
                     <div class="additional-amount-o2-widget-value"> {{ additional_amount_o2 }} </div>
-                    <input v-on:input="onMaxo2Update" type="text" style="text-align: right;" id="max-o2" name="max-o2" class="widget-max-o2">
+                    <!-- <input v-on:input="onMaxo2Update" type="text" style="text-align: right;" id="max-o2" name="max-o2" class="widget-max-o2"> -->
                 </div>
 
                 <div class="widget-nutrients-row">
@@ -35,7 +35,7 @@
                     <div class="widget-slider-label-nutrients">nutrientes</div>
                     <input v-on:input="onAdditionalAmountNutrientsUpdate" @change="logInteractionData('slider', 'additional-amount-nutrients', $event.target.value)" type="range" min="0" max="10" value="0" step="1" class="widget-slider widget-slider-additional-amount-nutrients" id="additional-amount-nutrients">
                     <div class="additional-amount-nutrients-widget-value"> {{ additional_amount_nutrients }} </div>
-                    <input v-on:input="onMaxNutrientsUpdate" type="text" style="text-align: right;" id="max-nutrients" name="max-nutrients" class="widget-max-nutrients">
+                    <!-- <input v-on:input="onMaxNutrientsUpdate" type="text" style="text-align: right;" id="max-nutrients" name="max-nutrients" class="widget-max-nutrients"> -->
                 </div>
             </div>
 
@@ -53,11 +53,11 @@ export default {
             completeEvent: '',
             completeClicked: false,
             additional_amount_o2: 0,
-            max_o2: 0,
+            // max_o2: 0,
             additional_amount_nutrients: 0,
-            max_nutrients: 0,
+            // max_nutrients: 0,
             show_energy: true,
-            show_co2: true
+            // show_co2: true
         }
     },
     mounted()
@@ -100,24 +100,24 @@ export default {
             this.show_energy = $("#show-energy").is(":checked");
             this.$emit('sendValue', {type:'fv-checkbox', name:'show-energy?', value: this.show_energy});
         },
-        onCo2Update(){
-            this.show_co2 = $("#show-co2").is(":checked");
-            this.$emit('sendValue', {type:'fv-checkbox', name:'show-co2?', value: this.show_co2});
-        },
-        onMaxo2Update(){
-            this.max_o2 = $("#max-o2").val();
-            if (isNaN(this.max_o2) || this.max_o2 === "") {
-                this.max_o2 = 0;
-            }
-            this.$emit('sendValue', {type:'fv-slider', name:'max-o2', value: this.max_o2});
-        },
-        onMaxNutrientsUpdate(){
-            this.max_nutrients = $("#max-nutrients").val();
-            if (isNaN(this.max_nutrients) || this.max_nutrients === "") {
-                this.max_nutrients = 0;
-            }
-            this.$emit('sendValue', {type:'fv-slider', name:'max-nutrients', value: this.max_nutrients});
-        }
+        // onCo2Update(){
+        //     this.show_co2 = $("#show-co2").is(":checked");
+        //     this.$emit('sendValue', {type:'fv-checkbox', name:'show-co2?', value: this.show_co2});
+        // },
+        // onMaxo2Update(){
+        //     this.max_o2 = $("#max-o2").val();
+        //     if (isNaN(this.max_o2) || this.max_o2 === "") {
+        //         this.max_o2 = 0;
+        //     }
+        //     this.$emit('sendValue', {type:'fv-slider', name:'max-o2', value: this.max_o2});
+        // },
+        // onMaxNutrientsUpdate(){
+        //     this.max_nutrients = $("#max-nutrients").val();
+        //     if (isNaN(this.max_nutrients) || this.max_nutrients === "") {
+        //         this.max_nutrients = 0;
+        //     }
+        //     this.$emit('sendValue', {type:'fv-slider', name:'max-nutrients', value: this.max_nutrients});
+        // }
     }
 }
 </script>

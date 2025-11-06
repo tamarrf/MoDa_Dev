@@ -125,6 +125,15 @@ to display-labels
   ]
 end
 
+to-report rand-int [a b]
+  if a > b [
+    let c a
+    set a b
+    set b c
+  ]
+  report a + (random (b - a + 1))
+end
+
 ; --- START BLOCKLY GENERATED NETLOGO ---
 
 ;BLOCKLY CODE GOES HERE
