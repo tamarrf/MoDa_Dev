@@ -104,6 +104,7 @@ netlogoGenerator.SPEED = {
     "LOW": "30 - random (random-wiggle)",
     "MEDIUM": "50 - random (random-wiggle)",
     "HIGH": "80 - random (random-wiggle)",
+    "HIGH100": "100 - random (random-wiggle)",
     "TEMP": "initial-temperature - random (random-wiggle)",
     "WIND_SPEED": "wind-speed - random (random-wiggle)",
     "BAIXA": "30 - random (random-wiggle)",

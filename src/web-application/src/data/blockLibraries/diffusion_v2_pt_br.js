@@ -147,7 +147,7 @@ Blockly.Blocks['create_particles'] = {
                 {
                   blockType: 'set_speed',
                   fields: {
-                    SPEED: 'TEMP',
+                    'SPEED': this.getFieldValue('TYPE') === 'WATER' ? 'TEMP' : 'MEDIUM',
                   }
                 },
                 {
@@ -212,7 +212,7 @@ Blockly.Blocks['create_particles'] = {
                 {
                   blockType: 'set_speed',
                   fields: {
-                    SPEED: 'TEMP',
+                    'SPEED': this.getFieldValue('TYPE') === 'WATER' ? 'TEMP' : 'MEDIUM',
                   }
                 },
                 {
@@ -394,7 +394,7 @@ Blockly.defineBlocksWithJsonArray([
                 ],
                 [
                     "alta",
-                    "HIGH"
+                    "HIGH100"
                 ],
                 [
                     "temperatura inicial",
