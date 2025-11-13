@@ -44,6 +44,10 @@ diffusion_v2 = {
                 "kind": "block",
                 "type": "set_heading"
             },
+            {
+              "kind": "block",
+              "type": "set_speed_number"
+            }
             ]
         },
         {
@@ -139,7 +143,7 @@ Blockly.Blocks['create_particles'] = {
                 {
                   blockType: 'set_speed',
                   fields: {
-                    SPEED: 'TEMP',
+                    'SPEED': this.getFieldValue('TYPE') === 'WATER' ? 'TEMP' : 'MEDIUM',
                   }
                 },
                 {
@@ -204,7 +208,7 @@ Blockly.Blocks['create_particles'] = {
                 {
                   blockType: 'set_speed',
                   fields: {
-                    SPEED: 'TEMP',
+                    'SPEED': this.getFieldValue('TYPE') === 'WATER' ? 'TEMP' : 'MEDIUM',
                   }
                 },
                 {
@@ -386,7 +390,7 @@ Blockly.defineBlocksWithJsonArray([
                 ],
                 [
                     "high",
-                    "HIGH"
+                    "HIGH100"
                 ],
                 [
                     "initial temperature",
@@ -604,6 +608,20 @@ Blockly.defineBlocksWithJsonArray([
     "previousStatement": null,
     "nextStatement": null,
     "style": "particle_border",
+},
+{
+    "type": "set_speed_number",
+    "message0": "set speed %1",
+    "args0": [
+        {
+            'type': 'field_number',
+            'name': 'SPEED_NUMBER',
+            'value': 1,
+        }
+    ],
+    "previousStatement": null,
+    "nextStatement": null,
+    "style": "particle_border"
 },
 // Action Blocks
 {
@@ -975,6 +993,11 @@ netlogoGenerator['set_heading'] = function (block) {
     return code;
 };
 
+netlogoGenerator['set_speed_number'] = function (block) {
+    let speed_number = block.getFieldValue('SPEED_NUMBER');
+    let code = 'set speed ' + speed_number + '\n';
+    return code;
+};
 
 // Action Blocks
 // Move
