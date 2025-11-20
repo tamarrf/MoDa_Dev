@@ -74,11 +74,12 @@ let opTypesAll = [...opTypes];
 opTypesAll.push(["all", "ALL"]);
 
 const opTypesConsume = [
-    ["algae", "algae"],
-    ["bacteria", "bacteria"],
+    ["alga", "algae"],
+    ["bacterium", "bacteria"],
     ["co2", "co2s"],
     ["dead matter", "dead-matters"],
-    ["nutrients", "nutrients"],
+    ["fish", "fishes"],
+    ["nutrient", "nutrients"],
     ["o2", "o2s"]
 ];
 

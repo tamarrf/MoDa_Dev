@@ -87,8 +87,9 @@ const opTypesConsume = [
     ["bactéria", "bacteria"],
     ["co2", "co2s"],
     ["matéria orgânica", "dead-matters"],
-    ["nutrientes", "nutrients"],
-    ["o2", "o2s"]
+    ["nutriente", "nutrients"],
+    ["o2", "o2s"],
+    ["peixe", "fishes"]
 ];
 
 eutrophication_v2_pt_br = {
