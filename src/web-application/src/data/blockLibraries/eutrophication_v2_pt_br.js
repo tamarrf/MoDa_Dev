@@ -10,7 +10,7 @@ Blockly.Msg['SETUP_BLOCK'] = 'preparar %1'
 Blockly.Msg['GO_BLOCK'] = 'executar %1';
 Blockly.Msg['MOUSE_CLICK_BLOCK'] = 'ao clicar %1';
 Blockly.Msg['GENERAL_CATEGORY'] = 'Geral';
-Blockly.Msg['MATH_RANDOM_INT_TITLE'] = "número aleatório entre %1 e %2";;
+Blockly.Msg['MATH_RANDOM_INT_TITLE'] = "número aleatório entre %1 e %2";
 
 baseBlockLibrary["contents"][0] = {
     "kind": "category",

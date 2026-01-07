@@ -92,7 +92,8 @@ export default {
            this.$store.state.taskInfo.taskId === 'wolf_sheep' ||
            this.$store.state.taskInfo.taskId === 'eutrophication_v2' ||
            this.$store.state.taskInfo.taskId === 'eutrophication_v2_pt_br' ||
-           this.$store.state.taskInfo.taskId === 'moda_art'){
+           this.$store.state.taskInfo.taskId === 'moda_art' ||
+           this.$store.state.taskInfo.taskId === 'pollutants'){
             this.defaultBlocksXml = '<xml>'+
                 '<block type="set">'+
                 '</block>'+
