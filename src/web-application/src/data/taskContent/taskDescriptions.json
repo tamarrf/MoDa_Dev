@@ -328,9 +328,10 @@
         "videos": [],
         "debugFile":"virus-spread-solution.nlogo",
         "worldWidth": 201,
-        "viewComponents":["chartComponent"],
+        "viewComponents":["chartComponent","experimentComponent"],
         "chart": "eutrophication_v2Chart",
-        "widget":"eutrophication_v2Widget"   
+        "widget":"eutrophication_v2Widget",
+        "experiment":"videoComponent"
     },
     {
         "taskId": "eutrophication_v2_pt_br",
@@ -514,5 +515,31 @@
         "viewComponents":[],
         "widget":"moda_artWidget"
             
+    },
+    {
+        "taskId": "pollutants",
+        "title": "pollutants",
+        "description": "Sample Text",
+        "blocklyLibrary": [
+            {
+                "label": "General",
+                "selected": true,
+                "valid": true,
+                "value": "general"
+            },
+            {
+                "label": "pollutants",
+                "selected": true,
+                "valid": true,
+                "value": "pollutants"
+            }
+        ],
+        "script": "pollutants.nlogo",
+        "videos": [],
+        "debugFile":"pollutants.nlogo",
+        "worldWidth": 101,
+        "viewComponents":["chartComponent"],
+        "chart": "pollutantsChart",
+        "widget": "pollutantsWidget"
     }
 ]

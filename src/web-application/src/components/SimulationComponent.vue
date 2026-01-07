@@ -188,7 +188,8 @@ export default {
                this.$store.state.taskInfo.taskId === 'photossynthesis' ||
                this.$store.state.taskInfo.taskId === 'wolf_sheep' ||
                this.$store.state.taskInfo.taskId === 'eutrophication_v2' ||
-               this.$store.state.taskInfo.taskId === 'eutrophication_v2_pt_br'){
+               this.$store.state.taskInfo.taskId === 'eutrophication_v2_pt_br' ||
+               this.$store.state.taskInfo.taskId === 'pollutants'){
                 this.series.series1 = 0;
                 this.series.series2 = 0;
                 this.series.series3 = 0;
@@ -320,7 +321,8 @@ export default {
                            this.$store.state.taskInfo.taskId === 'photossynthesis' ||
                            this.$store.state.taskInfo.taskId === 'wolf_sheep' ||
                            this.$store.state.taskInfo.taskId === 'eutrophication_v2' ||
-                           this.$store.state.taskInfo.taskId === 'eutrophication_v2_pt_br') && this.ticks > 0){
+                           this.$store.state.taskInfo.taskId === 'eutrophication_v2_pt_br' ||
+                           this.$store.state.taskInfo.taskId === 'pollutants') && this.ticks > 0){
                                 this.$store.commit('appendData', {x: this.ticks, y: this.series, chart_num: 1});    
                                 this.$store.commit('appendData', {x: this.ticks, y: this.series, chart_num: 2});
                         }
@@ -370,7 +372,8 @@ export default {
                         this.$store.state.taskInfo.taskId === 'photossynthesis' ||
                         this.$store.state.taskInfo.taskId === 'wolf_sheep' ||
                         this.$store.state.taskInfo.taskId === 'eutrophication_v2' ||
-                        this.$store.state.taskInfo.taskId === 'eutrophication_v2_pt_br') && this.$store.state.secondChart?.data.datasets[0].data){
+                        this.$store.state.taskInfo.taskId === 'eutrophication_v2_pt_br' ||
+                        this.$store.state.taskInfo.taskId === 'pollutants') && this.$store.state.secondChart?.data.datasets[0].data){
                         // multi run
                         // const length = this.$store.state.chart.data.datasets[this.$store.state.runCount].data.length;
                         // let spread = this.$store.state.chart.data.datasets[this.$store.state.runCount].data[length - 1];
@@ -469,7 +472,8 @@ export default {
                this.$store.state.taskInfo.taskId === 'moda_math_1quad' ||
                this.$store.state.taskInfo.taskId === 'moda_math_1quad_basic' ||
                this.$store.state.taskInfo.taskId === 'moda_math_transform' ||
-               this.$store.state.taskInfo.taskId === 'moda_art'){
+               this.$store.state.taskInfo.taskId === 'moda_art' ||
+               this.$store.state.taskInfo.taskId === 'pollutants'){
                 this.temp = parseInt(widgetParameters.value);
             }
             $("iframe").get(0).contentWindow.postMessage({type: widgetParameters.type, buttons: [{name: widgetParameters.name, value: widgetParameters.value }]}, "*");
