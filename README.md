@@ -40,6 +40,31 @@ Make sure that you have updated my.config.json with your Netlogo private key for
 	npm install  #on first time only
 	node index.js
 
+## Database Setup
+
+When starting the environment for the first time, the seed database at `docker/build/craftcms-seeds/mysql/database.sql` is used automatically.
+
+To use production data instead, follow these steps after the environment is running:
+
+1. Export the production database using MySQL Workbench (`Server` → `Data Export` → `Export to Self-Contained File`)
+2. Import the dump into the local container:
+
+		docker exec -i craft-database mysql -uroot -proot craftcms < /path/to/dump.sql
+
+3. Restart the webserver to pick up the new database:
+
+		docker compose restart webserver
+
+### Full reset with production data
+
+	docker compose down
+	sudo rm -rf ./docker/runtime/data/mysql/*
+	docker compose build --no-cache webserver
+	docker compose up -d webserver
+	docker exec -i craft-database mysql -uroot -proot craftcms < /path/to/dump.sql
+	docker compose restart webserver
+	docker compose up -d galapagos
+
 ## Notes for getting set up with our migrations tool
 
 Add the new key-value pairs from the sample.env file to your .env file (MIGRATION_ASSET_URL and the AWS stuff).

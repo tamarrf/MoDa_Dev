@@ -1,7 +1,7 @@
 #!/bin/bash
 cd /var/www/craftcms
 
-composer require $1
+composer require $1 --ignore-platform-reqs
 ./craft plugin/install $2
 ./craft plugin/install aws-s3
 ./craft plugin/install redactor

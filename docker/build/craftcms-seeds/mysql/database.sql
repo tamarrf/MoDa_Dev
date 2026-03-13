@@ -2100,7 +2100,6 @@ CREATE TABLE `plugins` (
   `handle` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `version` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `schemaVersion` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `licenseKeyStatus` enum('valid','trial','invalid','mismatched','astray','unknown') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'unknown',
   `licensedEdition` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `installDate` datetime NOT NULL,
   `dateCreated` datetime NOT NULL,
@@ -2113,13 +2112,13 @@ CREATE TABLE `plugins` (
 LOCK TABLES `plugins` WRITE;
 /*!40000 ALTER TABLE `plugins` DISABLE KEYS */;
 
-INSERT INTO `plugins` (`id`, `handle`, `version`, `schemaVersion`, `licenseKeyStatus`, `licensedEdition`, `installDate`, `dateCreated`, `dateUpdated`, `uid`)
+INSERT INTO `plugins` (`id`, `handle`, `version`, `schemaVersion`, `licensedEdition`, `installDate`, `dateCreated`, `dateUpdated`, `uid`)
 VALUES
-  (1,'redactor','2.8.8','2.3.0','unknown',NULL,'2021-06-07 14:36:42','2021-06-07 14:36:42','2021-10-04 13:44:43','bb0b4b4d-abf7-4dde-a314-fc796c3bafe5'),
-  (4,'netlogo','0.0.5','0.0.9','unknown',NULL,'2021-06-08 02:34:08','2021-06-08 02:34:08','2021-10-04 13:44:43','29848fa0-4855-444e-aa29-8c2be970f77d'),
-  (5,'feed-me','4.4.0','4.4.0','unknown',NULL,'2021-06-23 19:41:51','2021-06-23 19:41:51','2021-10-04 13:44:43','76f93edc-c974-4703-83a6-48fc63954d2b'),
-  (6,'migrationassistant','3.2.6','1.0.0','trial',NULL,'2021-10-01 02:21:37','2021-10-01 02:21:37','2021-10-04 13:44:43','e7859604-bffd-4040-847c-6fd678f473a2'),
-  (7,'architect','2.4.3','2.0.0','unknown',NULL,'2021-10-02 11:12:59','2021-10-02 11:12:59','2021-10-04 13:44:43','db585742-962b-416f-bf1c-6e9eedebd292');
+  (1,'redactor','2.8.8','2.3.0',NULL,'2021-06-07 14:36:42','2021-06-07 14:36:42','2021-10-04 13:44:43','bb0b4b4d-abf7-4dde-a314-fc796c3bafe5'),
+  (4,'netlogo','0.0.5','0.0.9',NULL,'2021-06-08 02:34:08','2021-06-08 02:34:08','2021-10-04 13:44:43','29848fa0-4855-444e-aa29-8c2be970f77d'),
+  (5,'feed-me','4.4.0','4.4.0',NULL,'2021-06-23 19:41:51','2021-06-23 19:41:51','2021-10-04 13:44:43','76f93edc-c974-4703-83a6-48fc63954d2b'),
+  (6,'migrationassistant','3.2.6','1.0.0',NULL,'2021-10-01 02:21:37','2021-10-01 02:21:37','2021-10-04 13:44:43','e7859604-bffd-4040-847c-6fd678f473a2'),
+  (7,'architect','2.4.3','2.0.0',NULL,'2021-10-02 11:12:59','2021-10-02 11:12:59','2021-10-04 13:44:43','db585742-962b-416f-bf1c-6e9eedebd292');
 
 /*!40000 ALTER TABLE `plugins` ENABLE KEYS */;
 UNLOCK TABLES;

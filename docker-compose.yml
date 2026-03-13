@@ -68,6 +68,7 @@ services:
       - "./docker/runtime/logs/craft:/var/www/craftcms/storage/logs"
       - "./docker/build/scripts/install.sh:/usr/local/bin/plugin-install.sh"
       - "./docker/build/scripts/wait-for-it.sh:/usr/local/bin/wait-for-it.sh"
+      - "./src/craft-plugin/fablevision/netlogo/src/web-application:/var/www/craftcms/templates/netlogo"
     environment:
       APACHE_DOCUMENT_ROOT: ${APACHE_DOCUMENT_ROOT-/var/www/craftcms/web}
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
