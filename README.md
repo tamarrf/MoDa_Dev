@@ -6,9 +6,26 @@ https://github.com/tamarrf/MoDa_Dev/tree/master/src/web-application
 
 ## Installation
 
-You will need to have recent versions of docker (w/ docker compose) installed. Run the following in the project root to get started
+### Environment Setup
+
+Copy the sample environment file and update the values:
 
 	cp sample.env .env
+
+Generate a unique `SECURITY_KEY` (any random 32+ character string) and a unique `APP_ID`:
+
+	uuidgen  # use the output as your APP_ID in the format CraftCMS--{uuid}
+
+You can generate a secure random key using OpenSSL:
+
+	openssl rand -base64 32
+
+Update your `.env` file with the generated values before running the build.
+
+### Build
+
+You will need to have recent versions of docker (w/ docker compose) installed. Run the following in the project root to get started
+
 	docker compose up --build 
 
 To run and build in the background:
