@@ -7,3 +7,4 @@ my.config.json
 utils/plugin-upload/node_modules
 src/craft/web/assets/
 src/craft-plugin/fablevision/netlogo/src/web-application/
+src/craft-plugin/fablevision/netlogo/src/assetbundles/simulation/img
