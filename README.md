@@ -22,6 +22,17 @@ You can generate a secure random key using OpenSSL:
 
 Update your `.env` file with the generated values before running the build.
 
+### Frontend Build
+
+Before running Docker, you need to build the frontend. This step generates the files in `src/craft-plugin/fablevision/netlogo/src/web-application/` which are mounted as a volume into the CraftCMS container and served as templates.
+
+	cd src/web-application
+	pnpm install  # on first time only
+	pnpm build
+
+Note: This folder is not tracked by git as it contains generated files. You must run `pnpm build` whenever you make changes to the frontend source in `src/web-application/`.
+
+
 ### Build
 
 You will need to have recent versions of docker (w/ docker compose) installed. Run the following in the project root to get started
